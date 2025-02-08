@@ -1,5 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:online_exam_app/core/Utils/font_manager.dart';
+import 'package:online_exam_app/core/Utils/style_manager.dart';
 
 import '../Utils/colors_manager.dart';
 
@@ -45,6 +47,9 @@ class CustomElevatedButton extends StatelessWidget {
             ),
             Text(
               label,
+              style: getTextStyle(FontSize.s16, FontWeightManager.medium,
+                  ColorsManager.whiteColor,
+              fontFamily: FontFamily.roboto),
             ),
             SizedBox(
               width: 27.w,

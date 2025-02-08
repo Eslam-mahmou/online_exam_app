@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:online_exam_app/presentation/auth/pages/login_screen.dart';
+import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'core/routes_generator/routes_generator.dart';
 
 void main() {
@@ -16,12 +16,11 @@ class OnlineExamApp extends StatelessWidget {
       designSize: const Size(375, 812),
       splitScreenMode: true,
       minTextAdapt: true,
-      builder: (context, child) => MaterialApp(
+      builder: (context, _) =>const MaterialApp(
         debugShowCheckedModeBanner: false,
-        home: child,
         onGenerateRoute: RoutesGenerator.onGenerateRoute,
+        initialRoute: PagesRoutes.loginScreen,
       ),
-      child:const LoginScreen(),
     );
   }
 }
