@@ -76,12 +76,20 @@ flutter:
   # list giving the asset and other descriptors for the font. For
   # example:
   fonts:
-      - family: Inter
-        fonts:
-          - asset: assets/fonts/Inter/
-      - family: Roboto
-        fonts:
-          - asset: assets/fonts/Roboto/
+    - family: Inter
+      fonts:
+        - asset: assets/fonts/Inter/Inter_18pt-Bold.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-Light.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-Medium.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-Regular.ttf
+        - asset: assets/fonts/Inter/Inter_18pt-SemiBold.ttf
+    - family: Roboto
+      fonts:
+        - asset: assets/fonts/Roboto/Roboto_Condensed-Bold.ttf
+        - asset: assets/fonts/Roboto/Roboto_Condensed-Light.ttf
+        - asset: assets/fonts/Roboto/Roboto_Condensed-Medium.ttf
+        - asset: assets/fonts/Roboto/Roboto_Condensed-Regular.ttf
+        - asset: assets/fonts/Roboto/Roboto_Condensed-SemiBold.ttf
 
 
   # For details regarding fonts from package dependencies,
