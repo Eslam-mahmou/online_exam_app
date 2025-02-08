@@ -1,8 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:online_exam_app/presentation/auth/pages/sign_up_screen.dart';
-
-import 'core/routes_generator/pages_routes.dart';
+import 'package:online_exam_app/presentation/auth/pages/login_screen.dart';
 import 'core/routes_generator/routes_generator.dart';
 
 void main() {
@@ -23,7 +21,7 @@ class OnlineExamApp extends StatelessWidget {
         home: child,
         onGenerateRoute: RoutesGenerator.onGenerateRoute,
       ),
-      child: SignUpScreen(),
+      child:const LoginScreen(),
     );
   }
 }
