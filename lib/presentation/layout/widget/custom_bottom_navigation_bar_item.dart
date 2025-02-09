@@ -19,7 +19,7 @@ class CustomBottomNavigationBarItem extends BottomNavigationBarItem {
         height: 32.h,
         decoration: BoxDecoration(
           borderRadius: BorderRadius.circular(16),
-          color: Color(0xffCCD7EB),
+          color:ColorsManager.blueLightColor,
         ),
         child: ImageIcon(
           AssetImage(iconPath),

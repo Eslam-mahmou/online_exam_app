@@ -57,7 +57,9 @@ class LoginScreen extends StatelessWidget {
                 ),
               ),
               InkWell(
-                onTap: () {},
+                onTap: () {
+                  Navigator.pushNamed(context, PagesRoutes.resetPassword);
+                },
                 child: Padding(
                   padding: EdgeInsets.only(right: 16.w),
                   child: Text(

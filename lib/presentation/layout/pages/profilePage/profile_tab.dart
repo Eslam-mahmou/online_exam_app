@@ -28,17 +28,17 @@ class ProfileTab extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 24.h,
+            height: 16.h,
           ),
           const CustomPickerImage(),
           SizedBox(
-            height: 24.h,
+            height: 16.h,
           ),
           CustomTextFromField(
             labelText: "User name",
           ),
           SizedBox(
-            height: 24.h,
+            height: 16.h,
           ),
           Row(
             children: [
@@ -47,7 +47,7 @@ class ProfileTab extends StatelessWidget {
                 labelText: "First name",
               )),
               SizedBox(
-                width: 16.w,
+                width: 4.w,
               ),
               Expanded(
                   child: CustomTextFromField(
@@ -56,13 +56,13 @@ class ProfileTab extends StatelessWidget {
             ],
           ),
           SizedBox(
-            height: 24.h,
+            height: 16.h,
           ),
           CustomTextFromField(
             labelText: "Email",
           ),
           SizedBox(
-            height: 24.h,
+            height: 16.h,
           ),
           CustomTextFromField(
             labelText: "Password",
@@ -73,13 +73,13 @@ class ProfileTab extends StatelessWidget {
             ),
           ),
           SizedBox(
-            height: 24.h,
+            height: 16.h,
           ),
           CustomTextFromField(
             labelText: "Phone number",
           ),
           SizedBox(
-            height: 48.h,
+            height: 16.h,
           ),
           CustomElevatedButton(
             label: "Update",

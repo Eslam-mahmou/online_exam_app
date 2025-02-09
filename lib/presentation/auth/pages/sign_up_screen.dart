@@ -78,7 +78,9 @@ class SignUpScreen extends StatelessWidget {
                       ColorsManager.blackColor),
                 ),
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () {
+                    Navigator.pop(context);
+                  },
                   child: Text("Login",
                       style: getTextStyle(FontSize.s16,
                           FontWeightManager.regular, ColorsManager.primaryColor,
