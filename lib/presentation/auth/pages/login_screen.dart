@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
+import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'package:online_exam_app/core/widget/custom_text_from_field.dart';
 
 import '../../../core/widget/custom_elevated_button.dart';
@@ -58,11 +59,14 @@ class LoginScreen extends StatelessWidget {
                     width: 16.w,
                   ),
                 ),
-                Text(
-                  "Forget password?",
-                  style: getTextStyle(FontSize.s12, FontWeightManager.regular,
-                      ColorsManager.blackColor,
-                      decoration: TextDecoration.underline),
+                InkWell(
+                  onTap: () {},
+                  child: Text(
+                    "Forget password?",
+                    style: getTextStyle(FontSize.s12, FontWeightManager.regular,
+                        ColorsManager.blackColor,
+                        decoration: TextDecoration.underline),
+                  ),
                 ),
               ],
             ),
@@ -71,7 +75,9 @@ class LoginScreen extends StatelessWidget {
             ),
             CustomElevatedButton(
               label: "Login",
-              onTap: () {},
+              onTap: () {
+                Navigator.pushNamed(context, PagesRoutes.layoutScreen);
+              },
               backgroundColor: ColorsManager.primaryColor,
             ),
             SizedBox(
