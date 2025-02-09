@@ -8,7 +8,7 @@ class CustomTextFromField extends StatelessWidget {
   CustomTextFromField(
       {super.key,
       required this.labelText,
-      required this.hinText,
+       this.hinText,
       this.controller,
       this.validator,
       this.keyboardType,
@@ -16,7 +16,7 @@ class CustomTextFromField extends StatelessWidget {
       this.suffix});
 
   final String labelText;
-  final String hinText;
+  final String? hinText;
   TextEditingController? controller;
   String? Function(String?)? validator;
   TextInputType? keyboardType;

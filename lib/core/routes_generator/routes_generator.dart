@@ -1,7 +1,7 @@
+import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'package:online_exam_app/presentation/auth/pages/login_screen.dart';
-import 'package:online_exam_app/presentation/auth/pages/reset_password.dart';
 import 'package:online_exam_app/presentation/auth/pages/sign_up_screen.dart';
 
 class RoutesGenerator {
@@ -11,10 +11,6 @@ class RoutesGenerator {
         return MaterialPageRoute(builder: (context) => const LoginScreen(),settings: settings);
       case PagesRoutes.signUpScreen :
         return MaterialPageRoute(builder: (context) => const SignUpScreen(),settings: settings);
-      case PagesRoutes.resetPasswordScreen:
-        return MaterialPageRoute(
-            builder: (context) => const ResetPassword(), settings: settings);
-
       default :
         return unDefinedRoute();
     }
