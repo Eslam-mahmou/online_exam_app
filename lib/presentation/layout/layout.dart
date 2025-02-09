@@ -1,12 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/Utils/assets_manager.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
-import 'package:online_exam_app/presentation/layout/pages/profile_tab.dart';
+import 'package:online_exam_app/presentation/layout/pages/profilePage/profile_tab.dart';
 
-import '../widget/custom_bottom_navigation_bar_item.dart';
+import 'widget/custom_bottom_navigation_bar_item.dart';
 
 class LayoutScreen extends StatelessWidget {
   const LayoutScreen({super.key});

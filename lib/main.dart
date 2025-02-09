@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
+
 import 'core/routes_generator/routes_generator.dart';
 
 void main() {
@@ -19,7 +20,7 @@ class OnlineExamApp extends StatelessWidget {
       builder: (context, _) =>const MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RoutesGenerator.onGenerateRoute,
-        initialRoute: PagesRoutes.loginScreen,
+        initialRoute: PagesRoutes.layoutScreen,
       ),
     );
   }

@@ -18,16 +18,22 @@ class CustomPickerImage extends StatelessWidget {
             const CircleAvatar(
               radius: 50,
               backgroundColor: ColorsManager.greyColor,
+              child: Icon(
+                Icons.person,
+                color: ColorsManager.primaryColor,
+                size: 80,
+              ),
             ),
             Container(
-              width: 24.w,
-              height: 24.h,
+              width: 28.w,
+              height: 28.h,
               decoration: BoxDecoration(
                   borderRadius: BorderRadius.circular(6),
                   color: ColorsManager.primaryColor),
               child: const Icon(
                 Icons.camera_alt_outlined,
                 color: ColorsManager.whiteColor,
+                size: 20,
               ),
             ),
           ],

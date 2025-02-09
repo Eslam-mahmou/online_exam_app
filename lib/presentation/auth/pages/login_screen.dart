@@ -25,42 +25,41 @@ class LoginScreen extends StatelessWidget {
         backgroundColor: ColorsManager.whiteColor,
         elevation: 0,
       ),
-      body: Padding(
-        padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.stretch,
-          children: [
-            SizedBox(
-              height: 12.h,
-            ),
-            CustomTextFromField(
-                labelText: "Email", hinText: "Enter your email"),
-            SizedBox(
-              height: 24.h,
-            ),
-            CustomTextFromField(
-                labelText: "Password", hinText: "Enter your password"),
-            SizedBox(
-              height: 16.h,
-            ),
-            Row(
-              children: [
-                Checkbox(
-                  value: false,
-                  onChanged: (value) {},
+      body: Column(
+        crossAxisAlignment: CrossAxisAlignment.stretch,
+        children: [
+          SizedBox(
+            height: 12.h,
+          ),
+          CustomTextFromField(labelText: "Email", hinText: "Enter your email"),
+          SizedBox(
+            height: 24.h,
+          ),
+          CustomTextFromField(
+              labelText: "Password", hinText: "Enter your password"),
+          SizedBox(
+            height: 16.h,
+          ),
+          Row(
+            children: [
+              Checkbox(
+                value: false,
+                onChanged: (value) {},
+              ),
+              Text(
+                "Remember me",
+                style: getTextStyle(FontSize.s12, FontWeightManager.regular,
+                    ColorsManager.blackColor),
+              ),
+              Expanded(
+                child: SizedBox(
+                  width: 16.w,
                 ),
-                Text(
-                  "Remember me",
-                  style: getTextStyle(FontSize.s12, FontWeightManager.regular,
-                      ColorsManager.blackColor),
-                ),
-                Expanded(
-                  child: SizedBox(
-                    width: 16.w,
-                  ),
-                ),
-                InkWell(
-                  onTap: () {},
+              ),
+              InkWell(
+                onTap: () {},
+                child: Padding(
+                  padding: EdgeInsets.only(right: 16.w),
                   child: Text(
                     "Forget password?",
                     style: getTextStyle(FontSize.s12, FontWeightManager.regular,
@@ -68,38 +67,43 @@ class LoginScreen extends StatelessWidget {
                         decoration: TextDecoration.underline),
                   ),
                 ),
-              ],
-            ),
-            SizedBox(
-              height: 48.h,
-            ),
-            CustomElevatedButton(
-              label: "Login",
-              onTap: () {
-                Navigator.pushNamed(context, PagesRoutes.layoutScreen);
-              },
-              backgroundColor: ColorsManager.primaryColor,
-            ),
-            SizedBox(
-              height: 16.h,
-            ),
-            Row(
-              mainAxisAlignment: MainAxisAlignment.center,
-              children: [
-                Text(
-                  "Don't have an account? ",
-                  style: getTextStyle(FontSize.s16, FontWeightManager.regular,
-                      ColorsManager.blackColor),
-                ),
-                Text("Sign up",
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 48.h,
+          ),
+          CustomElevatedButton(
+            label: "Login",
+            onTap: () {
+              Navigator.pushNamed(context, PagesRoutes.layoutScreen);
+            },
+            backgroundColor: ColorsManager.primaryColor,
+          ),
+          SizedBox(
+            height: 16.h,
+          ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Don't have an account? ",
+                style: getTextStyle(FontSize.s16, FontWeightManager.regular,
+                    ColorsManager.blackColor),
+              ),
+              InkWell(
+                onTap: () {
+                  Navigator.pushNamed(context, PagesRoutes.signUpScreen);
+                },
+                child: Text("Sign up",
                     style: getTextStyle(FontSize.s16, FontWeightManager.regular,
                         ColorsManager.primaryColor,
                         decoration: TextDecoration.underline,
-                        decorationColor: ColorsManager.primaryColor))
-              ],
-            )
-          ],
-        ),
+                        decorationColor: ColorsManager.primaryColor)),
+              ),
+            ],
+          )
+        ],
       ),
     );
   }
