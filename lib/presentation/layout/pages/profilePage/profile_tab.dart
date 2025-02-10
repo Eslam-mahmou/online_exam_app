@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
+import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'package:online_exam_app/core/widget/custom_elevated_button.dart';
 import 'package:online_exam_app/core/widget/custom_text_from_field.dart';
 import 'package:online_exam_app/presentation/layout/widget/custom_picker_image.dart';
@@ -66,11 +67,15 @@ class ProfileTab extends StatelessWidget {
           ),
           CustomTextFromField(
             labelText: "Password",
-            suffix: Text(
-              "Change",
+            suffix: TextButton(
+              onPressed: () {
+            Navigator.pushNamed(context, PagesRoutes.resetPassword);
+              },
+             child: Text("Change",
+              textAlign: TextAlign.center,
               style: getTextStyle(FontSize.s12, FontWeightManager.semiBold,
                   ColorsManager.primaryColor),
-            ),
+             )),
           ),
           SizedBox(
             height: 16.h,

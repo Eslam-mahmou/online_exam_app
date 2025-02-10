@@ -36,9 +36,9 @@ class CustomTextFromField extends StatelessWidget {
             FontSize.s16, FontWeightManager.regular, ColorsManager.blackColor,
             fontFamily: FontFamily.roboto),
         decoration: InputDecoration(
-            label: Text(labelText),
+           labelText:labelText ,
             hintText: hinText,
-            suffix: suffix,
+            suffixIcon: suffix,
             hintStyle: getTextStyle(FontSize.s14, FontWeightManager.regular,
                 ColorsManager.greyColor, fontFamily: FontFamily.roboto),
             labelStyle: getTextStyle(FontSize.s12, FontWeightManager.regular,
