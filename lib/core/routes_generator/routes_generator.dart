@@ -4,7 +4,7 @@ import 'package:online_exam_app/presentation/auth/pages/forget_password/email_ve
 import 'package:online_exam_app/presentation/auth/pages/forget_password/forget_password.dart';
 import 'package:online_exam_app/presentation/auth/pages/forget_password/reset_pass_login.dart';
 import 'package:online_exam_app/presentation/auth/pages/login_screen.dart';
-import 'package:online_exam_app/presentation/auth/pages/reset_password.dart';
+import 'package:online_exam_app/presentation/layout/pages/profilePage/reset_password.dart';
 import 'package:online_exam_app/presentation/auth/pages/sign_up_screen.dart';
 import 'package:online_exam_app/presentation/layout/layout.dart';
 

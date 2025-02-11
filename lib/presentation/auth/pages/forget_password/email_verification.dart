@@ -167,6 +167,27 @@ class EmailVerification extends StatelessWidget {
           SizedBox(
             height: 20.h,
           ),
+          Row(
+            mainAxisAlignment: MainAxisAlignment.center,
+            children: [
+              Text(
+                "Didn't receive code?",
+                style: getTextStyle(FontSize.s16, FontWeightManager.regular,
+                    ColorsManager.blackColor),
+              ),
+              TextButton(
+                onPressed: () {},
+                child: Text("Resend",
+                    style: getTextStyle(FontSize.s16, FontWeightManager.regular,
+                        ColorsManager.primaryColor,
+                        decoration: TextDecoration.underline,
+                        decorationColor: ColorsManager.primaryColor)),
+              ),
+            ],
+          ),
+          SizedBox(
+            height: 20.h,
+          ),
           CustomElevatedButton(
             label: 'Continue',
             onTap: () {

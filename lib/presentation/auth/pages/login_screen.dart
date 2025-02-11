@@ -58,11 +58,16 @@ class LoginScreen extends StatelessWidget {
               ),
               Padding(
                 padding: EdgeInsets.only(right: 16.w),
-                child: Text(
-                  "Forget password?",
-                  style: getTextStyle(FontSize.s12, FontWeightManager.regular,
-                      ColorsManager.blackColor,
-                      decoration: TextDecoration.underline),
+                child: InkWell(
+                  onTap: () {
+                    Navigator.pushNamed(context, PagesRoutes.forgetPassword);
+                  },
+                  child: Text(
+                    "Forget password?",
+                    style: getTextStyle(FontSize.s12, FontWeightManager.regular,
+                        ColorsManager.blackColor,
+                        decoration: TextDecoration.underline),
+                  ),
                 ),
               ),
             ],
