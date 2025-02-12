@@ -1,13 +1,18 @@
 import 'package:flutter/material.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'package:online_exam_app/presentation/auth/pages/login_screen.dart';
-import 'package:online_exam_app/presentation/auth/pages/reset_password.dart';
 import 'package:online_exam_app/presentation/auth/pages/sign_up_screen.dart';
 import 'package:online_exam_app/presentation/layout/layout.dart';
+import 'package:online_exam_app/presentation/splash/splash_screen.dart';
+
+import '../../presentation/layout/pages/profilePage/reset_password.dart';
 
 class RoutesGenerator {
   static Route<dynamic> onGenerateRoute(RouteSettings settings){
     switch (settings.name){
+      case PagesRoutes.splashScreen:
+        return MaterialPageRoute(
+            builder: (context) => const SplashScreen(), settings: settings);
       case PagesRoutes.loginScreen :
         return MaterialPageRoute(builder: (context) => const LoginScreen(),settings: settings);
       case PagesRoutes.signUpScreen :
