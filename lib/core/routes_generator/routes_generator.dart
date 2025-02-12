@@ -1,10 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
-import 'package:online_exam_app/presentation/auth/pages/forget_password/email_verification.dart';
-import 'package:online_exam_app/presentation/auth/pages/forget_password/forget_password.dart';
-import 'package:online_exam_app/presentation/auth/pages/forget_password/reset_pass_login.dart';
 import 'package:online_exam_app/presentation/auth/pages/login_screen.dart';
-import 'package:online_exam_app/presentation/layout/pages/profilePage/reset_password.dart';
+import 'package:online_exam_app/presentation/auth/pages/reset_password.dart';
 import 'package:online_exam_app/presentation/auth/pages/sign_up_screen.dart';
 import 'package:online_exam_app/presentation/layout/layout.dart';
 
@@ -21,17 +18,6 @@ class RoutesGenerator {
       case PagesRoutes.layoutScreen:
         return MaterialPageRoute(
             builder: (context) => const LayoutScreen(), settings: settings);
-      case PagesRoutes.forgetPassword:
-        return MaterialPageRoute(
-            builder: (context) => const ForgetPassword(), settings: settings);
-      case PagesRoutes.emailVerification:
-        return MaterialPageRoute(
-            builder: (context) => const EmailVerification(),
-            settings: settings);
-      case PagesRoutes.resetPassLogin:
-        return MaterialPageRoute(
-            builder: (context) => const ResetPasswordLogin(),
-            settings: settings);
       default :
         return unDefinedRoute();
     }

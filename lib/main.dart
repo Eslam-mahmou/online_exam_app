@@ -20,7 +20,7 @@ class OnlineExamApp extends StatelessWidget {
       builder: (context, _) =>const MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RoutesGenerator.onGenerateRoute,
-        initialRoute: PagesRoutes.loginScreen,
+        initialRoute: PagesRoutes.splashScreen,
       ),
     );
   }
