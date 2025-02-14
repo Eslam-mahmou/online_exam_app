@@ -1,4 +1,7 @@
+import 'dart:async';
+
 import 'package:flutter/material.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
@@ -6,6 +9,7 @@ import 'package:online_exam_app/core/Utils/style_manager.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'package:online_exam_app/core/widget/custom_text_from_field.dart';
 
+import '../../../core/services/easy_loading_service.dart';
 import '../../../core/widget/custom_elevated_button.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -60,6 +64,7 @@ class LoginScreen extends StatelessWidget {
                 padding: EdgeInsets.only(right: 16.w),
                 child: InkWell(
                   onTap: () {
+
                     Navigator.pushNamed(context, PagesRoutes.forgetPassword);
                   },
                   child: Text(
@@ -77,8 +82,11 @@ class LoginScreen extends StatelessWidget {
           ),
           CustomElevatedButton(
             label: "Login",
-            onTap: () {
-              Navigator.pushNamed(context, PagesRoutes.layoutScreen);
+            onTap: (){
+             EasyLoading.show(
+               // maskType: EasyLoadingMaskType.black
+             );
+              // Navigator.pushNamed(context, PagesRoutes.layoutScreen);
             },
             backgroundColor: ColorsManager.primaryColor,
           ),
