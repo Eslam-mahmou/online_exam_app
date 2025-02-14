@@ -12,17 +12,17 @@ class CustomTextFromField extends StatelessWidget {
       this.controller,
       this.validator,
       this.keyboardType,
-      this.obscureText = false,
-      this.suffix});
+      this.obscureText,
+      this.suffix,});
 
   final String labelText;
   final String? hinText;
   TextEditingController? controller;
   String? Function(String?)? validator;
   TextInputType? keyboardType;
-  bool obscureText;
+  bool? obscureText;
   Widget? suffix;
-
+  // String? obscuringCharacter;
   @override
   Widget build(BuildContext context) {
     return Padding(
@@ -31,7 +31,9 @@ class CustomTextFromField extends StatelessWidget {
         controller: controller,
         validator: validator,
         keyboardType: keyboardType,
-        obscureText: obscureText,
+        obscureText: obscureText??false,
+        cursorColor: ColorsManager.blackColor,
+        // obscuringCharacter:obscuringCharacter??"" ,
         style: getTextStyle(
             FontSize.s16, FontWeightManager.regular, ColorsManager.blackColor,
             fontFamily: FontFamily.roboto),

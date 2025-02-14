@@ -1,11 +1,22 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
+import 'package:online_exam_app/core/services/easy_loading_service.dart';
 
 import 'core/routes_generator/routes_generator.dart';
+import 'core/services/bloc_observer.dart';
+import 'core/services/shared_preference_services.dart';
+import 'di/injectable_initializer.dart';
 
-void main() {
+void main()async {
+  WidgetsFlutterBinding.ensureInitialized();
+  Bloc.observer = MyBlocObserver();
+  configureDependencies();
+  await SharedPreferenceServices.init();
   runApp(const OnlineExamApp());
+  ConfigLoading().showLoading();
 }
 
 class OnlineExamApp extends StatelessWidget {
@@ -17,10 +28,11 @@ class OnlineExamApp extends StatelessWidget {
       designSize: const Size(375, 812),
       splitScreenMode: true,
       minTextAdapt: true,
-      builder: (context, _) =>const MaterialApp(
+      builder: (context, _) => MaterialApp(
         debugShowCheckedModeBanner: false,
         onGenerateRoute: RoutesGenerator.onGenerateRoute,
         initialRoute: PagesRoutes.splashScreen,
+        builder: EasyLoading.init(),
       ),
     );
   }
