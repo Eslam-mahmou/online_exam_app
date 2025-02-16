@@ -5,6 +5,7 @@ import 'package:online_exam_app/core/utils/end_point.dart';
 
 abstract class AuthRemoteDataSource {
   Future<Response> login(String email,String password);
+  Future<Response> forgetPassword(String email) ;
 }
 @ Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
@@ -17,6 +18,14 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
        "email":email,
        "password":password
      });
+  }
+
+  @override
+  Future<Response> forgetPassword(String email) async{
+    return await _apiManager.postData(EndPoints.forgetPassword,
+    body:{
+      "email":email
+    });
   }
 
 }

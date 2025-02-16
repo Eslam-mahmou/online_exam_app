@@ -17,6 +17,8 @@ import '../data/data_source/remote_data_source/auth_remote_data_source.dart'
 import '../data/repository_impl/auth_repository_impl.dart' as _i970;
 import '../domain/repository/auth_repository.dart' as _i306;
 import '../domain/use_case/auth_use_case.dart' as _i358;
+import '../presentation/auth/manager/forget_password_cubit/forget_password_view_model.dart'
+    as _i778;
 import '../presentation/auth/manager/login_cubit/login_view_model.dart'
     as _i160;
 
@@ -40,6 +42,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i358.AuthUseCase(gh<_i306.AuthRepository>()));
     gh.factory<_i160.LoginViewModel>(
         () => _i160.LoginViewModel(gh<_i358.AuthUseCase>()));
+    gh.factory<_i778.ForgetPasswordViewModel>(
+        () => _i778.ForgetPasswordViewModel(gh<_i358.AuthUseCase>()));
     return this;
   }
 }
