@@ -1,16 +1,30 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
-import 'package:online_exam_app/core/widget/custom_validate.dart';
 
 import '../../../../core/Utils/colors_manager.dart';
 import '../../../../core/Utils/font_manager.dart';
 import '../../../../core/Utils/style_manager.dart';
 import '../../../../core/widget/custom_elevated_button.dart';
-import '../../../../core/widget/custom_text_from_field.dart';
 
-class EmailVerification extends StatelessWidget {
+class EmailVerification extends StatefulWidget {
   const EmailVerification({super.key});
+
+  @override
+  State<EmailVerification> createState() => _EmailVerificationState();
+}
+
+class _EmailVerificationState extends State<EmailVerification> {
+  final FocusNode _focusNode1 = FocusNode();
+  final FocusNode _focusNode2 = FocusNode();
+  final FocusNode _focusNode3 = FocusNode();
+  final FocusNode _focusNode4 = FocusNode();
+
+  void _onChanged(String value, FocusNode nextFocusNode) {
+    if (value.length == 1) {
+      FocusScope.of(context).requestFocus(nextFocusNode);
+    }
+  }
 
   @override
   Widget build(BuildContext context) {
@@ -52,25 +66,37 @@ class EmailVerification extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     horizontal: 4.w,
                   ),
-                  child: TextFormField(
-                    // validator: validator,
-                    // obscureText: obscureText,
-                    style: getTextStyle(FontSize.s16, FontWeightManager.regular,
-                        ColorsManager.blackColor,
-                        fontFamily: FontFamily.roboto),
-                    decoration: InputDecoration(
-                      label: Text(''),
-                      labelStyle: getTextStyle(FontSize.s12,
-                          FontWeightManager.regular, ColorsManager.greyColor,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: ColorsManager.blueLightColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextFormField(
+                      focusNode: _focusNode1,
+                      keyboardType: TextInputType.number,
+                      maxLength: 1,
+                      textAlign: TextAlign.center,
+                      onChanged: (value) => _onChanged(value, _focusNode2),
+                      // validator: validator,
+                      // obscureText: obscureText,
+                      style: getTextStyle(FontSize.s16,
+                          FontWeightManager.regular, ColorsManager.blackColor,
                           fontFamily: FontFamily.roboto),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                              color: ColorsManager.greyColor, width: 1)),
-                      errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                              color: ColorsManager.redColor, width: 1)),
+                      decoration: InputDecoration(
+                        counterText: "",
+                        label: const Text(''),
+                        labelStyle: getTextStyle(FontSize.s12,
+                            FontWeightManager.regular, ColorsManager.greyColor,
+                            fontFamily: FontFamily.roboto),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                                color: ColorsManager.greyColor, width: 1)),
+                        errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                                color: ColorsManager.redColor, width: 1)),
+                      ),
                     ),
                   ),
                 ),
@@ -80,25 +106,37 @@ class EmailVerification extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     horizontal: 4.w,
                   ),
-                  child: TextFormField(
-                    // validator: validator,
-                    // obscureText: obscureText,
-                    style: getTextStyle(FontSize.s16, FontWeightManager.regular,
-                        ColorsManager.blackColor,
-                        fontFamily: FontFamily.roboto),
-                    decoration: InputDecoration(
-                      label: Text(''),
-                      labelStyle: getTextStyle(FontSize.s12,
-                          FontWeightManager.regular, ColorsManager.greyColor,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: ColorsManager.blueLightColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextFormField(
+                      focusNode: _focusNode2,
+                      keyboardType: TextInputType.number,
+                      maxLength: 1,
+                      textAlign: TextAlign.center,
+                      onChanged: (value) => _onChanged(value, _focusNode3),
+                      // validator: validator,
+                      // obscureText: obscureText,
+                      style: getTextStyle(FontSize.s16,
+                          FontWeightManager.regular, ColorsManager.blackColor,
                           fontFamily: FontFamily.roboto),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                              color: ColorsManager.greyColor, width: 1)),
-                      errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                              color: ColorsManager.redColor, width: 1)),
+                      decoration: InputDecoration(
+                        counterText: "",
+                        label: const Text(''),
+                        labelStyle: getTextStyle(FontSize.s12,
+                            FontWeightManager.regular, ColorsManager.greyColor,
+                            fontFamily: FontFamily.roboto),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                                color: ColorsManager.greyColor, width: 1)),
+                        errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                                color: ColorsManager.redColor, width: 1)),
+                      ),
                     ),
                   ),
                 ),
@@ -108,25 +146,37 @@ class EmailVerification extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     horizontal: 4.w,
                   ),
-                  child: TextFormField(
-                    // validator: validator,
-                    // obscureText: obscureText,
-                    style: getTextStyle(FontSize.s16, FontWeightManager.regular,
-                        ColorsManager.blackColor,
-                        fontFamily: FontFamily.roboto),
-                    decoration: InputDecoration(
-                      label: Text(''),
-                      labelStyle: getTextStyle(FontSize.s12,
-                          FontWeightManager.regular, ColorsManager.greyColor,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: ColorsManager.blueLightColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextFormField(
+                      focusNode: _focusNode3,
+                      keyboardType: TextInputType.number,
+                      maxLength: 1,
+                      textAlign: TextAlign.center,
+                      onChanged: (value) => _onChanged(value, _focusNode4),
+                      // validator: validator,
+                      // obscureText: obscureText,
+                      style: getTextStyle(FontSize.s16,
+                          FontWeightManager.regular, ColorsManager.blackColor,
                           fontFamily: FontFamily.roboto),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                              color: ColorsManager.greyColor, width: 1)),
-                      errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                              color: ColorsManager.redColor, width: 1)),
+                      decoration: InputDecoration(
+                        counterText: "",
+                        label: const Text(''),
+                        labelStyle: getTextStyle(FontSize.s12,
+                            FontWeightManager.regular, ColorsManager.greyColor,
+                            fontFamily: FontFamily.roboto),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                                color: ColorsManager.greyColor, width: 1)),
+                        errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                                color: ColorsManager.redColor, width: 1)),
+                      ),
                     ),
                   ),
                 ),
@@ -136,25 +186,37 @@ class EmailVerification extends StatelessWidget {
                   padding: EdgeInsets.symmetric(
                     horizontal: 4.w,
                   ),
-                  child: TextFormField(
-                    // validator: validator,
-                    // obscureText: obscureText,
-                    style: getTextStyle(FontSize.s16, FontWeightManager.regular,
-                        ColorsManager.blackColor,
-                        fontFamily: FontFamily.roboto),
-                    decoration: InputDecoration(
-                      label: Text(''),
-                      labelStyle: getTextStyle(FontSize.s12,
-                          FontWeightManager.regular, ColorsManager.greyColor,
+                  child: Container(
+                    decoration: BoxDecoration(
+                      color: ColorsManager.blueLightColor,
+                      borderRadius: BorderRadius.circular(10),
+                    ),
+                    child: TextFormField(
+                      focusNode: _focusNode4,
+                      keyboardType: TextInputType.number,
+                      maxLength: 1,
+                      textAlign: TextAlign.center,
+                      // onChanged: (value) => _onChanged(value,_focusNode4),
+                      // validator: validator,
+                      // obscureText: obscureText,
+                      style: getTextStyle(FontSize.s16,
+                          FontWeightManager.regular, ColorsManager.blackColor,
                           fontFamily: FontFamily.roboto),
-                      border: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                              color: ColorsManager.greyColor, width: 1)),
-                      errorBorder: OutlineInputBorder(
-                          borderRadius: BorderRadius.circular(10),
-                          borderSide: const BorderSide(
-                              color: ColorsManager.redColor, width: 1)),
+                      decoration: InputDecoration(
+                        counterText: "",
+                        label: const Text(''),
+                        labelStyle: getTextStyle(FontSize.s12,
+                            FontWeightManager.regular, ColorsManager.greyColor,
+                            fontFamily: FontFamily.roboto),
+                        border: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                                color: ColorsManager.greyColor, width: 1)),
+                        errorBorder: OutlineInputBorder(
+                            borderRadius: BorderRadius.circular(10),
+                            borderSide: const BorderSide(
+                                color: ColorsManager.redColor, width: 1)),
+                      ),
                     ),
                   ),
                 ),
@@ -198,5 +260,14 @@ class EmailVerification extends StatelessWidget {
         ],
       ),
     );
+  }
+
+  @override
+  void dispose() {
+    _focusNode1.dispose();
+    _focusNode2.dispose();
+    _focusNode3.dispose();
+    _focusNode4.dispose();
+    super.dispose();
   }
 }

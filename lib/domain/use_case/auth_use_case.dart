@@ -1,0 +1,16 @@
+import 'package:injectable/injectable.dart';
+import 'package:online_exam_app/domain/entity/login_response_entity.dart';
+import 'package:online_exam_app/domain/repository/auth_repository.dart';
+
+import '../common/result.dart';
+@injectable
+class AuthUseCase {
+ final AuthRepository _authRepository;
+
+  AuthUseCase(this._authRepository);
+
+  Future<Result<LoginResponseEntity>> callLogin(
+      String email, String password) async {
+    return await _authRepository.login(email, password);
+  }
+}

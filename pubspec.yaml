@@ -43,10 +43,16 @@ dependencies:
 
   shared_preferences: any
   flutter_easyloading: any
+  equatable: any
+  flutter_bloc: any
+  pretty_dio_logger: ^1.4.0
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
+  injectable_generator:
+
+  build_runner:
 
   # The "flutter_lints" package below contains a set of recommended lints to
   # encourage good coding practices. The lint set provided by the package is
