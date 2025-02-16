@@ -55,50 +55,6 @@ class AuthRepositoryImpl implements AuthRepository {
       },
     );
   }
-
-// Future<Result<UserModel>> signUp(SignUpRequest data) async {
-//     try {
-//       final response = await _authRemoteDataSource.signUp(data);
-//       if (response.statusCode == 201) { // Successful signup
-//         SharedPreferenceServices.getToken(response.data['token']); // Save token
-//         // Convert JSON response to UserResponse
-//         final userResponse = UserResponse.fromJson(response.data);
-//         final userModel = userResponse.user; // Extract UserModel
-//         return Success(userModel);
-//         // if (response.statusCode == 200 && response.data["message"] == "success") {
-//         //   return Success(UserModel.fromJson(response.data));// Return UserModel instead of `true`
-//
-//       } else {
-//         return Error(response.data["message"],);
-//       }
-//
-//     } on DioException catch (dioException) {
-//       return Error(dioException.response!.data["message"],);
-//     }
-//   }
-  ///
-  // Future<Result<UserModel>> signUp(SignUpRequest data) async {
-  //   try {
-  //     print("Signing up...");
-  //
-  //     final response = await _authRemoteDataSource.signUp(data);
-  //
-  //     print("Response received: ${response.statusCode}");
-  //
-  //     if (response.statusCode == 201) {
-  //       print("Success: ${response.data}");
-  //       SharedPreferenceServices.getToken(response.data['token']);
-  //       final userResponse = UserResponse.fromJson(response.data);
-  //       return Success(userResponse.user);
-  //     } else {
-  //       print("SignUp failed: ${response.data}");
-  //       return Error(response.data["message"]);
-  //     }
-  //   } on DioException catch (e) {
-  //     print("DioException: ${e.response?.data}");
-  //     return Error(e.response?.data?["message"] ?? "Unknown error");
-  //   }
-  // }
   ///
   // Future<Result<UserModel>> signUp(SignUpRequest data) async {
   //   try {
