@@ -18,8 +18,11 @@ class RoutesGenerator {
             builder: (context) => const SplashScreen(), settings: settings);
       case PagesRoutes.loginScreen :
         return MaterialPageRoute(builder: (context) => const LoginScreen(),settings: settings);
-      case PagesRoutes.signUpScreen :
-        return MaterialPageRoute(builder: (context) => const SignUpScreen(),settings: settings);
+
+      case PagesRoutes.signUpScreen:
+        return MaterialPageRoute(
+            builder: (context) => const SignUpScreen(), settings: settings);
+
       case PagesRoutes.resetPassword:
         return MaterialPageRoute(
             builder: (context) => const ResetPassword(), settings: settings);
