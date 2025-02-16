@@ -1,4 +1,4 @@
-import 'package:online_exam_app/core/errors/dio_error.dart';
+
 
 sealed class Result<T>{}
 class Success<T> extends Result<T>{
@@ -6,6 +6,6 @@ class Success<T> extends Result<T>{
   Success(this.data);
 }
 class Error<T> extends Result<T>{
-  DioFailure? exception;
+  String? exception;
   Error(this.exception);
 }

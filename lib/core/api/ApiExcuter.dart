@@ -9,13 +9,13 @@ Future<Result<T>> executeApi<T>(Future<T> Function() apiCall) async {
     return Success(result);
   } catch (ex) {
     if (ex is DioException) {
-      return Error(ServerFailure.fromDioError(ex));
+      return Error(ServerFailure.fromDioError(ex).toString());
     }
     else if (ex is ServerFailure) {
-      return Error(ServerFailure(ex.errorMessage));
+      return Error(ServerFailure(ex.errorMessage).toString());
     }
     else {
-      return Error(NetworkFailure(ex.toString()));
+      return Error(NetworkFailure(ex.toString()).toString());
     }
   }
 }

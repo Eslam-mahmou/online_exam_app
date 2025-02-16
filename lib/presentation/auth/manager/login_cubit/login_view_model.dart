@@ -20,18 +20,6 @@ class LoginViewModel extends Cubit<LoginState> {
         _login(emailController.text, passwordController.text);
     }
   }
-
-  /*Future<void> _login(String email, String password) async {
-    emit(LoginLoadingState());
-    var result = await _auth.callLogin(email, password);
-    switch (result) {
-      case Success():
-        emit(SuccessLoginState(result.data));
-         log(result.data.toString());
-      case Error():
-        emit(ErrorLoginState(result.exception!.errorMessage.toString()));
-    }
-  }*/
   Future<void> _login(String email, String password) async {
     emit(LoginLoadingState()); // Start with loading state
     var result = await _auth.callLogin(email, password);
@@ -47,8 +35,8 @@ class LoginViewModel extends Cubit<LoginState> {
         }
 
       case Error():
-        emit(ErrorLoginState(result.exception!.errorMessage));
-        log("Login API Error: ${result.exception!.errorMessage}");
+        emit(ErrorLoginState(result.exception.toString()));
+        log("Login API Error: ${result.exception}");
     }
   }
 }

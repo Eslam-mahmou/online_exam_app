@@ -3,9 +3,14 @@ import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/core/api/api_manager.dart';
 import 'package:online_exam_app/core/utils/end_point.dart';
 
+import '../../../domain/entity/sign_up_request.dart';
+
 abstract class AuthRemoteDataSource {
   Future<Response> login(String email,String password);
+
+  Future<Response> signUp(SignUpRequest data);
 }
+
 @ Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
  final ApiManager _apiManager;
@@ -19,4 +24,11 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
      });
   }
 
+  @override
+  Future<Response> signUp(SignUpRequest data) async {
+    return await _apiManager.postData(
+      EndPoints.signUpDomain, // تأكد أن المسار صحيح
+      body: data.toJson(),
+    );
+  }
 }
