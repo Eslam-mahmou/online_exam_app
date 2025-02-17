@@ -27,7 +27,7 @@ final  AuthUseCase _authUseCase;
       case Success():
         var data=result.data;
         log(data!.message.toString());
-        if (data !=null && data.hashCode==200 ){
+        if (data !=null &&data.message=="success" ){
           log(data.toString());
           emit(SuccessForgetPasswordState(data));
         }
