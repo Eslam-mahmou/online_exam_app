@@ -15,6 +15,7 @@ abstract class AuthRemoteDataSource {
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
  final ApiManager _apiManager;
   AuthRemoteDataSourceImpl(this._apiManager);
+
   @override
   Future<Response> login(String email, String password)async {
      return await _apiManager.postData(EndPoints.login,
@@ -27,7 +28,7 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
   @override
   Future<Response> signUp(SignUpRequest data) async {
     return await _apiManager.postData(
-      EndPoints.signUpDomain, // تأكد أن المسار صحيح
+      EndPoints.signUpDomain,
       body: data.toJson(),
     );
   }
