@@ -9,6 +9,7 @@ abstract class AuthRemoteDataSource {
   Future<Response> forgetPassword(String email);
 
   Future<Response> verifyEmail(String code);
+  Future<Response> resetPassword(String email,String newPassword);
 }
 
 @Injectable(as: AuthRemoteDataSource)
@@ -33,5 +34,15 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   Future<Response> verifyEmail(String code) async {
     return await _apiManager
         .postData(EndPoints.verifyEmail, body: {"resetCode": code});
+  }
+
+  @override
+  Future<Response> resetPassword(String email, String newPassword)async {
+    return await _apiManager.putData(EndPoints.resetPassword, {
+      "email":email,
+      "newPassword":newPassword
+    },{
+
+    });
   }
 }

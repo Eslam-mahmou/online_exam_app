@@ -22,6 +22,8 @@ import '../presentation/auth/manager/forget_password_cubit/forget_password_view_
     as _i778;
 import '../presentation/auth/manager/login_cubit/login_view_model.dart'
     as _i160;
+import '../presentation/auth/manager/reset_password_cubit/reset_password_view_model.dart'
+    as _i303;
 import '../presentation/auth/manager/verify_email_cubit/verify_email_vew_model.dart'
     as _i306;
 
@@ -51,6 +53,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i306.VerifyEmailVewModel(gh<_i358.AuthUseCase>()));
     gh.factory<_i778.ForgetPasswordViewModel>(
         () => _i778.ForgetPasswordViewModel(gh<_i358.AuthUseCase>()));
+    gh.factory<_i303.ResetPasswordViewModel>(
+        () => _i303.ResetPasswordViewModel(gh<_i358.AuthUseCase>()));
     return this;
   }
 }

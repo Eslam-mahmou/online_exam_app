@@ -5,10 +5,12 @@ import 'package:online_exam_app/core/api/ApiExcuter.dart';
 import 'package:online_exam_app/data/data_source/remote_data_source/auth_remote_data_source.dart';
 import 'package:online_exam_app/data/model/forget_response_password_dto.dart';
 import 'package:online_exam_app/data/model/login_response_dto.dart';
+import 'package:online_exam_app/data/model/reset_password_response_dto.dart';
 import 'package:online_exam_app/data/model/verify_email_response_dto.dart';
 import 'package:online_exam_app/domain/common/result.dart';
 import 'package:online_exam_app/domain/entity/forget_response_password_entity.dart';
 import 'package:online_exam_app/domain/entity/login_response_entity.dart';
+import 'package:online_exam_app/domain/entity/reset_password_response_entity.dart';
 import 'package:online_exam_app/domain/entity/verify_email_response_entity.dart';
 import 'package:online_exam_app/domain/repository/auth_repository.dart';
 
@@ -54,6 +56,20 @@ class AuthRepositoryImpl implements AuthRepository {
       () async {
         var response = await _authRemoteDataSource.verifyEmail(code);
         var data = VerifyEmailResponseDto.fromJson(response.data);
+        return data;
+      },
+    );
+  }
+
+  @override
+  Future<Result<ResetPasswordResponseEntity>> resetPassword(
+      String email, String newPassword) {
+    return executeApi<ResetPasswordResponseEntity>(
+      () async {
+        var response =
+            await _authRemoteDataSource.resetPassword(email, newPassword);
+        var data = ResetPasswordResponseDto.formJson(response.data);
+        SharedPreferenceServices.saveToken(AppConstants.token, data.token.toString());
         return data;
       },
     );
