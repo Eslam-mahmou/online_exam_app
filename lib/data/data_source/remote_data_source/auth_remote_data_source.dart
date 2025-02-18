@@ -4,28 +4,34 @@ import 'package:online_exam_app/core/api/api_manager.dart';
 import 'package:online_exam_app/core/utils/end_point.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<Response> login(String email,String password);
-  Future<Response> forgetPassword(String email) ;
+  Future<Response> login(String email, String password);
+
+  Future<Response> forgetPassword(String email);
+
+  Future<Response> verifyEmail(String code);
 }
-@ Injectable(as: AuthRemoteDataSource)
-class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
- final ApiManager _apiManager;
+
+@Injectable(as: AuthRemoteDataSource)
+class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+  final ApiManager _apiManager;
+
   AuthRemoteDataSourceImpl(this._apiManager);
+
   @override
-  Future<Response> login(String email, String password)async {
-     return await _apiManager.postData(EndPoints.login,
-     body: {
-       "email":email,
-       "password":password
-     });
+  Future<Response> login(String email, String password) async {
+    return await _apiManager.postData(EndPoints.login,
+        body: {"email": email, "password": password});
   }
 
   @override
-  Future<Response> forgetPassword(String email) async{
-    return await _apiManager.postData(EndPoints.forgetPassword,
-    body:{
-      "email":email
-    });
+  Future<Response> forgetPassword(String email) async {
+    return await _apiManager
+        .postData(EndPoints.forgetPassword, body: {"email": email});
   }
 
+  @override
+  Future<Response> verifyEmail(String code) async {
+    return await _apiManager
+        .postData(EndPoints.verifyEmail, body: {"resetCode": code});
+  }
 }

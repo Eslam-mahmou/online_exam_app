@@ -5,9 +5,11 @@ import 'package:online_exam_app/core/api/ApiExcuter.dart';
 import 'package:online_exam_app/data/data_source/remote_data_source/auth_remote_data_source.dart';
 import 'package:online_exam_app/data/model/forget_response_password_dto.dart';
 import 'package:online_exam_app/data/model/login_response_dto.dart';
+import 'package:online_exam_app/data/model/verify_email_response_dto.dart';
 import 'package:online_exam_app/domain/common/result.dart';
 import 'package:online_exam_app/domain/entity/forget_response_password_entity.dart';
 import 'package:online_exam_app/domain/entity/login_response_entity.dart';
+import 'package:online_exam_app/domain/entity/verify_email_response_entity.dart';
 import 'package:online_exam_app/domain/repository/auth_repository.dart';
 
 import '../../core/services/shared_preference_services.dart';
@@ -41,6 +43,17 @@ class AuthRepositoryImpl implements AuthRepository {
       () async {
         var response = await _authRemoteDataSource.forgetPassword(email);
         var data = ForgetResponsePasswordDto.fromJson(response.data);
+        return data;
+      },
+    );
+  }
+
+  @override
+  Future<Result<VerifyEmailResponseEntity>> verifyEmail(String code) {
+    return executeApi<VerifyEmailResponseEntity>(
+      () async {
+        var response = await _authRemoteDataSource.verifyEmail(code);
+        var data = VerifyEmailResponseDto.fromJson(response.data);
         return data;
       },
     );
