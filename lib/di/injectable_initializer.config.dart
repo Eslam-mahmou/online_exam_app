@@ -44,10 +44,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i358.AuthUseCase(gh<_i306.AuthRepository>()));
     gh.factory<_i160.LoginViewModel>(
         () => _i160.LoginViewModel(gh<_i358.AuthUseCase>()));
-    gh.factory<_i457.EditProfileViewModel>(
-        () => _i457.EditProfileViewModel(gh<_i358.AuthUseCase>()));
     gh.factory<_i628.SignUpViewModel>(
         () => _i628.SignUpViewModel(gh<_i358.AuthUseCase>()));
+    gh.factory<_i457.EditProfileViewModel>(
+        () => _i457.EditProfileViewModel(gh<_i358.AuthUseCase>()));
     return this;
   }
 }
