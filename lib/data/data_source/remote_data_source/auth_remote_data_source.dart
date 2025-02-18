@@ -10,25 +10,23 @@ import '../../../core/services/shared_preference_services.dart';
 import '../../../domain/entity/sign_up_request.dart';
 
 abstract class AuthRemoteDataSource {
-  Future<Response> login(String email,String password);
+  Future<Response> login(String email, String password);
 
   Future<Response> signUp(SignUpRequest data);
 
   Future<Response> updateProfile(String lastName);
 }
 
-@ Injectable(as: AuthRemoteDataSource)
-class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
- final ApiManager _apiManager;
+@Injectable(as: AuthRemoteDataSource)
+class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
+  final ApiManager _apiManager;
+
   AuthRemoteDataSourceImpl(this._apiManager);
 
   @override
-  Future<Response> login(String email, String password)async {
-     return await _apiManager.postData(EndPoints.login,
-     body: {
-       "email":email,
-       "password":password
-     });
+  Future<Response> login(String email, String password) async {
+    return await _apiManager.postData(EndPoints.login,
+        body: {"email": email, "password": password});
   }
 
   @override
@@ -41,20 +39,21 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource{
 
   @override
   Future<Response> updateProfile(String lastName) async {
-    var token = SharedPreferenceServices.getToken(AppConstants.token);
-    log("Token: $token");
-    log("Headers: {'Content-Type': 'application/json', 'Authorization': '$token'}"); // Add this line to log the token value
-    if (token == null) {
-      log("Token is null or empty");
-    }
-    return await _apiManager.putData(
-      EndPoints.editProfile,
-      {"lastName": lastName}, // Body parameter
-      {
-        'Content-Type': 'application/json',
-        'Authorization': '$token',
-      }, // Headers parameter
-    );
+    log("Headers: {'Content-Type': 'application/json', 'Authorization': '${SharedPreferenceServices.getToken(AppConstants.token.toString())}'}"); // Add this line to log the token value
+
+    return await _apiManager.putData(EndPoints.editProfile, {
+      "lastName": lastName
+    }, {
+      "token": SharedPreferenceServices.getToken(AppConstants.token.toString())
+    });
+    // return await _apiManager.putData(
+    //   EndPoints.editProfile,
+    //   {"lastName": lastName}, // Body parameter
+    //   {
+    //     'Content-Type': 'application/json',
+    //     'token': '$token',
+    //   }, // Headers parameter
+    // );
   }
 // return await _apiManager.putData(
 

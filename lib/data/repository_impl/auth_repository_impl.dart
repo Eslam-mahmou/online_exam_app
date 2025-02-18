@@ -30,9 +30,8 @@ class AuthRepositoryImpl implements AuthRepository {
         log(response.toString());
         var data = LoginResponseDto.fromJson(response.data);
         log(data.token.toString());
-        // SharedPreferenceServices.saveToken(
-        //    AppConstants.token, data.token.toString());
-        SharedPreferenceServices.getToken(data.token.toString());
+        SharedPreferenceServices.saveToken(
+           AppConstants.token, data.token.toString());
         return data;
       },
     );
@@ -48,7 +47,7 @@ class AuthRepositoryImpl implements AuthRepository {
         final userResponse = UserResponse.fromJson(response.data);
         log(userResponse.token);
         SharedPreferenceServices.saveToken(
-            AppConstants.token, userResponse.token.toString());
+            AppConstants.token, userResponse.token);
         log(userResponse.token);
         final userModel = userResponse.user;
         return Success(userModel);
