@@ -13,7 +13,6 @@ import '../../../../domain/entity/sign_up_request.dart';
 @injectable
 class SignUpViewModel extends Cubit<SignUpState> {
   SignUpViewModel(this._authUseCase) : super(SignUpLoadingState());
-
   final AuthUseCase _authUseCase;
 
   final emailController = TextEditingController();
@@ -33,49 +32,6 @@ class SignUpViewModel extends Cubit<SignUpState> {
     }
   }
 
-  // Future<void> _handleSignUp() async {
-  //   if (!formSignUpKey.currentState!.validate()) {
-  //     return;
-  //   }
-  //
-  //   if (passwordController.text != rePasswordController.text) {
-  //     EasyLoading.showError("Passwords do not match");
-  //     return;
-  //   }
-  //
-  //   var data = SignUpRequest(
-  //     username: userNameController.text,
-  //     firstName: firstNameController.text,
-  //     lastName: lastNameController.text,
-  //     phone: phoneController.text,
-  //     email: emailController.text,
-  //     password: passwordController.text,
-  //     rePassword: rePasswordController.text,
-  //   );
-  //
-  //   emit(SignUpLoadingState()); // Start with loading state
-  //   EasyLoading.show();
-  //
-  //   var result = await _authUseCase.execute(data);
-  //
-  //   switch (result) {
-  //     case Success():
-  //       var user = result.data;
-  //       if (user != null) {
-  //         emit(SuccessSignUpState(user));
-  //         log("Sign-up success: ${user.username}");
-  //       } else {
-  //         emit(ErrorSignUpState("Sign-up failed"));
-  //         log("Sign-up Error: Sign-up failed");
-  //       }
-  //       EasyLoading.dismiss();
-  //
-  //     case Error():
-  //       emit(ErrorSignUpState(result.exception.toString()));
-  //       log("Sign-up API Error: ${result.exception}");
-  //       EasyLoading.dismiss();
-  //   }
-  // }
   Future<void> _handleSignUp() async {
     if (!formSignUpKey.currentState!.validate()) return;
     if (passwordController.text != rePasswordController.text) {
@@ -96,7 +52,6 @@ class SignUpViewModel extends Cubit<SignUpState> {
     );
 
     var result = await _authUseCase.execute(data);
-
     EasyLoading.dismiss();
 
     switch (result) {
@@ -104,7 +59,7 @@ class SignUpViewModel extends Cubit<SignUpState> {
         if (result.data != null) {
           emit(SuccessSignUpState(result.data!));
           log("Sign-up success: ${result.data!.username}");
-          log("Sign-up success: $result");
+          log("Sign-up success: ${result.data}");
         } else {
           emit(ErrorSignUpState("Sign-up failed"));
         }

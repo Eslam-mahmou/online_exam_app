@@ -1,3 +1,6 @@
+import 'dart:convert';
+import 'dart:developer';
+
 import 'package:dio/dio.dart';
 import 'package:flutter/material.dart';
 import 'package:injectable/injectable.dart';
@@ -48,6 +51,9 @@ class ApiManager {
 
   Future<Response> putData(String endPoint, Map<String, dynamic> body,
       Map<String, dynamic>? headers) async {
+    log("🚀 Sending PUT request to: ${AppConstants.baseUrl + endPoint}");
+    log("📦 Request Body: ${jsonEncode(body)}");
+    log("🔐 Request Headers: $headers");
     return await dio.put(AppConstants.baseUrl + endPoint,
         data: body,
         options: Options(
