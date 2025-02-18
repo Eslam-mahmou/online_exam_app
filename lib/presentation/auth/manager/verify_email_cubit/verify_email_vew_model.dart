@@ -1,6 +1,8 @@
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
+import 'package:online_exam_app/core/services/shared_preference_services.dart';
+import 'package:online_exam_app/core/utils/constant_manager.dart';
 import 'package:online_exam_app/domain/common/result.dart';
 import 'package:online_exam_app/domain/use_case/auth_use_case.dart';
 import 'package:online_exam_app/presentation/auth/manager/verify_email_cubit/verify_email_state.dart';
@@ -21,6 +23,8 @@ class VerifyEmailVewModel extends Cubit<VerifyEmailState> {
         if(formVerifyKey.currentState!.validate()){
           _verifyEmail(_collectVerifyCode());
         }
+      case ResendClickedIntent():
+        _resendCode(SharedPreferenceServices.getToken(AppConstants.email.toString()).toString());
 
     }
   }
@@ -44,6 +48,23 @@ class VerifyEmailVewModel extends Cubit<VerifyEmailState> {
         emit(ErrorVerifyEmailState(result.exception!.errorMessage));
     }
   }
+  void _resendCode(String email)async{
+    emit(LoadingResendEmailState());
+    var result=await _auth.callForgetPassword(email);
+    switch(result){
+      case Success():
+        var data = result.data;
+        if(data!.message=="success"){
+          emit(SuccessResendEmailState());
+        }else{
+          emit(ErrorResendEmailState(data.message));
+        }
+      case Error():
+        emit(ErrorResendEmailState(result.exception!.errorMessage));
+    }
+  }
 }
 sealed class VerifyEmailIntent {}
 class ContinueClickedIntent extends VerifyEmailIntent {}
+class ResendClickedIntent extends VerifyEmailIntent {
+}

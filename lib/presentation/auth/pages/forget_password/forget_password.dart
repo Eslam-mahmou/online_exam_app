@@ -44,7 +44,7 @@ class ForgetPassword extends StatelessWidget {
               );
             } else if (state is SuccessForgetPasswordState) {
               EasyLoading.dismiss();
-              Navigator.pushNamed(context, PagesRoutes.emailVerification);
+              Navigator.pushNamed(context, PagesRoutes.emailVerification,arguments: viewModel.email);
             }
           },
           child: Form(

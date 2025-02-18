@@ -56,7 +56,23 @@ class _EmailVerificationState extends State<EmailVerification> {
             if (state is ErrorVerifyEmailState) {
               EasyLoading.dismiss();
               DialogUtils.showMessage(
-                  context: context, message: state.errMessage.toString());
+                title: "Error",
+                  context: context, message: state.errMessage.toString(),
+              postActionName: "Ok");
+
+            }
+            if(state is LoadingResendEmailState){
+              EasyLoading.show();
+            }
+            if(state is SuccessResendEmailState){
+              EasyLoading.dismiss();
+            }
+            if(state is ErrorResendEmailState){
+              EasyLoading.dismiss();
+              DialogUtils.showMessage(
+                  title: "Error",
+                  context: context, message: state.errMessage.toString(),
+                  postActionName: "Ok");
             }
           },
           child: Form(
@@ -388,7 +404,9 @@ class _EmailVerificationState extends State<EmailVerification> {
                           FontWeightManager.regular, ColorsManager.blackColor),
                     ),
                     TextButton(
-                      onPressed: () {},
+                      onPressed: () {
+                        vewModel.doIntent(ResendClickedIntent());
+                      },
                       child: Text("Resend",
                           style: getTextStyle(
                               FontSize.s16,
