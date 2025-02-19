@@ -1,64 +1,90 @@
+import '../../domain/entity/login_response_entity.dart';
 import '../../domain/entity/profile_user_entity.dart';
 
-class ProfileUserModel extends ProfileUserEntity {
+class ProfileUserModel extends UserLoginResponseEntity {
   ProfileUserModel({
-    required String id,
-    required String username,
-    required String firstName,
-    required String lastName,
-    required String email,
-    required String phone,
-    required String role,
-    required bool isVerified,
-    String? passwordResetCode,
-    String? passwordResetExpires,
-    bool? resetCodeVerified,
-  }) : super(
-          id: id,
-          username: username,
-          firstName: firstName,
-          lastName: lastName,
-          email: email,
-          phone: phone,
-          role: role,
-          isVerified: isVerified,
-          passwordResetCode: passwordResetCode,
-          passwordResetExpires: passwordResetExpires,
-          resetCodeVerified: resetCodeVerified,
-        );
+    super.id,
+    super.username,
+    super.firstName,
+    super.lastName,
+    super.email,
+    super.phone,
+    super.isVerified,
+    this.passwordResetCode,
+    this.passwordResetExpires,
+    this.resetCodeVerified,
+  });
+
+  String? passwordResetCode;
+  String? passwordResetExpires;
+  bool? resetCodeVerified;
+
+  // change ProfileUserModel to ProfileUserEntity
+  ProfileUserEntity toEntity() {
+    return ProfileUserEntity(
+      id: id,
+      username: username.toString(),
+      firstName: firstName.toString(),
+      lastName: lastName.toString(),
+      email: email.toString(),
+      phone: phone.toString(),
+      isVerified: isVerified,
+      passwordResetCode: passwordResetCode,
+      passwordResetExpires: passwordResetExpires,
+      resetCodeVerified: resetCodeVerified,
+    );
+  }
+
+  factory ProfileUserModel.fromEntity(ProfileUserEntity entity) {
+    return ProfileUserModel(
+      id: entity.id,
+      username: entity.username,
+      firstName: entity.firstName,
+      lastName: entity.lastName,
+      email: entity.email,
+      phone: entity.phone,
+      isVerified: entity.isVerified,
+      passwordResetCode: entity.passwordResetCode,
+      passwordResetExpires: entity.passwordResetExpires,
+      resetCodeVerified: entity.resetCodeVerified,
+    );
+  }
 
   // Factory constructor to convert JSON to ProfileUserModel
   factory ProfileUserModel.fromJson(Map<String, dynamic> json) {
+    print("📢 Received JSON in fromJson: $json"); // Print data before decoding
+
+    // Extract the 'user' object from the response
+    var user = json["user"];
+    print("📢 User Data: $user");
+
+    // Now map the 'user' object to the ProfileUserModel fields
     return ProfileUserModel(
-      id: json["_id"] ?? "",
-      username: json["username"] ?? "",
-      firstName: json["firstName"] ?? "",
-      lastName: json["lastName"] ?? "",
-      email: json["email"] ?? "",
-      phone: json["phone"] ?? "",
-      role: json["role"] ?? "",
-      isVerified: json["isVerified"] is bool
-          ? json["isVerified"] as bool
-          : json["isVerified"] == "false",
-      passwordResetCode: json["passwordResetCode"],
-      passwordResetExpires: json["passwordResetExpires"],
-      resetCodeVerified: json["resetCodeVerified"] is bool
-          ? json["resetCodeVerified"] as bool
-          : json["resetCodeVerified"] == "true",
+      id: user["_id"] ?? "",
+      username: user["username"] ?? "",
+      firstName: user["firstName"] ?? "",
+      lastName: user["lastName"] ?? "",
+      email: user["email"] ?? "",
+      phone: user["phone"] ?? "",
+      isVerified: user["isVerified"] is bool
+          ? user["isVerified"] as bool
+          : user["isVerified"] == "false",
+      passwordResetCode: user["passwordResetCode"],
+      passwordResetExpires: user["passwordResetExpires"],
+      resetCodeVerified: user["resetCodeVerified"] is bool
+          ? user["resetCodeVerified"] as bool
+          : user["resetCodeVerified"] == "true",
     );
   }
 
   // Convert ProfileUserModel to JSON
   Map<String, dynamic> toJson() {
     return {
-      "_id": id,
       "username": username,
       "firstName": firstName,
       "lastName": lastName,
       "email": email,
       "phone": phone,
-      "role": role,
-      "isVerified": isVerified,
       "passwordResetCode": passwordResetCode,
       "passwordResetExpires": passwordResetExpires,
       "resetCodeVerified": resetCodeVerified,

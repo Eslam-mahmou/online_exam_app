@@ -22,7 +22,8 @@ class AuthUseCase {
     return await _authRepository.signUp(data);
   }
 
-  Future<Result<ProfileUserEntity>> executeProfile(String lastName) async {
-    return await _authRepository.updateProfile(lastName);
+  Future<Result<ProfileUserEntity>> executeProfile(
+      ProfileUserEntity updatedProfile) async {
+    return await _authRepository.updateProfile(updatedProfile);
   }
 }

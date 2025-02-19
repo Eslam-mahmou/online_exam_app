@@ -5,6 +5,8 @@ class LoginLoadingState extends LoginState{}
 class SuccessLoginState extends LoginState{
   final LoginResponseEntity? success;
   SuccessLoginState(this.success);
+
+  List<Object?> get props => [success];
 }
 class ErrorLoginState extends LoginState{
   final String? errMessage;

@@ -81,15 +81,17 @@ class AuthRepositoryImpl implements AuthRepository {
   //
   //
   // }
-  Future<Result<ProfileUserEntity>> updateProfile(String lastName) async {
+  Future<Result<ProfileUserEntity>> updateProfile(
+      ProfileUserEntity user) async {
     try {
-      final response = await _authRemoteDataSource.updateProfile(lastName);
+      final response = await _authRemoteDataSource.updateProfile(user);
 
       log("Update Profile API Response: ${response.data}"); // 🔍 Log the response
 
       if (response.statusCode == 200 && response.data["message"] == "success") {
         final userResponse = ProfileUserModel.fromJson(response.data);
-        return Success(userResponse);
+        // return Success(userResponse as ProfileUserEntity?);
+        return Success(userResponse.toEntity());
       } else {
         return Error(response.data["message"]);
       }

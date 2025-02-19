@@ -11,6 +11,8 @@ import 'package:online_exam_app/core/widget/custom_validate.dart';
 import 'package:online_exam_app/di/injectable_initializer.dart';
 import 'package:online_exam_app/presentation/auth/manager/login_cubit/login_state.dart';
 import 'package:online_exam_app/presentation/auth/manager/login_cubit/login_view_model.dart';
+
+import '../../../core/services/shared_preference_services.dart';
 import '../../../core/widget/custom_elevated_button.dart';
 
 class LoginScreen extends StatelessWidget {
@@ -47,8 +49,16 @@ class LoginScreen extends StatelessWidget {
         }
         if(state is SuccessLoginState){
           EasyLoading.dismiss();
-          Navigator.pushNamed(context, PagesRoutes.layoutScreen);
-        }
+              // Save only the 'user' object inside LoginResponseEntity
+              if (state.success?.user != null) {
+                Prefs.saveUserData(state.success!.user!);
+              }
+              Navigator.pushNamed(
+                context,
+                PagesRoutes.layoutScreen,
+                arguments: state.success!.user,
+              );
+            }
         if(state is LoginLoadingState){
           EasyLoading.show();
         }

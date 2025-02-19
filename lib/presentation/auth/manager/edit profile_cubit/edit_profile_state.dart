@@ -5,9 +5,11 @@ sealed class EditProfileState {}
 class EditProfileLoadingState extends EditProfileState {}
 
 class SuccessEditProfileState extends EditProfileState {
-  final ProfileUserEntity? updatedUser;
+  final ProfileUserEntity updatedUser;
 
   SuccessEditProfileState(this.updatedUser);
+
+  List<Object?> get props => [updatedUser];
 }
 
 class ErrorEditProfileState extends EditProfileState {

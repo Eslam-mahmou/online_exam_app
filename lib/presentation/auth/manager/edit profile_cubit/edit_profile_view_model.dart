@@ -87,6 +87,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:injectable/injectable.dart';
 
 import '../../../../domain/common/result.dart';
+import '../../../../domain/entity/profile_user_entity.dart';
 import '../../../../domain/use_case/auth_use_case.dart';
 import 'edit_profile_state.dart';
 
@@ -119,22 +120,29 @@ class EditProfileViewModel extends Cubit<EditProfileState> {
     emit(EditProfileLoadingState());
 
     try {
-      final updatedUser = await _authUseCase.executeProfile(
-        lastNameController.text,
+      // Create the ProfileUserEntity object
+      var user = ProfileUserEntity(
+        username: userNameController.text,
+        firstName: firstNameController.text,
+        lastName: lastNameController.text,
+        email: emailController.text,
+        phone: phoneController.text,
       );
 
-      // Log API Response before processing
-      log("Update Profile API Response: ${updatedUser.toString()}");
+      // Pass the user object to the executeProfile method
+      final updatedUser = await _authUseCase.executeProfile(user);
+
+      log("📢 Raw API Response: $updatedUser");
 
       EasyLoading.dismiss();
 
       switch (updatedUser) {
         case Success():
           var data = updatedUser.data;
-          log("Parsed Profile Data: $data");
+          log("✅ Parsed Profile Data: $data");
 
           if (data != null) {
-            emit(SuccessEditProfileState(data)); // Profile update successful
+            emit(SuccessEditProfileState(data)); // ✅ Ensures UI updates
             log("✅ Profile updated successfully: ${data.lastName}");
           } else {
             emit(ErrorEditProfileState("Profile update failed"));

@@ -10,5 +10,6 @@ abstract class AuthRepository {
 
   Future<Result<UserModel>> signUp(SignUpRequest data);
 
-  Future<Result<ProfileUserEntity>> updateProfile(String lastName);
+  Future<Result<ProfileUserEntity>> updateProfile(
+      ProfileUserEntity updatedProfile);
 }
