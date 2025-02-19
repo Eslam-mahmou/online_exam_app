@@ -17,6 +17,8 @@ import '../data/data_source/remote_data_source/auth_remote_data_source.dart'
 import '../data/repository_impl/auth_repository_impl.dart' as _i970;
 import '../domain/repository/auth_repository.dart' as _i306;
 import '../domain/use_case/auth_use_case.dart' as _i358;
+import '../presentation/auth/manager/change_password_cubit/change_password_view_model.dart'
+    as _i152;
 import '../presentation/auth/manager/edit%20profile_cubit/edit_profile_view_model.dart'
     as _i457;
 import '../presentation/auth/manager/login_cubit/login_view_model.dart'
@@ -44,10 +46,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i358.AuthUseCase(gh<_i306.AuthRepository>()));
     gh.factory<_i160.LoginViewModel>(
         () => _i160.LoginViewModel(gh<_i358.AuthUseCase>()));
-    gh.factory<_i628.SignUpViewModel>(
-        () => _i628.SignUpViewModel(gh<_i358.AuthUseCase>()));
+    gh.factory<_i152.ChangePasswordViewModel>(
+        () => _i152.ChangePasswordViewModel(gh<_i358.AuthUseCase>()));
     gh.factory<_i457.EditProfileViewModel>(
         () => _i457.EditProfileViewModel(gh<_i358.AuthUseCase>()));
+    gh.factory<_i628.SignUpViewModel>(
+        () => _i628.SignUpViewModel(gh<_i358.AuthUseCase>()));
     return this;
   }
 }

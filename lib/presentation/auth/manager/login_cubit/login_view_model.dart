@@ -43,5 +43,4 @@ class LoginViewModel extends Cubit<LoginState> {
 
 sealed class LoginIntent {}
 
-class LoginClickedIntent extends LoginIntent {
-}
+class LoginClickedIntent extends LoginIntent {}

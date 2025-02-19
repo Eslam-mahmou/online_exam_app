@@ -13,7 +13,9 @@ import '../utils/constant_manager.dart';
 class ApiManager {
   static ApiManager? _this;
 
-  ApiManager._();
+  ApiManager._() {
+    // initializeInterceptors();
+  }
 
   factory ApiManager() {
     _this ??= ApiManager._();
@@ -56,6 +58,20 @@ class ApiManager {
     log("Request Body: ${jsonEncode(body)}");
     log("Request Headers: $headers");
     return await dio.put(AppConstants.baseUrl + endPoint,
+        data: body,
+        options: Options(
+          headers: headers,
+          validateStatus: (status) => true,
+        ));
+  }
+
+  Future<Response> patchData(String endPoint,
+      {Map<String, dynamic>? body, Map<String, dynamic>? headers}) async {
+    log("Sending PATCH request to: ${AppConstants.baseUrl + endPoint}");
+    log("Request Body: ${jsonEncode(body)}");
+    log("Request Headers: $headers");
+
+    return await dio.patch(AppConstants.baseUrl + endPoint,
         data: body,
         options: Options(
           headers: headers,

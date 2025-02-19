@@ -1,0 +1,69 @@
+import 'package:flutter/cupertino.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:injectable/injectable.dart';
+import 'package:online_exam_app/domain/common/result.dart';
+import 'package:online_exam_app/domain/use_case/auth_use_case.dart';
+import 'package:online_exam_app/presentation/auth/manager/change_password_cubit/change_password_state.dart';
+
+@injectable
+class ChangePasswordViewModel extends Cubit<ChangePasswordState> {
+  final AuthUseCase _authUseCase;
+
+  ChangePasswordViewModel(this._authUseCase)
+      : super(InitialChangePasswordState());
+
+  final TextEditingController oldPassword = TextEditingController();
+  final TextEditingController newPassword = TextEditingController();
+  final TextEditingController rePassword = TextEditingController();
+
+  final GlobalKey<FormState> formResetPasswordKey = GlobalKey<FormState>();
+
+  void doIntent(ResetPasswordIntent resetPasswordIntent) {
+    switch (resetPasswordIntent) {
+      case ResetClickedIntent():
+        if (formResetPasswordKey.currentState!.validate()) {
+          if (newPassword.text != rePassword.text) {
+            emit(ErrorChangePasswordState("New Password DOES NOT MATCH"));
+            return;
+          }
+          _changePassword();
+        }
+    }
+  }
+
+  void _changePassword() async {
+    emit(LoadingChangePasswordState());
+
+    String oldPass = oldPassword.text.trim();
+    String newPass = newPassword.text.trim();
+    String rePass = rePassword.text.trim();
+
+    print("oldPassword: $oldPass");
+    print("newPassword: $newPass");
+    print("rePassword: $rePass");
+
+    if (rePass != newPass) {
+      print("rePassword does not match newPassword");
+      rePass = newPass;
+    }
+
+    var result =
+        await _authUseCase.callChangePassword(oldPass, newPass, rePass);
+
+    switch (result) {
+      case Success():
+        var data = result.data;
+        if (data!.message == "success") {
+          emit(SuccessChangePasswordState());
+        } else {
+          emit(ErrorChangePasswordState(data.message.toString()));
+        }
+      case Error():
+        emit(ErrorChangePasswordState(result.toString()));
+    }
+  }
+}
+
+sealed class ResetPasswordIntent {}
+
+class ResetClickedIntent extends ResetPasswordIntent {}

@@ -12,16 +12,16 @@ import '../../../domain/entity/sign_up_request.dart';
 
 abstract class AuthRemoteDataSource {
   Future<Response> login(String email, String password);
-
   Future<Response> signUp(SignUpRequest data);
-
   Future<Response> updateProfile(ProfileUserEntity user);
+
+  Future<Response> changePassword(
+      String oldPassword, String newPassword, String rePassword);
 }
 
 @Injectable(as: AuthRemoteDataSource)
 class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   final ApiManager _apiManager;
-
   AuthRemoteDataSourceImpl(this._apiManager);
 
   @override
@@ -39,24 +39,8 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
   }
 
   @override
-  // Future<Response> updateProfile(String lastName) async {
-  //
-  //   log("Headers: {'Content-Type': 'application/json', 'Token': '${SharedPreferenceServices.getToken(AppConstants.token.toString())}'}"); // Add this line to log the token value
-  //
-  //   return await _apiManager.putData(
-  //       EndPoints.editProfile,
-  //       {
-  //         "lastName": lastName
-  //       },
-  //       {
-  //         "token": SharedPreferenceServices.getToken(AppConstants.token.toString())
-  //       }
-  //       );
-  //
-  // }
   Future<Response> updateProfile(ProfileUserEntity user) async {
     log("Headers: {'Content-Type': 'application/json', 'Token': '${SharedPreferenceServices.getToken(AppConstants.token.toString())}'}");
-
     return await _apiManager.putData(
       EndPoints.editProfile,
       {
@@ -69,6 +53,24 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
       {
         "token":
             SharedPreferenceServices.getToken(AppConstants.token.toString())
+      },
+    );
+  }
+
+  @override
+  Future<Response> changePassword(
+      String oldPassword, String newPassword, String rePassword) async {
+    return await _apiManager.patchData(
+      EndPoints.changePasswordDomain,
+      body: {
+        "oldPassword": oldPassword,
+        "password": newPassword,
+        "rePassword": rePassword,
+      },
+      headers: {
+        "token":
+            SharedPreferenceServices.getToken(AppConstants.token.toString()),
+        "Content-Type": "application/json",
       },
     );
   }
