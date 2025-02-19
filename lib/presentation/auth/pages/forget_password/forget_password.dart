@@ -5,6 +5,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
+import 'package:online_exam_app/core/widget/custom_diaolg.dart';
 import 'package:online_exam_app/core/widget/custom_validate.dart';
 import 'package:online_exam_app/di/injectable_initializer.dart';
 import 'package:online_exam_app/presentation/auth/manager/forget_password_cubit/forget_password_state.dart';
@@ -33,15 +34,9 @@ class ForgetPassword extends StatelessWidget {
               EasyLoading.show();
             } else if (state is ErrorForgetPasswordState) {
               EasyLoading.dismiss();
-              showDialog(
-                context: context,
-                builder: (context) {
-                  return AlertDialog(
-                    title: const Text("Error"),
-                    content: Text(state.errorMessage.toString()),
-                  );
-                },
-              );
+              DialogUtils.showMessage(context: context, message: state.errorMessage.toString(),
+              title: "Error",
+              postActionName: "Ok");
             } else if (state is SuccessForgetPasswordState) {
               EasyLoading.dismiss();
               Navigator.pushNamed(context, PagesRoutes.emailVerification,arguments: viewModel.email);

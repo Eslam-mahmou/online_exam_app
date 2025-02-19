@@ -3,9 +3,7 @@ import 'dart:developer';
 import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
-import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'package:online_exam_app/domain/common/result.dart';
-import 'package:online_exam_app/domain/entity/login_response_entity.dart';
 import 'package:online_exam_app/domain/use_case/auth_use_case.dart';
 import 'package:online_exam_app/presentation/auth/manager/login_cubit/login_state.dart';
 
