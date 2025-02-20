@@ -52,11 +52,11 @@ class ProfileUserModel extends UserLoginResponseEntity {
 
   // Factory constructor to convert JSON to ProfileUserModel
   factory ProfileUserModel.fromJson(Map<String, dynamic> json) {
-    print("📢 Received JSON in fromJson: $json"); // Print data before decoding
+    print(" Received JSON in fromJson: $json"); // Print data before decoding
 
     // Extract the 'user' object from the response
     var user = json["user"];
-    print("📢 User Data: $user");
+    print(" User Data: $user");
 
     // Now map the 'user' object to the ProfileUserModel fields
     return ProfileUserModel(

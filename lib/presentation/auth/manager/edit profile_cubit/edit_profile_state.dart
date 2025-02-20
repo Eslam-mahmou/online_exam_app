@@ -8,7 +8,6 @@ class SuccessEditProfileState extends EditProfileState {
   final ProfileUserEntity updatedUser;
 
   SuccessEditProfileState(this.updatedUser);
-
   List<Object?> get props => [updatedUser];
 }
 

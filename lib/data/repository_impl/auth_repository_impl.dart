@@ -62,33 +62,11 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  // Future<Result<ProfileUserEntity>> updateProfile(String lastName) async {
-  //
-  //   try {
-  //     final response = await _authRemoteDataSource.updateProfile(lastName);
-  //
-  //     if (response.statusCode == 200 && response.data["message"] == "success") {
-  //       // SharedPreferenceServices.getToken(response.data['token']);
-  //       final userResponse = ProfileUserModel.fromJson(response.data);
-  //       SharedPreferenceServices.getToken(response.data['token']);
-  //       // SharedPreferenceServices.saveToken(
-  //       //     AppConstants.token, userResponse.token.toString());
-  //       return Success(userResponse);
-  //     } else {
-  //       return Error(response.data["message"]);
-  //     }
-  //   } on DioException catch (dioException) {
-  //     return Error(dioException.response?.data["message"] ?? "Unknown error");
-  //   }
-  //
-  //
-  // }
   Future<Result<ProfileUserEntity>> updateProfile(
       ProfileUserEntity user) async {
     try {
       final response = await _authRemoteDataSource.updateProfile(user);
-
-      log("Update Profile API Response: ${response.data}"); // 🔍 Log the response
+      log("Update Profile API Response: ${response.data}");
 
       if (response.statusCode == 200 && response.data["message"] == "success") {
         final userResponse = ProfileUserModel.fromJson(response.data);
