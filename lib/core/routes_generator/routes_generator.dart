@@ -1,5 +1,8 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
+import 'package:online_exam_app/di/injectable_initializer.dart';
+import 'package:online_exam_app/presentation/auth/manager/login_cubit/login_view_model.dart';
 import 'package:online_exam_app/presentation/auth/pages/forget_password/email_verification.dart';
 import 'package:online_exam_app/presentation/auth/pages/forget_password/forget_password.dart';
 import 'package:online_exam_app/presentation/auth/pages/forget_password/reset_pass_login.dart';
@@ -17,7 +20,9 @@ class RoutesGenerator {
         return MaterialPageRoute(
             builder: (context) => const SplashScreen(), settings: settings);
       case PagesRoutes.loginScreen :
-        return MaterialPageRoute(builder: (context) => const LoginScreen(),settings: settings);
+        return MaterialPageRoute(builder: (context) => BlocProvider(
+            create: (context) => getIt.get<LoginViewModel>(),
+            child: const LoginScreen()),settings: settings);
 
       case PagesRoutes.signUpScreen:
         return MaterialPageRoute(
