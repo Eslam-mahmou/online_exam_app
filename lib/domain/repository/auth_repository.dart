@@ -9,4 +9,12 @@ abstract class AuthRepository {
   Future<Result<ForgetResponsePasswordEntity>> forgetPassword(String email);
   Future<Result<VerifyEmailResponseEntity>> verifyEmail(String code);
   Future<Result<ResetPasswordResponseEntity>> resetPassword(String email,String newPassword);
+
+  Future<Result<UserModel>> signUp(SignUpRequest data);
+
+  Future<Result<ProfileUserEntity>> updateProfile(
+      ProfileUserEntity updatedProfile);
+
+  Future<Result<ChangePasswordResponseEntity>> changePassword(
+      String oldPassword, String newPassword, String rePassword);
 }

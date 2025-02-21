@@ -11,7 +11,7 @@ import 'package:online_exam_app/presentation/auth/pages/sign_up_screen.dart';
 import 'package:online_exam_app/presentation/layout/layout.dart';
 import 'package:online_exam_app/presentation/splash/splash_screen.dart';
 
-import '../../presentation/layout/pages/profilePage/reset_password.dart';
+import '../../presentation/layout/pages/profilePage/change_password.dart';
 
 class RoutesGenerator {
   static Route<dynamic> onGenerateRoute(RouteSettings settings){
@@ -30,7 +30,7 @@ class RoutesGenerator {
 
       case PagesRoutes.resetPassword:
         return MaterialPageRoute(
-            builder: (context) => const ResetPassword(), settings: settings);
+            builder: (context) => const ChangePassword(), settings: settings);
       case PagesRoutes.layoutScreen:
         return MaterialPageRoute(
             builder: (context) => const LayoutScreen(), settings: settings);

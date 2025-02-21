@@ -9,7 +9,8 @@ class CustomTextFromField extends StatelessWidget {
       {super.key,
       required this.labelText,
        this.hinText,
-      this.controller,
+    this.initialValue,
+    this.controller,
       this.validator,
       this.keyboardType,
       this.obscureText,
@@ -17,6 +18,7 @@ class CustomTextFromField extends StatelessWidget {
 
   final String labelText;
   final String? hinText;
+  final String? initialValue;
   TextEditingController? controller;
   String? Function(String?)? validator;
   TextInputType? keyboardType;
@@ -28,6 +30,7 @@ class CustomTextFromField extends StatelessWidget {
     return Padding(
       padding: EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
       child: TextFormField(
+        initialValue: initialValue,
         controller: controller,
         validator: validator,
         keyboardType: keyboardType,

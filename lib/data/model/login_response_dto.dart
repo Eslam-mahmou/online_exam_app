@@ -21,7 +21,8 @@ class UserLoginResponseDTO extends UserLoginResponseEntity{
       super.lastName,
       super.email,
       super.phone,
-      super.isVerified,});
+    super.isVerified,
+  });
 
   UserLoginResponseDTO.fromJson(dynamic json) {
     id = json['_id'];

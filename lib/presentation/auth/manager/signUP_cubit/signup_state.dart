@@ -6,7 +6,6 @@ class SignUpLoadingState extends SignUpState {}
 
 class SuccessSignUpState extends SignUpState {
   final UserModel? success;
-
   SuccessSignUpState(this.success);
 }
 

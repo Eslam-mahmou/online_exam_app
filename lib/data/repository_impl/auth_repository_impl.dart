@@ -5,6 +5,7 @@ import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/core/api/ApiExcuter.dart';
 import 'package:online_exam_app/data/data_source/remote_data_source/auth_remote_data_source.dart';
 import 'package:online_exam_app/data/model/forget_response_password_dto.dart';
+import 'package:online_exam_app/data/model/change_password.dart';
 import 'package:online_exam_app/data/model/login_response_dto.dart';
 import 'package:online_exam_app/data/model/reset_password_response_dto.dart';
 import 'package:online_exam_app/data/model/verify_email_response_dto.dart';
@@ -17,8 +18,13 @@ import 'package:online_exam_app/domain/repository/auth_repository.dart';
 
 import '../../core/services/shared_preference_services.dart';
 import '../../core/utils/constant_manager.dart';
+
+import '../../domain/entity/change_password_response_entity.dart';
+import '../../domain/entity/profile_user_entity.dart';
 import '../../domain/entity/sign_up_request.dart';
 import '../../domain/entity/sign_up_response.dart';
+
+import '../model/profile_user.dart';
 
 @Injectable(as: AuthRepository)
 class AuthRepositoryImpl implements AuthRepository {
@@ -38,7 +44,9 @@ class AuthRepositoryImpl implements AuthRepository {
         log(response.toString());
         var data = LoginResponseDto.fromJson(response.data);
         log(data.token.toString());
-        SharedPreferenceServices.getToken(AppConstants.token);
+        SharedPreferenceServices.saveToken(
+           AppConstants.token, data.token.toString());
+
         return data;
       },
     );
@@ -82,61 +90,58 @@ class AuthRepositoryImpl implements AuthRepository {
   }
 
   @override
-  Future<Result<UserModel>> signUp1(SignUpRequest data) async {
-    return executeApi<UserModel>(
-      () async {
-        var response = await _authRemoteDataSource.signUp(data);
-        log(response.toString());
-
-        var userResponse = UserResponse.fromJson(response.data);
-        log(userResponse.token.toString());
-        SharedPreferenceServices.saveToken(
-            AppConstants.token, userResponse.token.toString());
-
-        return userResponse.user; // Return the extracted UserModel
-      },
-    );
-  }
-  ///
-  // Future<Result<UserModel>> signUp(SignUpRequest data) async {
-  //   try {
-  //     print("Starting SignUp...");
-  //
-  //     final response = await _authRemoteDataSource.signUp(data);
-  //
-  //     print("Response Received: ${response.statusCode}");
-  //
-  //     if (response.statusCode == 201) {
-  //       print("SignUp Success: ${response.data}");
-  //       SharedPreferenceServices.getToken(response.data['token']);
-  //       final userResponse = UserResponse.fromJson(response.data);
-  //       return Success(userResponse.user);
-  //     } else {
-  //       print("SignUp Failed: ${response.data}");
-  //       return Error(response.data["message"]);
-  //     }
-  //   } on DioException catch (e) {
-  //     print("DioException: ${e.response?.data}");
-  //     return Error(e.response?.data?["message"] ?? "Unknown error");
-  //   }
-  // }
   Future<Result<UserModel>> signUp(SignUpRequest data) async {
     try {
       final response = await _authRemoteDataSource.signUp(data);
 
       if (response.statusCode == 200 && response.data["message"] == "success") {
-        SharedPreferenceServices.getToken(response.data['token']); // Save token
-
-        // Convert JSON response to UserResponse
+        // SharedPreferenceServices.getToken(response.data['token']);
         final userResponse = UserResponse.fromJson(response.data);
-        final userModel = userResponse.user; // Extract UserModel
+        log(userResponse.token);
+        SharedPreferenceServices.saveToken(
+            AppConstants.token, userResponse.token);
+        log(userResponse.token);
+        final userModel = userResponse.user;
         return Success(userModel);
       } else {
-        return Error(
-            response.data["message"]); // Return error if not successful
+        return Error(response.data["message"]);
       }
     } on DioException catch (dioException) {
       return Error(dioException.response?.data["message"] ?? "Unknown error");
     }
+  }
+
+  @override
+  Future<Result<ProfileUserEntity>> updateProfile(
+      ProfileUserEntity user) async {
+    try {
+      final response = await _authRemoteDataSource.updateProfile(user);
+      log("Update Profile API Response: ${response.data}");
+
+      if (response.statusCode == 200 && response.data["message"] == "success") {
+        final userResponse = ProfileUserModel.fromJson(response.data);
+        // return Success(userResponse as ProfileUserEntity?);
+        return Success(userResponse.toEntity());
+      } else {
+        return Error(response.data["message"]);
+      }
+    } on DioException catch (dioException) {
+      return Error(dioException.response?.data["message"] ?? "Unknown error");
+    }
+  }
+
+  @override
+  Future<Result<ChangePasswordResponseEntity>> changePassword(
+      String oldPassword, String newPassword, String rePassword) {
+    return executeApi<ChangePasswordResponseEntity>(
+      () async {
+        var response = await _authRemoteDataSource.changePassword(
+            oldPassword, newPassword, rePassword);
+        var data = ChangePasswordResponseDto.formJson(response.data);
+        SharedPreferenceServices.saveToken(
+            AppConstants.token, data.token.toString());
+        return data;
+      },
+    );
   }
 }

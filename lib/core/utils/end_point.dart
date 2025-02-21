@@ -4,4 +4,6 @@ class EndPoints {
   static const String verifyEmail="/api/v1/auth/verifyResetCode";
   static const String signUpDomain = "/api/v1/auth/signup";
   static const String resetPassword="/api/v1/auth/resetPassword";
+  static const String editProfile = "/api/v1/auth/editProfile";
+  static const String changePasswordDomain = "/api/v1/auth/changePassword";
 }
