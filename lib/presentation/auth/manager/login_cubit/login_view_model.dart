@@ -36,8 +36,8 @@ class LoginViewModel extends Cubit<LoginState> {
           log("Login Error: ${data?.message}");
         }
       case Error():
-        emit(ErrorLoginState(result.exception!.errorMessage));
-        log(result.exception!.errorMessage);
+        emit(ErrorLoginState(result.exception!));
+        log(result.exception!);
     }
   }
 }

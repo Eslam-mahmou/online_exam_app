@@ -12,6 +12,7 @@ import 'package:online_exam_app/core/widget/custom_validate.dart';
 import 'package:online_exam_app/di/injectable_initializer.dart';
 import 'package:online_exam_app/presentation/auth/manager/login_cubit/login_state.dart';
 import 'package:online_exam_app/presentation/auth/manager/login_cubit/login_view_model.dart';
+
 import '../../../core/widget/custom_elevated_button.dart';
 
 class LoginScreen extends StatefulWidget {
@@ -21,7 +22,7 @@ class LoginScreen extends StatefulWidget {
   State<LoginScreen> createState() => _LoginScreenState();
 }
 
-bool obscureText = true;
+// bool obscureText = true;
 
 class _LoginScreenState extends State<LoginScreen> {
   @override
@@ -135,6 +136,7 @@ class _LoginScreenState extends State<LoginScreen> {
                   //   ),
                   // ),
                   CustomTextFromField(
+                      obscureText: true,
                       keyboardType: TextInputType.visiblePassword,
                       controller: viewModel.passwordController,
                       validator: AppValidate.validatePassword,
@@ -230,11 +232,11 @@ class _LoginScreenState extends State<LoginScreen> {
     );
   }
 
-  @override
-  void changePassword() {
-    obscureText = !obscureText;
-    setState(
-      () {},
-    );
-  }
+// @override
+// void changePassword() {
+//   obscureText = !obscureText;
+//   setState(
+//     () {},
+//   );
+// }
 }

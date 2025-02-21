@@ -5,10 +5,11 @@ import 'package:online_exam_app/domain/entity/login_response_entity.dart';
 import 'package:online_exam_app/domain/entity/profile_user_entity.dart';
 import 'package:online_exam_app/domain/entity/reset_password_response_entity.dart';
 import 'package:online_exam_app/domain/repository/auth_repository.dart';
+
 import '../common/result.dart';
 import '../entity/sign_up_request.dart';
 import '../entity/sign_up_response.dart';
-
+import '../entity/verify_email_response_entity.dart';
 
 @injectable
 class AuthUseCase {

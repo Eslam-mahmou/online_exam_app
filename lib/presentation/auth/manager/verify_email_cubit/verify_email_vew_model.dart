@@ -64,7 +64,7 @@ class VerifyEmailVewModel extends Cubit<VerifyEmailState> {
           emit(ErrorVerifyEmailState("something went wrong"));
         }
       case Error():
-        emit(ErrorVerifyEmailState(result.exception!.errorMessage));
+        emit(ErrorVerifyEmailState(result.exception!));
     }
   }
   void _resendCode(String email)async{
@@ -79,7 +79,7 @@ class VerifyEmailVewModel extends Cubit<VerifyEmailState> {
           emit(ErrorResendEmailState(data.message));
         }
       case Error():
-        emit(ErrorResendEmailState(result.exception!.errorMessage));
+        emit(ErrorResendEmailState(result.exception!));
     }
   }
 }

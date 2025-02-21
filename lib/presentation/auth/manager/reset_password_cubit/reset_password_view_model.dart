@@ -47,7 +47,7 @@ class ResetPasswordViewModel extends Cubit<ResetPasswordState> {
           emit(ErrorResetPasswordState(data.message.toString()));
         }
       case Error():
-        emit(ErrorResetPasswordState(result.exception!.errorMessage));
+        emit(ErrorResetPasswordState(result.exception!));
     }
   }
 

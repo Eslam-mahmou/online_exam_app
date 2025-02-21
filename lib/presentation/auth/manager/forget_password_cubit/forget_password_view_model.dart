@@ -42,7 +42,8 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
           emit(ErrorForgetPasswordState(data.message));
         }
       case Error():
-        emit(ErrorForgetPasswordState(result.exception!.errorMessage));
+        // emit(ErrorForgetPasswordState(result.exception!.errorMessage))
+        emit(ErrorForgetPasswordState(result.exception!));
     }
   }
 }
