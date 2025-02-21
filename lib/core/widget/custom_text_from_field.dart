@@ -33,7 +33,6 @@ class CustomTextFromField extends StatelessWidget {
         keyboardType: keyboardType,
         obscureText: obscureText??false,
         cursorColor: ColorsManager.blackColor,
-        // obscuringCharacter:obscuringCharacter??"" ,
         style: getTextStyle(
             FontSize.s16, FontWeightManager.regular, ColorsManager.blackColor,
             fontFamily: FontFamily.roboto),

@@ -4,9 +4,15 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/core/api/ApiExcuter.dart';
 import 'package:online_exam_app/data/data_source/remote_data_source/auth_remote_data_source.dart';
+import 'package:online_exam_app/data/model/forget_response_password_dto.dart';
 import 'package:online_exam_app/data/model/login_response_dto.dart';
+import 'package:online_exam_app/data/model/reset_password_response_dto.dart';
+import 'package:online_exam_app/data/model/verify_email_response_dto.dart';
 import 'package:online_exam_app/domain/common/result.dart';
+import 'package:online_exam_app/domain/entity/forget_response_password_entity.dart';
 import 'package:online_exam_app/domain/entity/login_response_entity.dart';
+import 'package:online_exam_app/domain/entity/reset_password_response_entity.dart';
+import 'package:online_exam_app/domain/entity/verify_email_response_entity.dart';
 import 'package:online_exam_app/domain/repository/auth_repository.dart';
 
 import '../../core/services/shared_preference_services.dart';
@@ -26,14 +32,50 @@ class AuthRepositoryImpl implements AuthRepository {
   @override
   Future<Result<LoginResponseEntity>> login(
       String email, String password) async {
- return executeApi<LoginResponseEntity>(
+    return executeApi<LoginResponseEntity>(
       () async {
         var response = await _authRemoteDataSource.login(email, password);
         log(response.toString());
         var data = LoginResponseDto.fromJson(response.data);
         log(data.token.toString());
-         SharedPreferenceServices.saveToken(
-            AppConstants.token, data.token.toString());
+        SharedPreferenceServices.getToken(AppConstants.token);
+        return data;
+      },
+    );
+  }
+
+  @override
+  Future<Result<ForgetResponsePasswordEntity>> forgetPassword(
+      String email) async {
+    return executeApi<ForgetResponsePasswordEntity>(
+      () async {
+        var response = await _authRemoteDataSource.forgetPassword(email);
+        var data = ForgetResponsePasswordDto.fromJson(response.data);
+        return data;
+      },
+    );
+  }
+
+  @override
+  Future<Result<VerifyEmailResponseEntity>> verifyEmail(String code) {
+    return executeApi<VerifyEmailResponseEntity>(
+      () async {
+        var response = await _authRemoteDataSource.verifyEmail(code);
+        var data = VerifyEmailResponseDto.fromJson(response.data);
+        return data;
+      },
+    );
+  }
+
+  @override
+  Future<Result<ResetPasswordResponseEntity>> resetPassword(
+      String email, String newPassword) {
+    return executeApi<ResetPasswordResponseEntity>(
+      () async {
+        var response =
+            await _authRemoteDataSource.resetPassword(email, newPassword);
+        var data = ResetPasswordResponseDto.formJson(response.data);
+        SharedPreferenceServices.saveToken(AppConstants.token, data.token.toString());
         return data;
       },
     );

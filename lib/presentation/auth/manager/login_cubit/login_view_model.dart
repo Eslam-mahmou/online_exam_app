@@ -6,13 +6,14 @@ import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/domain/common/result.dart';
 import 'package:online_exam_app/domain/use_case/auth_use_case.dart';
 import 'package:online_exam_app/presentation/auth/manager/login_cubit/login_state.dart';
+
 @injectable
 class LoginViewModel extends Cubit<LoginState> {
   LoginViewModel(this._auth) : super(LoginLoadingState());
   final AuthUseCase _auth;
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
- final GlobalKey<FormState> formLoginKey = GlobalKey<FormState>();
+  final GlobalKey<FormState> formLoginKey = GlobalKey<FormState>();
 
   void doIntent(LoginIntent loginIntent) {
     switch (loginIntent) {
@@ -20,8 +21,9 @@ class LoginViewModel extends Cubit<LoginState> {
         _login(emailController.text, passwordController.text);
     }
   }
+
   Future<void> _login(String email, String password) async {
-    emit(LoginLoadingState()); // Start with loading state
+    emit(LoginLoadingState());
     var result = await _auth.callLogin(email, password);
     switch (result) {
       case Success():
@@ -33,15 +35,13 @@ class LoginViewModel extends Cubit<LoginState> {
           emit(ErrorLoginState(data?.message ?? "Login failed"));
           log("Login Error: ${data?.message}");
         }
-
       case Error():
-        emit(ErrorLoginState(result.exception.toString()));
-        log("Login API Error: ${result.exception}");
+        emit(ErrorLoginState(result.exception!.errorMessage));
+        log(result.exception!.errorMessage);
     }
   }
 }
 
 sealed class LoginIntent {}
 
-class LoginClickedIntent extends LoginIntent {
-}
+class LoginClickedIntent extends LoginIntent {}
