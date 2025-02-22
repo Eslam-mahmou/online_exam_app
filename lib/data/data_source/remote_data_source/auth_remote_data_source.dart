@@ -18,7 +18,7 @@ abstract class AuthRemoteDataSource {
   Future<Response> verifyEmail(String code);
   Future<Response> resetPassword(String email,String newPassword);
   Future<Response> signUp(SignUpRequest data);
-  Future<Response> updateProfile(ProfileUserEntity user);
+  // Future<Response> updateProfile(ProfileUserEntity user);
 
   Future<Response> changePassword(
       String oldPassword, String newPassword, String rePassword);
@@ -64,24 +64,24 @@ class AuthRemoteDataSourceImpl implements AuthRemoteDataSource {
     );
   }
 
-  @override
-  Future<Response> updateProfile(ProfileUserEntity user) async {
-    log("Headers: {'Content-Type': 'application/json', 'Token': '${SharedPreferenceServices.getToken(AppConstants.token.toString())}'}");
-    return await _apiManager.putData(
-      EndPoints.editProfile,
-      {
-        "username": user.username,
-        "firstName": user.firstName,
-        "lastName": user.lastName,
-        "email": user.email,
-        "phone": user.phone,
-      },
-      {
-        "token":
-            SharedPreferenceServices.getToken(AppConstants.token.toString())
-      },
-    );
-  }
+  // @override
+  // Future<Response> updateProfile(ProfileUserEntity user) async {
+  //   log("Headers: {'Content-Type': 'application/json', 'Token': '${SharedPreferenceServices.getToken(AppConstants.token.toString())}'}");
+  //   return await _apiManager.putData(
+  //     EndPoints.editProfile,
+  //     {
+  //       "username": user.username,
+  //       "firstName": user.firstName,
+  //       "lastName": user.lastName,
+  //       "email": user.email,
+  //       "phone": user.phone,
+  //     },
+  //     {
+  //       "token":
+  //           SharedPreferenceServices.getToken(AppConstants.token.toString())
+  //     },
+  //   );
+  // }
 
   @override
   Future<Response> changePassword(

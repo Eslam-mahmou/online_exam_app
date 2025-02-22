@@ -1,0 +1,13 @@
+import 'package:injectable/injectable.dart';
+import 'package:online_exam_app/domain/entity/profile_user_entity.dart';
+import 'package:online_exam_app/domain/repository/profile_repository.dart';
+
+import '../common/result.dart';
+@injectable
+class ProfileUseCase {
+  ProfileUseCase(this._profileRepository);
+ final ProfileRepository _profileRepository;
+  Future<Result<ProfileUserEntity>> callUser()async{
+    return await _profileRepository.getUserInfo();
+  }
+}

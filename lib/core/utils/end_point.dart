@@ -6,4 +6,5 @@ class EndPoints {
   static const String resetPassword="/api/v1/auth/resetPassword";
   static const String editProfile = "/api/v1/auth/editProfile";
   static const String changePasswordDomain = "/api/v1/auth/changePassword";
+  static const String getUser = "/api/v1/auth/profileData";
 }

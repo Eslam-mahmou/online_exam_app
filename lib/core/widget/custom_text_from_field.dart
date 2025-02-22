@@ -25,6 +25,7 @@ class CustomTextFromField extends StatelessWidget {
   bool? obscureText;
   Widget? suffix;
   // String? obscuringCharacter;
+
   @override
   Widget build(BuildContext context) {
     return Padding(

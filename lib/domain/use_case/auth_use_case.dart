@@ -26,10 +26,10 @@ class AuthUseCase {
     return await _authRepository.signUp(data);
   }
 
-  Future<Result<ProfileUserEntity>> executeProfile(
-      ProfileUserEntity updatedProfile) async {
-    return await _authRepository.updateProfile(updatedProfile);
-  }
+  // Future<Result<ProfileUserEntity>> executeProfile(
+  //     ProfileUserEntity updatedProfile) async {
+  //   return await _authRepository.updateProfile(updatedProfile);
+  // }
 
   Future<Result<ChangePasswordResponseEntity>> callChangePassword(
       String oldPassword, String newPassword, String rePassword) async {

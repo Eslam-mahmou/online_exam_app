@@ -17,8 +17,8 @@ abstract class AuthRepository {
 
   Future<Result<UserModel>> signUp(SignUpRequest data);
 
-  Future<Result<ProfileUserEntity>> updateProfile(
-      ProfileUserEntity updatedProfile);
+  // Future<Result<ProfileUserEntity>> updateProfile(
+  //     ProfileUserEntity updatedProfile);
 
   Future<Result<ChangePasswordResponseEntity>> changePassword(
       String oldPassword, String newPassword, String rePassword);

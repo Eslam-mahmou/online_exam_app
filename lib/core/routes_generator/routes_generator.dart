@@ -9,6 +9,7 @@ import 'package:online_exam_app/presentation/auth/pages/forget_password/reset_pa
 import 'package:online_exam_app/presentation/auth/pages/login_screen.dart';
 import 'package:online_exam_app/presentation/auth/pages/sign_up_screen.dart';
 import 'package:online_exam_app/presentation/layout/layout.dart';
+import 'package:online_exam_app/presentation/layout/manager/profile_tab_cubit/profile_tab_view_model.dart';
 import 'package:online_exam_app/presentation/splash/splash_screen.dart';
 
 import '../../presentation/layout/pages/profilePage/change_password.dart';
@@ -20,9 +21,7 @@ class RoutesGenerator {
         return MaterialPageRoute(
             builder: (context) => const SplashScreen(), settings: settings);
       case PagesRoutes.loginScreen :
-        return MaterialPageRoute(builder: (context) => BlocProvider(
-            create: (context) => getIt.get<LoginViewModel>(),
-            child: const LoginScreen()),settings: settings);
+        return MaterialPageRoute(builder: (context) => const LoginScreen(),settings: settings);
 
       case PagesRoutes.signUpScreen:
         return MaterialPageRoute(
@@ -33,7 +32,9 @@ class RoutesGenerator {
             builder: (context) => const ChangePassword(), settings: settings);
       case PagesRoutes.layoutScreen:
         return MaterialPageRoute(
-            builder: (context) => const LayoutScreen(), settings: settings);
+            builder: (context) => BlocProvider(
+                create: (context) => getIt.get<ProfileTabViewModel>(),
+                child: const LayoutScreen()), settings: settings);
       case PagesRoutes.forgetPassword:
         return MaterialPageRoute(
             builder: (context) => const ForgetPassword(), settings: settings);

@@ -1,48 +1,30 @@
 import 'package:equatable/equatable.dart';
 
-class ProfileUserEntity extends Equatable {
-  final String? id;
-  final String username;
-  final String firstName;
-  final String lastName;
-  final String email;
-  final String phone;
-  final String? role;
-  final bool? isVerified;
-  final String? passwordResetCode;
-  final String? passwordResetExpires;
-  final bool? resetCodeVerified;
+class ProfileUserEntity {
+  String? message;
+  UserDataEntity? user;
 
-  const ProfileUserEntity({
+  ProfileUserEntity({this.message, this.user});
+}
+
+class UserDataEntity extends Equatable {
+   String? id;
+   String? username;
+   String? firstName;
+   String? lastName;
+   String? email;
+   String? phone;
+
+   UserDataEntity({
     this.id,
-    required this.username,
-    required this.firstName,
-    required this.lastName,
-    required this.email,
-    required this.phone,
-    this.role,
-    this.isVerified,
-    this.passwordResetCode,
-    this.passwordResetExpires,
-    this.resetCodeVerified,
+     this.username,
+     this.firstName,
+     this.lastName,
+     this.email,
+     this.phone,
   });
 
   @override
-  List<Object?> get props => [
-        id,
-        username,
-        email,
-        phone,
-      ];
-
-  Map<String, dynamic> toJson() {
-    return {
-      "username": username,
-      "firstName": firstName,
-      "lastName": lastName,
-      "email": email,
-      "phone": phone,
-      "passwordResetCode": passwordResetCode,
-    };
-  }
+  List<Object?> get props => [id, email,
+  firstName, lastName, phone, username];
 }
