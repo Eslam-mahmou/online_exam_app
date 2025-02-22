@@ -65,12 +65,12 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i160.LoginViewModel(gh<_i358.AuthUseCase>()));
     gh.factory<_i306.VerifyEmailVewModel>(
         () => _i306.VerifyEmailVewModel(gh<_i358.AuthUseCase>()));
-    gh.factory<_i152.ChangePasswordViewModel>(
-        () => _i152.ChangePasswordViewModel(gh<_i358.AuthUseCase>()));
     gh.factory<_i778.ForgetPasswordViewModel>(
         () => _i778.ForgetPasswordViewModel(gh<_i358.AuthUseCase>()));
     gh.factory<_i303.ResetPasswordViewModel>(
         () => _i303.ResetPasswordViewModel(gh<_i358.AuthUseCase>()));
+    gh.factory<_i152.ChangePasswordViewModel>(
+        () => _i152.ChangePasswordViewModel(gh<_i358.AuthUseCase>()));
     gh.factory<_i628.SignUpViewModel>(
         () => _i628.SignUpViewModel(gh<_i358.AuthUseCase>()));
     gh.factory<_i409.ProfileTabViewModel>(
