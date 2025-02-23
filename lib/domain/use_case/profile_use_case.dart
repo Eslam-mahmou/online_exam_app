@@ -10,4 +10,9 @@ class ProfileUseCase {
   Future<Result<ProfileUserEntity>> callUser()async{
     return await _profileRepository.getUserInfo();
   }
+
+  Future<Result<ProfileUserEntity>> executeProfile(
+      ProfileUserEntity updatedProfile) async {
+    return await _profileRepository.updateProfile(updatedProfile);
+  }
 }

@@ -39,16 +39,9 @@
 //     emit(EditProfileLoadingState());
 //
 //     try {
-//       var user = ProfileUserEntity(
-//         username: userNameController.text,
-//         firstName: firstNameController.text,
-//         lastName: lastNameController.text,
-//         email: emailController.text,
-//         phone: phoneController.text,
-//       );
 //
 //       // Pass the user object to the executeProfile method
-//       final updatedUser = await _authUseCase.executeProfile(user);
+//       final updatedUser = await _authUseCase.executeProfile(ProfileUserEntity());
 //
 //       log("Raw API Response: $updatedUser");
 //       EasyLoading.dismiss();
@@ -60,7 +53,7 @@
 //
 //           if (data != null) {
 //             emit(SuccessEditProfileState(data));
-//             log("✅ Profile updated successfully: ${data.lastName}");
+//             log("✅ Profile updated successfully: ${data.user?.lastName}");
 //           } else {
 //             emit(ErrorEditProfileState("Profile update failed"));
 //             log("❌ Profile update error: Data is null");

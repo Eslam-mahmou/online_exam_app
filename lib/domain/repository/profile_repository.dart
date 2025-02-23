@@ -4,4 +4,7 @@ import '../common/result.dart';
 
 abstract class ProfileRepository {
   Future<Result<ProfileUserEntity>> getUserInfo();
+
+  Future<Result<ProfileUserEntity>> updateProfile(
+      ProfileUserEntity updatedProfile);
 }
