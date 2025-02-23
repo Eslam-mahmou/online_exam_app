@@ -1,11 +1,8 @@
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app/core/Utils/assets_manager.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
-import 'package:online_exam_app/di/injectable_initializer.dart';
-import 'package:online_exam_app/presentation/layout/manager/profile_tab_cubit/profile_tab_view_model.dart';
 import 'package:online_exam_app/presentation/layout/pages/profilePage/profile_tab.dart';
 
 import 'widget/custom_bottom_navigation_bar_item.dart';
@@ -16,7 +13,7 @@ class LayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: const ProfileTab(),
+      body: ProfileTab(),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: 2,
           type: BottomNavigationBarType.fixed,

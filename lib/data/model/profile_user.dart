@@ -25,4 +25,15 @@ class UserDataModel extends UserDataEntity {
    email = json['email'];
    phone = json['phone'];
  }
+
+  Map<String, dynamic> toJson() {
+    return {
+      "id": id,
+      "username": username,
+      "firstName": firstName,
+      "lastName": lastName,
+      "email": email,
+      "phone": phone,
+    };
+  }
 }

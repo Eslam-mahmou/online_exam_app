@@ -2,7 +2,6 @@ import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/domain/entity/change_password_response_entity.dart';
 import 'package:online_exam_app/domain/entity/forget_response_password_entity.dart';
 import 'package:online_exam_app/domain/entity/login_response_entity.dart';
-import 'package:online_exam_app/domain/entity/profile_user_entity.dart';
 import 'package:online_exam_app/domain/entity/reset_password_response_entity.dart';
 import 'package:online_exam_app/domain/repository/auth_repository.dart';
 
@@ -25,11 +24,6 @@ class AuthUseCase {
   Future<Result<UserModel>> execute(SignUpRequest data) async {
     return await _authRepository.signUp(data);
   }
-
-  // Future<Result<ProfileUserEntity>> executeProfile(
-  //     ProfileUserEntity updatedProfile) async {
-  //   return await _authRepository.updateProfile(updatedProfile);
-  // }
 
   Future<Result<ChangePasswordResponseEntity>> callChangePassword(
       String oldPassword, String newPassword, String rePassword) async {
