@@ -5,6 +5,7 @@ import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
+import 'package:online_exam_app/core/widget/custom_diaolg.dart';
 import 'package:online_exam_app/core/widget/custom_elevated_button.dart';
 import 'package:online_exam_app/core/widget/custom_text_from_field.dart';
 import 'package:online_exam_app/core/widget/custom_validate.dart';
@@ -32,15 +33,9 @@ class SignUpScreen extends StatelessWidget {
               listener: (context, state) {
                 if (state is ErrorSignUpState) {
                   EasyLoading.dismiss();
-                  showDialog(
-                    context: context,
-                    builder: (context) {
-                      return AlertDialog(
-                        title: Text("Error"),
-                        content: Text(state.errMessage.toString()),
-                      );
-                    },
-                  );
+                  DialogUtils.showMessage(context: context, message: state.errMessage.toString(),
+                  title: "Error",
+                  postActionName: "Cancel");
                 }
                 if (state is SuccessSignUpState) {
                   EasyLoading.dismiss();
@@ -87,13 +82,14 @@ class SignUpScreen extends StatelessWidget {
                           Expanded(
                               child: CustomTextFromField(
                             controller: viewModel.passwordController,
+                            validator: AppValidate.validatePassword,
                             labelText: "Password",
                             hinText: "Password",
                           )),
                           Expanded(
                               child: CustomTextFromField(
                             controller: viewModel.rePasswordController,
-                            validator: (p0) {},
+                            validator: AppValidate.validatePassword,
                             labelText: "Confirm password",
                             hinText: "Confirm",
                           )),
@@ -101,6 +97,7 @@ class SignUpScreen extends StatelessWidget {
                       ),
                       CustomTextFromField(
                         controller: viewModel.phoneController,
+                        validator: AppValidate.validateMobile,
                         labelText: "Phone number",
                         hinText: "Enter phone number",
                         // validator: AppValidate.validateMobile
