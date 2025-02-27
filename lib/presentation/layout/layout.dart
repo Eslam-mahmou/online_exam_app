@@ -20,6 +20,7 @@ class LayoutScreen extends StatelessWidget {
         builder: (context, state) {
           return Scaffold(
             // using view model
+            // using view model
             body: viewModel.tabs[viewModel.currentIndex],
             bottomNavigationBar: BottomNavigationBar(
                 currentIndex: viewModel.currentIndex,
