@@ -1,0 +1,76 @@
+import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
+import 'package:online_exam_app/core/Utils/colors_manager.dart';
+import 'package:online_exam_app/core/Utils/font_manager.dart';
+import 'package:online_exam_app/core/Utils/style_manager.dart';
+import 'package:online_exam_app/domain/entity/all_subject.dart';
+
+class SubjectWidget extends StatelessWidget {
+  final List<SubjectsEntity> subjects;
+
+  const SubjectWidget({super.key, required this.subjects});
+
+  @override
+  Widget build(BuildContext context) {
+    return ListView.builder(
+      shrinkWrap: true,
+      itemCount: subjects.length,
+      itemBuilder: (context, index) {
+        final subject = subjects[index];
+        return SizedBox(
+          height: 90.h,
+          child: GestureDetector(
+            onTap: () {},
+            child: Card(
+              shadowColor: ColorsManager.blackColor,
+              elevation: 3,
+              child: Row(
+                children: [
+                  SizedBox(width: 14.w),
+                  ClipRRect(
+                      borderRadius: BorderRadius.circular(50.0),
+                      child: Image.network(
+                        subject.icon.toString(),
+                        width: 50,
+                        height: 50,
+                      )),
+                  SizedBox(width: 8.w),
+                  Text(subject.name.toString(), // Use subject.name directly
+                      style: getTextStyle(FontSize.s16,
+                          FontWeightManager.regular, ColorsManager.blackColor)),
+                ],
+              ),
+            ),
+          ),
+        );
+      },
+    );
+  }
+}
+
+// class SubjectWidget extends StatelessWidget {
+//    SubjectWidget({super.key,required this.subjectEntity});
+//   AllSubjectEntity subjectEntity;
+//
+//   @override
+//   Widget build(BuildContext context) {
+//     return  SizedBox(
+//       height: 90.h,
+//       child: GestureDetector(
+//         onTap: (){},
+//         child: Card(
+//           shadowColor: ColorsManager.blackColor,
+//           elevation: 3,
+//           child: Row(
+//             children: [
+//               SizedBox(width: 14.w,),
+//               Image.asset(IconAssets.homeIcon,scale: 1,),
+//               SizedBox(width: 8.w,),
+//                Text(subjectEntity.subjects.name.toString(),style: getTextStyle(FontSize.s16, FontWeightManager.regular, ColorsManager.blackColor),),
+//             ],
+//           ),
+//         ),
+//       ),
+//     );
+//   }
+// }

@@ -27,5 +27,6 @@ class CustomBottomNavigationBarItem extends BottomNavigationBarItem {
           size: 35,
         ),
       ),
-      label: title);
+          label: title,
+        );
 }

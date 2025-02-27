@@ -8,6 +8,12 @@ import 'package:online_exam_app/data/model/profile_user.dart';
 import 'package:online_exam_app/domain/common/result.dart';
 import 'package:online_exam_app/domain/entity/profile_user_entity.dart';
 import 'package:online_exam_app/domain/repository/profile_repository.dart';
+
+import '../../core/services/shared_preference_services.dart';
+import '../../core/utils/constant_manager.dart';
+import '../../domain/entity/change_password_response_entity.dart';
+import '../model/change_password.dart';
+
 @Injectable(as: ProfileRepository)
 class ProfileRepositoryImpl implements ProfileRepository{
   ProfileRepositoryImpl(this._profile);
@@ -40,5 +46,20 @@ class ProfileRepositoryImpl implements ProfileRepository{
     } on DioException catch (dioException) {
       return Error(dioException.response?.data["message"] ?? "Unknown error");
     }
+  }
+
+  @override
+  Future<Result<ChangePasswordResponseEntity>> changePassword(
+      String oldPassword, String newPassword, String rePassword) {
+    return executeApi<ChangePasswordResponseEntity>(
+      () async {
+        var response =
+            await _profile.changePassword(oldPassword, newPassword, rePassword);
+        var data = ChangePasswordResponseDto.formJson(response.data);
+        SharedPreferenceServices.saveToken(
+            AppConstants.token, data.token.toString());
+        return data;
+      },
+    );
   }
 }
