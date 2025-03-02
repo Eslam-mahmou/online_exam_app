@@ -5,6 +5,7 @@ import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
 import 'package:online_exam_app/presentation/layout/pages/profilePage/profile_tab.dart';
 
+import '../exam/exam_screen.dart';
 import 'widget/custom_bottom_navigation_bar_item.dart';
 
 class LayoutScreen extends StatelessWidget {
@@ -13,7 +14,7 @@ class LayoutScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
-      body: ProfileTab(),
+      body:ProfileTab(),
       bottomNavigationBar: BottomNavigationBar(
           currentIndex: 2,
           type: BottomNavigationBarType.fixed,

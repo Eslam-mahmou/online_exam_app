@@ -1,8 +1,8 @@
-// const String imagePath="assets/images";
+const String imagePath="assets/images";
 const String iconPath="assets/icons";
 
 abstract class ImageAssets{
-
+static const String examImage="$imagePath/examImage.png";
 }
 abstract class IconAssets{
 static const String homeIcon="$iconPath/home_icon.png";
