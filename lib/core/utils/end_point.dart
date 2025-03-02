@@ -9,4 +9,5 @@ class EndPoints {
   static const String getUser = "/api/v1/auth/profileData";
   static const String getAllSubject = "/api/v1/subjects";
   static const String getExam = "/api/v1/exams";
+  static const String getQuestionOnExam = "/api/v1/questions";
 }

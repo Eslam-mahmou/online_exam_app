@@ -12,6 +12,7 @@ import 'package:online_exam_app/presentation/layout/layout.dart';
 import 'package:online_exam_app/presentation/layout/manager/profile_tab_cubit/profile_tab_view_model.dart';
 import 'package:online_exam_app/presentation/splash/splash_screen.dart';
 
+import '../../presentation/exam/question_screen.dart';
 import '../../presentation/layout/pages/profilePage/change_password.dart';
 
 class RoutesGenerator {
@@ -51,6 +52,9 @@ class RoutesGenerator {
       case PagesRoutes.examScreen:
         return MaterialPageRoute(
             builder: (context) => const ExamScreen(), settings: settings);
+      case PagesRoutes.questionScreen:
+        return MaterialPageRoute(
+            builder: (context) => const QuestionScreen(), settings: settings);
       default:
         return unDefinedRoute();
     }

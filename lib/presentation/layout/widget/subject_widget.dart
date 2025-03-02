@@ -26,7 +26,7 @@ class SubjectWidget extends StatelessWidget {
             },
             child: Card(
               shadowColor: ColorsManager.blackColor,
-              elevation: 3,
+              elevation: 4,
               child: Row(
                 children: [
                   SizedBox(width: 14.w),

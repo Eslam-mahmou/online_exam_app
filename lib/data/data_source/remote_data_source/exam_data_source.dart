@@ -7,11 +7,14 @@ import 'package:online_exam_app/core/utils/end_point.dart';
 
 abstract class BaseExamDataSource {
   Future<Response> getExamOnSubject(String subjectId);
+
+  Future<Response> getQuestionOnExam(String examId);
 }
 @Injectable(as: BaseExamDataSource)
 class BaseExamDataSourceImpl implements BaseExamDataSource {
  final ApiManager _apiManager;
   BaseExamDataSourceImpl(this._apiManager);
+
   @override
   Future<Response> getExamOnSubject(String subjectId)async {
     return await _apiManager.getData(EndPoints.getExam,queryParameters: {
@@ -21,5 +24,14 @@ class BaseExamDataSourceImpl implements BaseExamDataSource {
       "token":SharedPreferenceServices.getToken(AppConstants.token).toString()
     });
   }
-  
+
+  @override
+  Future<Response> getQuestionOnExam(String examId) async {
+    return await _apiManager
+        .getData(EndPoints.getQuestionOnExam, queryParameters: {
+      "exam": examId
+    }, headers: {
+      "token": SharedPreferenceServices.getToken(AppConstants.token).toString()
+    });
+  }
 }

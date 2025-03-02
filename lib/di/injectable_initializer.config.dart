@@ -42,6 +42,8 @@ import '../presentation/auth/manager/signUP_cubit/signup_view_model.dart'
 import '../presentation/auth/manager/verify_email_cubit/verify_email_vew_model.dart'
     as _i306;
 import '../presentation/exam/manager/exam_cubit.dart' as _i164;
+import '../presentation/exam/manager/question_cubit/question_cubit.dart'
+    as _i168;
 import '../presentation/layout/manager/change_password_cubit/change_password_view_model.dart'
     as _i884;
 import '../presentation/layout/manager/explore_cubit/explore_view_model.dart'
@@ -103,6 +105,8 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i334.ExamUseCase(gh<_i242.ExamRepository>()));
     gh.factory<_i164.ExamViewModel>(
         () => _i164.ExamViewModel(gh<_i334.ExamUseCase>()));
+    gh.factory<_i168.QuestionViewModel>(
+        () => _i168.QuestionViewModel(gh<_i334.ExamUseCase>()));
     return this;
   }
 }
