@@ -13,7 +13,7 @@ class CustomQuestionView extends StatefulWidget {
 }
 
 class _CustomQuestionViewState extends State<CustomQuestionView> {
-  String? selectedAnswer; // Stores the selected answer key
+  String? selectedAnswer;
 
   @override
   Widget build(BuildContext context) {
@@ -24,7 +24,7 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
           Row(
             children: [
               InkWell(
-                child: Icon(
+                child: const Icon(
                   Icons.arrow_back_ios,
                   color: ColorsManager.blackColor,
                 ),
@@ -60,7 +60,7 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
                 margin: EdgeInsets.symmetric(vertical: 6.h),
                 padding: EdgeInsets.symmetric(horizontal: 12.w, vertical: 10.h),
                 decoration: BoxDecoration(
-                  color: Color(0xffEDEFF3),
+                  color: ColorsManager.lightGrayColor,
                   borderRadius: BorderRadius.circular(8.r),
                 ),
                 child: RadioListTile<String>(
@@ -69,9 +69,7 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
                     style: const TextStyle(color: Colors.black),
                   ),
                   value: answer.key ?? '',
-                  // The value stored when selected
                   groupValue: selectedAnswer,
-                  // The currently selected value
                   activeColor: ColorsManager.primaryColor,
                   controlAffinity: ListTileControlAffinity.leading,
                   onChanged: (value) {
