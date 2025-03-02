@@ -4,7 +4,6 @@ import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/core/api/ApiExcuter.dart';
 import 'package:online_exam_app/data/data_source/remote_data_source/auth_remote_data_source.dart';
-import 'package:online_exam_app/data/model/change_password.dart';
 import 'package:online_exam_app/data/model/forget_response_password_dto.dart';
 import 'package:online_exam_app/data/model/login_response_dto.dart';
 import 'package:online_exam_app/data/model/reset_password_response_dto.dart';
@@ -18,7 +17,6 @@ import 'package:online_exam_app/domain/repository/auth_repository.dart';
 
 import '../../core/services/shared_preference_services.dart';
 import '../../core/utils/constant_manager.dart';
-import '../../domain/entity/change_password_response_entity.dart';
 import '../../domain/entity/sign_up_request.dart';
 import '../../domain/entity/sign_up_response.dart';
 
@@ -103,18 +101,4 @@ class AuthRepositoryImpl implements AuthRepository {
     }
   }
 
-  @override
-  Future<Result<ChangePasswordResponseEntity>> changePassword(
-      String oldPassword, String newPassword, String rePassword) {
-    return executeApi<ChangePasswordResponseEntity>(
-      () async {
-        var response = await _authRemoteDataSource.changePassword(
-            oldPassword, newPassword, rePassword);
-        var data = ChangePasswordResponseDto.formJson(response.data);
-        SharedPreferenceServices.saveToken(
-            AppConstants.token, data.token.toString());
-        return data;
-      },
-    );
-  }
 }

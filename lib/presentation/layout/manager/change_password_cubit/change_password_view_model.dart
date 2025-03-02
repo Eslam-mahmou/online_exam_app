@@ -2,14 +2,15 @@ import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/domain/common/result.dart';
-import 'package:online_exam_app/domain/use_case/auth_use_case.dart';
-import 'package:online_exam_app/presentation/auth/manager/change_password_cubit/change_password_state.dart';
+import 'package:online_exam_app/domain/use_case/profile_use_case.dart';
+
+import 'change_password_state.dart';
 
 @injectable
 class ChangePasswordViewModel extends Cubit<ChangePasswordState> {
-  final AuthUseCase _authUseCase;
+  final ProfileUseCase _profileUseCase;
 
-  ChangePasswordViewModel(this._authUseCase)
+  ChangePasswordViewModel(this._profileUseCase)
       : super(InitialChangePasswordState());
 
   final TextEditingController oldPassword = TextEditingController();
@@ -48,7 +49,7 @@ class ChangePasswordViewModel extends Cubit<ChangePasswordState> {
 
     try {
       var result =
-          await _authUseCase.callChangePassword(oldPass, newPass, rePass);
+          await _profileUseCase.callChangePassword(oldPass, newPass, rePass);
 
       switch (result) {
         case Success():
@@ -64,42 +65,9 @@ class ChangePasswordViewModel extends Cubit<ChangePasswordState> {
           break;
       }
     } catch (e) {
-      // Catch the exception if token is invalid or any other error
       emit(ErrorChangePasswordState("Error: ${e.toString()}"));
     }
   }
-
-// void _changePassword() async {
-//   emit(LoadingChangePasswordState());
-//
-//   String oldPass = oldPassword.text.trim();
-//   String newPass = newPassword.text.trim();
-//   String rePass = rePassword.text.trim();
-//
-//   print("oldPassword: $oldPass");
-//   print("newPassword: $newPass");
-//   print("rePassword: $rePass");
-//
-//   if (rePass != newPass) {
-//     print("rePassword does not match newPassword");
-//     rePass = newPass;
-//   }
-//
-//   var result =
-//       await _authUseCase.callChangePassword(oldPass, newPass, rePass);
-//
-//   switch (result) {
-//     case Success():
-//       var data = result.data;
-//       if (data!.message == "success") {
-//         emit(SuccessChangePasswordState());
-//       } else {
-//         emit(ErrorChangePasswordState(data.message.toString()));
-//       }
-//     case Error():
-//       emit(ErrorChangePasswordState(result.toString()));
-//   }
-// }
 }
 
 sealed class ResetPasswordIntent {}

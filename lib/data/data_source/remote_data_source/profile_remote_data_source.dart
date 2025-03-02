@@ -11,8 +11,10 @@ import '../../../domain/entity/profile_user_entity.dart';
 
 abstract class ProfileRemoteDataSource {
   Future<Response> getUserInfo();
-
   Future<Response> updateProfile(ProfileUserEntity user);
+
+  Future<Response> changePassword(
+      String oldPassword, String newPassword, String rePassword);
 }
 
 @Injectable(as: ProfileRemoteDataSource)
@@ -46,4 +48,55 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       },
     );
   }
+
+  @override
+  Future<Response> changePassword(
+      String oldPassword, String newPassword, String rePassword) async {
+    String? token =
+        await SharedPreferenceServices.getToken(AppConstants.token.toString())
+            .toString();
+
+    if (token == null || token.isEmpty) {
+      log("Token is missing or invalid!");
+
+      return Response(
+        requestOptions: RequestOptions(path: EndPoints.changePasswordDomain),
+        statusCode: 401,
+        data: "Token is missing",
+      );
+    }
+    log("Token before sending: $token");
+    return await _apiManager.patchData(
+      EndPoints.changePasswordDomain,
+      body: {
+        "oldPassword": oldPassword,
+        "password": newPassword,
+        "rePassword": rePassword,
+      },
+      headers: {
+        "token": token,
+        "Content-Type": "application/json",
+      },
+    );
+  }
+
+// Future<Response> changePassword(
+//     String oldPassword, String newPassword, String rePassword) async {
+//   String? token = SharedPreferenceServices.getToken(AppConstants.token.toString()).toString();
+//   if (token == null || token.isEmpty) {
+//     log("Token is missing or invalid");
+//   }
+//   return await _apiManager.patchData(
+//     EndPoints.changePasswordDomain,
+//     body: {
+//       "oldPassword": oldPassword,
+//       "password": newPassword,
+//       "rePassword": rePassword,
+//     },
+//     headers: {
+//       "token": token,
+//       "Content-Type": "application/json",
+//     },
+//   );
+// }
 }

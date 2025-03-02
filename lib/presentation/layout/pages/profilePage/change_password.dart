@@ -6,10 +6,10 @@ import 'package:online_exam_app/core/utils/colors_manager.dart';
 import 'package:online_exam_app/core/widget/custom_elevated_button.dart';
 import 'package:online_exam_app/core/widget/custom_text_from_field.dart';
 import 'package:online_exam_app/core/widget/custom_validate.dart';
-import 'package:online_exam_app/presentation/auth/manager/change_password_cubit/change_password_state.dart';
-import 'package:online_exam_app/presentation/auth/manager/change_password_cubit/change_password_view_model.dart';
 
 import '../../../../di/injectable_initializer.dart';
+import '../../manager/change_password_cubit/change_password_state.dart';
+import '../../manager/change_password_cubit/change_password_view_model.dart';
 
 class ChangePassword extends StatelessWidget {
   const ChangePassword({super.key});
