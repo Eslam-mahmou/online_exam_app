@@ -6,6 +6,7 @@ import 'package:online_exam_app/core/Utils/style_manager.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/widget/custom_diaolg.dart';
 import 'package:online_exam_app/di/injectable_initializer.dart';
+import 'package:online_exam_app/domain/entity/all_subject.dart';
 import 'package:online_exam_app/domain/entity/exam_response_entity.dart';
 import 'package:online_exam_app/presentation/exam/manager/exam_cubit.dart';
 import 'package:online_exam_app/presentation/exam/manager/exam_state.dart';
@@ -16,26 +17,33 @@ class ExamScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ExamViewModel viewModel = getIt.get<ExamViewModel>();
+  var   arg =ModalRoute.of(context)!.settings.arguments as SubjectsEntity ;
     return BlocProvider(
       create: (context) =>
-          viewModel..doIntent(FetchExamIntent("670037f6728c92b7fdf434fc")),
+          viewModel,
       child: Scaffold(
         backgroundColor: ColorsManager.whiteColor,
         appBar: AppBar(
           title: Text(
-            "Languages",
+            arg.name.toString(),
             style: getTextStyle(FontSize.s20, FontWeightManager.medium,
                 ColorsManager.blackColor,
                 fontFamily: FontFamily.inter),
           ),
           elevation: 0,
           backgroundColor: ColorsManager.whiteColor,
-          leading: const Icon(
-            Icons.arrow_back_ios,
-            color: ColorsManager.blackColor,
+          leading: InkWell(
+            onTap: () {
+              Navigator.pop(context);
+            },
+            child: const Icon(
+              Icons.arrow_back_ios,
+              color: ColorsManager.blackColor,
+            ),
           ),
         ),
         body: BlocConsumer<ExamViewModel, ExamState>(
+          bloc: viewModel..doIntent(FetchExamIntent(arg.id.toString())),
           listener: (context, state) {
             if (state is ErrorExamState) {
               DialogUtils.showMessage(
@@ -58,7 +66,7 @@ class ExamScreen extends StatelessWidget {
                   color: ColorsManager.primaryColor,
                 ),
               );
-            } else if (state is SuccessExamState) {
+            } else if (state is SuccessExamState && state.exams.isNotEmpty) {
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: ListView(
@@ -66,7 +74,7 @@ class ExamScreen extends StatelessWidget {
                   children: [
                     for (ExamsEntity item in viewModel.exams) ...[
                       Text(
-                        item.title.toString(),
+                        item.title!.split(" ")[0].toString(),
                         style: getTextStyle(FontSize.s18,
                             FontWeightManager.medium, ColorsManager.blackColor),
                       ),
@@ -80,7 +88,17 @@ class ExamScreen extends StatelessWidget {
                   ],
                 ),
               );
-            } else {
+
+            }
+            else if (viewModel.exams.isEmpty){
+             return Center(
+               child: Text(
+                  "No exams found for this subject",
+                  style: getTextStyle(FontSize.s18, FontWeightManager.medium, ColorsManager.blackColor),
+               ),
+             );
+    }else
+    {
               return const Text("Something went wrong");
             }
           },

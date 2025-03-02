@@ -3,6 +3,7 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
+import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'package:online_exam_app/domain/entity/all_subject.dart';
 
 class SubjectWidget extends StatelessWidget {
@@ -20,7 +21,9 @@ class SubjectWidget extends StatelessWidget {
         return SizedBox(
           height: 90.h,
           child: GestureDetector(
-            onTap: () {},
+            onTap: () {
+              Navigator.pushNamed(context, PagesRoutes.examScreen,arguments: subject);
+            },
             child: Card(
               shadowColor: ColorsManager.blackColor,
               elevation: 3,

@@ -19,7 +19,6 @@ import '../data/data_source/remote_data_source/profile_remote_data_source.dart'
     as _i240;
 import '../data/data_source/remote_data_source/subject_remote_data_source.dart'
     as _i567;
-import '../data/data_source/remote_data_source/subject_remote_data_source.dart';
 import '../data/repository_impl/auth_repository_impl.dart' as _i970;
 import '../data/repository_impl/exam_repository_impl.dart' as _i321;
 import '../data/repository_impl/profile_repository_impl.dart' as _i771;
@@ -42,11 +41,11 @@ import '../presentation/auth/manager/signUP_cubit/signup_view_model.dart'
     as _i628;
 import '../presentation/auth/manager/verify_email_cubit/verify_email_vew_model.dart'
     as _i306;
+import '../presentation/exam/manager/exam_cubit.dart' as _i164;
 import '../presentation/layout/manager/change_password_cubit/change_password_view_model.dart'
     as _i884;
 import '../presentation/layout/manager/explore_cubit/explore_view_model.dart'
     as _i601;
-import '../presentation/exam/manager/exam_cubit.dart' as _i164;
 import '../presentation/layout/manager/profile_tab_cubit/profile_tab_view_model.dart'
     as _i409;
 

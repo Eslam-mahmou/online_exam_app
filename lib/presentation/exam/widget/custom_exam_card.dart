@@ -33,12 +33,12 @@ class CustomExamCard extends StatelessWidget {
                   mainAxisAlignment: MainAxisAlignment.spaceBetween,
                   children: [
                     Text(
-                      "High level",
+                     exam.title!.split(" ")[0].toString(),
                       style: getTextStyle(FontSize.s16,
                           FontWeightManager.medium, ColorsManager.blackColor),
                     ),
                     Text(
-                      exam.duration.toString(),
+                      "${exam.duration} Minutes",
                       style: getTextStyle(
                           FontSize.s14,
                           FontWeightManager.regular,
