@@ -69,8 +69,9 @@ class _QuestionScreenState extends State<QuestionScreen> {
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        // if (currentQuestionIndex > 0) // Only show if it's not the first question
-                        ElevatedButton(
+                        if (currentQuestionIndex >
+                            0) // Only show if it's not the first question
+                          ElevatedButton(
                           onPressed: () {
                             setState(() {
                               if (currentQuestionIndex > 0) {
