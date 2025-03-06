@@ -20,13 +20,16 @@ dependencies:
   equatable: any
   flutter_bloc: any
   pretty_dio_logger: ^1.4.0
-  flutter_screenutil:
+  hive: any
+  hive_flutter: any
 
 dev_dependencies:
   flutter_test:
     sdk: flutter
   injectable_generator:
-  build_runner:
+  mockito: ^5.4.4
+  hive_generator: any
+  build_runner: any
   flutter_screenutil: any
   flutter_lints: ^4.0.0
 

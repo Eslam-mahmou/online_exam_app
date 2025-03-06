@@ -1,3 +1,5 @@
+import 'dart:developer';
+
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,20 +10,14 @@ import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'package:online_exam_app/core/widget/custom_diaolg.dart';
 import 'package:online_exam_app/di/injectable_initializer.dart';
 import 'package:online_exam_app/domain/entity/exam_response_entity.dart';
+import 'package:online_exam_app/domain/entity/solve_questions_model.dart';
 import 'package:online_exam_app/presentation/exam/widget/custom_question_view.dart';
 
 import 'manager/question_cubit/question_cubit.dart';
 import 'manager/question_cubit/question_state.dart';
 
-class QuestionScreen extends StatefulWidget {
+class QuestionScreen extends StatelessWidget {
   const QuestionScreen({super.key});
-
-  @override
-  _QuestionScreenState createState() => _QuestionScreenState();
-}
-
-class _QuestionScreenState extends State<QuestionScreen> {
-  int currentQuestionIndex = 0;
 
   @override
   Widget build(BuildContext context) {
@@ -56,45 +52,38 @@ class _QuestionScreenState extends State<QuestionScreen> {
                 ),
               );
             } else if (state is SuccessQuestionState &&
-                state.question.isNotEmpty) {
+                    state.question.isNotEmpty ||
+                state is NextQuestionState ||
+                state is PreviousQuestionState) {
               // Get the current question to display
-              var currentQuestion = viewModel.question[currentQuestionIndex];
+              var currentQuestion =
+                  viewModel.question[viewModel.currentQuestionIndex];
 
               return Padding(
                 padding: EdgeInsets.symmetric(horizontal: 16.w),
                 child: Column(
                   children: [
-                    CustomQuestionView(question: currentQuestion),
+                    CustomQuestionView(
+                      question: currentQuestion,
+                      numberOfQuestions: viewModel.currentQuestionIndex,
+                    ),
                     SizedBox(height: 20.h),
                     Row(
                       mainAxisAlignment: MainAxisAlignment.spaceBetween,
                       children: [
-                        if (currentQuestionIndex >
+                        if (viewModel.currentQuestionIndex >
                             0) // Only show if it's not the first question
                           ElevatedButton(
-                          onPressed: () {
-                            setState(() {
-                              if (currentQuestionIndex > 0) {
-                                currentQuestionIndex--;
-                              }
-                              if (currentQuestionIndex < 0) {
-                                Navigator.pushNamed(
-                                    context, PagesRoutes.examScreen);
-                              }
-                            });
-                          },
-                          child: const Text('Previous'),
-                        ),
-                        if (currentQuestionIndex <
+                            onPressed: () {
+                              viewModel.doIntent(PreviousQuestionIntent());
+                            },
+                            child: const Text('Previous'),
+                          ),
+                        if (viewModel.currentQuestionIndex <
                             viewModel.question.length - 1)
                           ElevatedButton(
                             onPressed: () {
-                              setState(() {
-                                if (currentQuestionIndex <
-                                    viewModel.question.length - 1) {
-                                  currentQuestionIndex++;
-                                }
-                              });
+                              viewModel.doIntent(NextQuestionIntent());
                             },
                             child: const Text('Next'),
                           ),
@@ -118,4 +107,3 @@ class _QuestionScreenState extends State<QuestionScreen> {
     );
   }
 }
-

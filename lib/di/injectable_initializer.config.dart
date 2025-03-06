@@ -97,10 +97,10 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i303.ResetPasswordViewModel(gh<_i358.AuthUseCase>()));
     gh.factory<_i628.SignUpViewModel>(
         () => _i628.SignUpViewModel(gh<_i358.AuthUseCase>()));
-    gh.factory<_i409.ProfileTabViewModel>(
-        () => _i409.ProfileTabViewModel(gh<_i92.ProfileUseCase>()));
     gh.factory<_i884.ChangePasswordViewModel>(
         () => _i884.ChangePasswordViewModel(gh<_i92.ProfileUseCase>()));
+    gh.factory<_i409.ProfileTabViewModel>(
+        () => _i409.ProfileTabViewModel(gh<_i92.ProfileUseCase>()));
     gh.factory<_i334.ExamUseCase>(
         () => _i334.ExamUseCase(gh<_i242.ExamRepository>()));
     gh.factory<_i164.ExamViewModel>(
