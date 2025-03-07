@@ -3,6 +3,7 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app/presentation/layout/manager/layout_cubit/layout_state.dart';
 import 'package:online_exam_app/presentation/layout/pages/explorePage/explore_page_view.dart';
 
+import '../../../exam/score_screen.dart';
 import '../../pages/profilePage/profile_tab.dart';
 
 class LayoutViewModel extends Cubit<LayoutState> {
@@ -10,7 +11,7 @@ class LayoutViewModel extends Cubit<LayoutState> {
   int currentIndex = 0;
   List<Widget> tabs = [
     const ExplorePageView(),
-    ProfileTab(),
+    const ExamScoreScreen(),
     ProfileTab(),
   ];
 
