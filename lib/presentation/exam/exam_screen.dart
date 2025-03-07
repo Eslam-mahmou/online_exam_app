@@ -1,9 +1,9 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/widget/custom_diaolg.dart';
 import 'package:online_exam_app/di/injectable_initializer.dart';
 import 'package:online_exam_app/domain/entity/all_subject.dart';
@@ -53,8 +53,7 @@ class ExamScreen extends StatelessWidget {
                 postActionName: "Ok",
                 negativeActionName: "Cancel",
                 postAction: () {
-                  viewModel
-                      .doIntent(FetchExamIntent("670037f6728c92b7fdf434fc"));
+                  viewModel.doIntent(FetchExamIntent(arg.id.toString()));
                 },
               );
             }

@@ -21,107 +21,110 @@ class ExplorePageView extends StatelessWidget {
     return SafeArea(
       child: Padding(
         padding: EdgeInsets.symmetric(horizontal: 16.w),
-        child: Column(
-          crossAxisAlignment: CrossAxisAlignment.start,
-          children: [
-            Text(
-              "Survery",
-              style: getTextStyle(FontSize.s20, FontWeightManager.medium,
-                  ColorsManager.primaryColor),
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                border: Border.all(color: ColorsManager.greyColor, width: 1),
+        child: SingleChildScrollView(
+          child: Column(
+            crossAxisAlignment: CrossAxisAlignment.start,
+            children: [
+              Text(
+                "Survery",
+                style: getTextStyle(FontSize.s20, FontWeightManager.medium,
+                    ColorsManager.primaryColor),
               ),
-              child: TextField(
-                decoration: InputDecoration(
-                    hintText: "search",
-                    prefixIcon: Icon(Icons.search),
-                    border: InputBorder.none),
+              SizedBox(
+                height: 24.h,
               ),
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            Text(
-              "Browse by subject",
-              style: getTextStyle(FontSize.s18, FontWeightManager.medium,
-                  ColorsManager.blackColor),
-            ),
-            SizedBox(
-              height: 24.h,
-            ),
-            BlocConsumer<ExploreViewModel, ExploreState>(
-              bloc: viewModel..doIntent(GetAllSubjectIntent()),
-              listener: (context, state) {
-                if (state is ExploreLoading) {
-                  EasyLoading.show();
-                } else if (state is ExploreSuccess) {
-                  EasyLoading.dismiss();
-                } else if (state is ExploreError) {
-                  EasyLoading.dismiss();
-                  DialogUtils.showMessage(
-                    context: context,
-                    message: state.errMessage,
-                    title: "Error",
-                    postActionName: "Ok",
-                    negativeActionName: "Cancel",
-                    postAction: () {
-                      viewModel.doIntent(GetAllSubjectIntent());
-                    },
-                  );
-                }
-              },
-              builder: (context, state) {
-                if (state is ExploreLoading) {
-                  return const Center(child: CircularProgressIndicator());
-                } else if (state is ExploreSuccess) {
-                  return SubjectWidget(subjects: state.subject?.subjects ?? []);
-                } else if (state is ExploreError) {
-                  return Center(child: Text("Error: ${state.errMessage}"));
-                }
-                return const SizedBox.shrink();
-              },
-            )
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  border: Border.all(color: ColorsManager.greyColor, width: 1),
+                ),
+                child: const TextField(
+                  decoration: InputDecoration(
+                      hintText: "search",
+                      prefixIcon: Icon(Icons.search),
+                      border: InputBorder.none),
+                ),
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+              Text(
+                "Browse by subject",
+                style: getTextStyle(FontSize.s18, FontWeightManager.medium,
+                    ColorsManager.blackColor),
+              ),
+              SizedBox(
+                height: 24.h,
+              ),
+              BlocConsumer<ExploreViewModel, ExploreState>(
+                bloc: viewModel..doIntent(GetAllSubjectIntent()),
+                listener: (context, state) {
+                  if (state is ExploreLoading) {
+                    EasyLoading.show();
+                  } else if (state is ExploreSuccess) {
+                    EasyLoading.dismiss();
+                  } else if (state is ExploreError) {
+                    EasyLoading.dismiss();
+                    DialogUtils.showMessage(
+                      context: context,
+                      message: state.errMessage,
+                      title: "Error",
+                      postActionName: "Ok",
+                      negativeActionName: "Cancel",
+                      postAction: () {
+                        viewModel.doIntent(GetAllSubjectIntent());
+                      },
+                    );
+                  }
+                },
+                builder: (context, state) {
+                  if (state is ExploreLoading) {
+                    return const Center(child: CircularProgressIndicator());
+                  } else if (state is ExploreSuccess) {
+                    return SubjectWidget(
+                        subjects: state.subject?.subjects ?? []);
+                  } else if (state is ExploreError) {
+                    return Center(child: Text("Error: ${state.errMessage}"));
+                  }
+                  return const SizedBox.shrink();
+                },
+              )
 
-            // BlocConsumer<ExploreViewModel,ExploreState>(
-            //     bloc: viewModel..doIntent(GetAllSubjectIntent()),
-            //     listener: (context, state) {
-            //       if (state is ExploreLoading) {
-            //         EasyLoading.show();
-            //       } else if (state is ExploreSuccess) {
-            //
-            //         EasyLoading.dismiss();
-            //       } else if (state is ExploreError) {
-            //         EasyLoading.dismiss();
-            //         DialogUtils.showMessage(
-            //           context: context,
-            //           message: state.errMessage,
-            //           title: "Error",
-            //           postActionName: "Ok",
-            //           negativeActionName: "Cancel",
-            //           postAction: () {
-            //             viewModel.doIntent(GetAllSubjectIntent());
-            //           },
-            //         );
-            //       }
-            //     },
-            //     builder: (context,state) {
-            //       if (state is ExploreLoading){
-            //         return const Center(child: CircularProgressIndicator());
-            //       }else if (state is ExploreSuccess) {
-            //         return SubjectWidget(subjectEntity: viewModel.subject.subjects,);
-            //       } else if (state is ExploreError) {
-            //         return Center(child: Text("Error: ${state.errMessage}"));
-            //       }
-            //       return const SizedBox.shrink();
-            //   }
-            // ),
-          ],
+              // BlocConsumer<ExploreViewModel,ExploreState>(
+              //     bloc: viewModel..doIntent(GetAllSubjectIntent()),
+              //     listener: (context, state) {
+              //       if (state is ExploreLoading) {
+              //         EasyLoading.show();
+              //       } else if (state is ExploreSuccess) {
+              //
+              //         EasyLoading.dismiss();
+              //       } else if (state is ExploreError) {
+              //         EasyLoading.dismiss();
+              //         DialogUtils.showMessage(
+              //           context: context,
+              //           message: state.errMessage,
+              //           title: "Error",
+              //           postActionName: "Ok",
+              //           negativeActionName: "Cancel",
+              //           postAction: () {
+              //             viewModel.doIntent(GetAllSubjectIntent());
+              //           },
+              //         );
+              //       }
+              //     },
+              //     builder: (context,state) {
+              //       if (state is ExploreLoading){
+              //         return const Center(child: CircularProgressIndicator());
+              //       }else if (state is ExploreSuccess) {
+              //         return SubjectWidget(subjectEntity: viewModel.subject.subjects,);
+              //       } else if (state is ExploreError) {
+              //         return Center(child: Text("Error: ${state.errMessage}"));
+              //       }
+              //       return const SizedBox.shrink();
+              //   }
+              // ),
+            ],
+          ),
         ),
       ),
     );

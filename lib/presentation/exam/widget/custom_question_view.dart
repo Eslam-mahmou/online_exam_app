@@ -2,7 +2,6 @@ import 'dart:async';
 import 'dart:developer';
 
 import 'package:flutter/material.dart';
-import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/Utils/assets_manager.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
@@ -17,7 +16,9 @@ class CustomQuestionView extends StatefulWidget {
 
   Questions question;
   final num numberOfQuestions;
-  late int totalSeconds = question.exam!.duration!.toInt() * 60;
+
+  // late int totalSeconds = question.exam!.duration!.toInt() * 60;//
+  late int totalSeconds = 1 * 60; //
 
   @override
   State<CustomQuestionView> createState() => _CustomQuestionViewState();
@@ -33,6 +34,17 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
     _startTimer();
   }
 
+  // void _startTimer() {
+  //   _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
+  //     if (remainingSeconds > 0) {
+  //       setState(() {
+  //         remainingSeconds--;
+  //       });
+  //     } else {
+  //       _timer?.cancel();
+  //     }
+  //   });
+  // }
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (remainingSeconds > 0) {
@@ -41,8 +53,38 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
         });
       } else {
         _timer?.cancel();
+        _showTimeOutDialog();
       }
     });
+  }
+
+// to show that TIME out.
+  void _showTimeOutDialog() {
+    showDialog(
+      context: context,
+      barrierDismissible: false,
+      builder: (context) => AlertDialog(
+        // title: const Text("Time's Up!"),
+        content: Row(
+          children: [
+            Image.asset(ImageAssets.timeOutImage),
+            const Text("Time's Up!"),
+          ],
+        ),
+        actions: [
+          TextButton(
+            onPressed: () {
+              Navigator.pop(context);
+              setState(() {
+                remainingSeconds = widget.totalSeconds;
+              });
+              _startTimer(); // Restart countdown
+            },
+            child: const Text("Restart"),
+          ),
+        ],
+      ),
+    );
   }
 
   @override

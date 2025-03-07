@@ -4,6 +4,7 @@ const String iconPath="assets/icons";
 abstract class ImageAssets{
 static const String examImage="$imagePath/examImage.png";
 static const String watchImage="$imagePath/watchImage.png";
+static const String timeOutImage = "$imagePath/time_out.png";
 }
 abstract class IconAssets{
 static const String homeIcon="$iconPath/home_icon.png";
