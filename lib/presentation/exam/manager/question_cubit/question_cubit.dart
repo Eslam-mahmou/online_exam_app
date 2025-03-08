@@ -19,14 +19,12 @@ class QuestionViewModel extends Cubit<QuestionState> {
   final ExamUseCase _examUseCase;
   List<Questions> question = [];
   int currentQuestionIndex = 0;
-  static String selectedAnswer = "";
-
   void doIntent(QuestionIntent examIntent) {
     switch (examIntent) {
       case FetchQuestionIntent():
         _fetchQuestion(examIntent.examId);
       case NextQuestionIntent():
-        _nextQuestion();
+        _nextQuestion(examIntent.selectedAnswer);
       case PreviousQuestionIntent():
         _previousQuestion();
       case AddQuestionAnswerIntent():
@@ -58,7 +56,7 @@ class QuestionViewModel extends Cubit<QuestionState> {
     }
   }
 
-  void _nextQuestion() {
+  void _nextQuestion(String selectedAnswer) {
     if (currentQuestionIndex < question.length - 1) {
       _addQuestionAnswer(SolveQuestionsModel(
           question[currentQuestionIndex].id, selectedAnswer));
@@ -83,7 +81,11 @@ class FetchQuestionIntent extends QuestionIntent {
   FetchQuestionIntent(this.examId);
 }
 
-class NextQuestionIntent extends QuestionIntent {}
+class NextQuestionIntent extends QuestionIntent {
+  final String selectedAnswer;
+
+  NextQuestionIntent(this.selectedAnswer);
+}
 
 class PreviousQuestionIntent extends QuestionIntent {}
 

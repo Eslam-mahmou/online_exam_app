@@ -66,6 +66,7 @@ class QuestionScreen extends StatelessWidget {
                     CustomQuestionView(
                       question: currentQuestion,
                       numberOfQuestions: viewModel.currentQuestionIndex,
+                      questionsLength: viewModel.question.length,
                     ),
                     SizedBox(height: 20.h),
                     Row(
@@ -79,13 +80,23 @@ class QuestionScreen extends StatelessWidget {
                             },
                             child: const Text('Previous'),
                           ),
-                        if (viewModel.currentQuestionIndex <
-                            viewModel.question.length - 1)
                           ElevatedButton(
                             onPressed: () {
-                              viewModel.doIntent(NextQuestionIntent());
+                              viewModel.currentQuestionIndex <
+                                  viewModel.question.length - 1 ?
+                              viewModel.doIntent(NextQuestionIntent(viewModel
+                                      .question[viewModel.currentQuestionIndex]
+                                      .selectedAnswer
+                                      .toString() ??
+                                  "")) :
+                              Navigator.pushNamed(
+                                  context, PagesRoutes.scoreScreen,arguments: viewModel);
+
                             },
-                            child: const Text('Next'),
+                            child: viewModel.currentQuestionIndex <
+                                    viewModel.question.length - 1
+                                ? const Text('Next')
+                                : const Text('Submit'),
                           ),
                       ],
                     ),
