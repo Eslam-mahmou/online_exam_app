@@ -1,10 +1,9 @@
+
+import 'dart:developer';
 import 'package:bloc/bloc.dart';
-import 'package:hive_flutter/adapters.dart';
 import 'package:injectable/injectable.dart';
-import 'package:online_exam_app/core/utils/constant_manager.dart';
 import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
 import 'package:online_exam_app/domain/entity/check_answer_entity.dart';
-import 'package:online_exam_app/domain/entity/solve_questions_model.dart';
 import 'package:online_exam_app/domain/use_case/check_answer_use_case.dart';
 import 'package:online_exam_app/presentation/exam/manager/score_cubit/score_state.dart';
 
@@ -16,16 +15,20 @@ class ScoreScreenViewModel extends Cubit<ScoreState> {
   final CheckAnswerUseCase _checkAnswerUseCase ;
   CheckAnswerEntity? answerEntity;
   QuestionsOnExamEntity? questions;
-  var box=Hive.box<SolveQuestionsModel>(AppConstants.hiveBoxQuestion);
   void doIntent(ScoreIntent scoreIntent) {
     switch (scoreIntent) {
       case CheckAnswerIntent():
         _checkAnswer();
     }
   }
+  // Future<CachedAnswerData?> _getCachedAnswers() async {
+  //   final box = Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestion);
+  //   return box.get(AppConstants.hiveBoxAnswerKey);
+  // }
+
   void _checkAnswer() async {
     emit(LoadingScoreState());
-    var result = await _checkAnswerUseCase.call(box.values.toList());
+    var result = await _checkAnswerUseCase.call();
     switch (result) {
       case Success():
         var data = result.data;
@@ -37,6 +40,7 @@ class ScoreScreenViewModel extends Cubit<ScoreState> {
          emit(ErrorScoreState(data.message.toString()));
        }
       case Error():
+        log("result $result");
         emit(ErrorScoreState(result.exception.toString()));
     }
   }

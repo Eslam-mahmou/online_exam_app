@@ -21,8 +21,6 @@ class ExamScoreScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ScoreScreenViewModel viewModel = getIt.get<ScoreScreenViewModel>();
-    var args =
-        ModalRoute.of(context)!.settings.arguments as QuestionViewModel;
     return BlocProvider(
       create: (context) => viewModel..doIntent(CheckAnswerIntent()),
       child: Scaffold(

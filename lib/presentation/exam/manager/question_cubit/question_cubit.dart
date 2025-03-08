@@ -7,7 +7,7 @@ import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/core/utils/constant_manager.dart';
 import 'package:online_exam_app/domain/common/result.dart';
 import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
-import 'package:online_exam_app/domain/entity/solve_questions_model.dart';
+import 'package:online_exam_app/domain/entity/cache_answer_model.dart';
 import 'package:online_exam_app/presentation/exam/manager/question_cubit/question_state.dart';
 
 import '../../../../domain/use_case/exam_use_case.dart';
@@ -24,19 +24,18 @@ class QuestionViewModel extends Cubit<QuestionState> {
       case FetchQuestionIntent():
         _fetchQuestion(examIntent.examId);
       case NextQuestionIntent():
-        _nextQuestion(examIntent.selectedAnswer);
+        _nextQuestion(examIntent.answerModel);
       case PreviousQuestionIntent():
         _previousQuestion();
-      case AddQuestionAnswerIntent():
-        _addQuestionAnswer(examIntent.answerModel);
     }
   }
 
-  void _addQuestionAnswer(SolveQuestionsModel answerModel) async {
-    var box = Hive.box<SolveQuestionsModel>(AppConstants.hiveBoxQuestion);
-    await box.add(answerModel);
-    log(answerModel.selectAnswer.toString());
+  void _addQuestionAnswer(List<AnswerModel> answers) async {
+    final box = Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestion);
+    final answerData = CachedAnswerData(answers: answers);
+    await box.put(AppConstants.hiveBoxAnswerKey, answerData);
   }
+
 
   Future<void> _fetchQuestion(String examId) async {
     emit(LoadingQuestionState());
@@ -56,10 +55,11 @@ class QuestionViewModel extends Cubit<QuestionState> {
     }
   }
 
-  void _nextQuestion(String selectedAnswer) {
+  void _nextQuestion(List<AnswerModel> answerModel) {
     if (currentQuestionIndex < question.length - 1) {
-      _addQuestionAnswer(SolveQuestionsModel(
-          question[currentQuestionIndex].id, selectedAnswer));
+      _addQuestionAnswer(
+        answerModel,
+      );
       currentQuestionIndex++;
       emit(NextQuestionState(currentQuestionIndex));
     }
@@ -82,15 +82,10 @@ class FetchQuestionIntent extends QuestionIntent {
 }
 
 class NextQuestionIntent extends QuestionIntent {
-  final String selectedAnswer;
+  final List<AnswerModel> answerModel;
 
-  NextQuestionIntent(this.selectedAnswer);
+  NextQuestionIntent(this.answerModel);
 }
 
 class PreviousQuestionIntent extends QuestionIntent {}
 
-class AddQuestionAnswerIntent extends QuestionIntent {
-  final SolveQuestionsModel answerModel;
-
-  AddQuestionAnswerIntent(this.answerModel);
-}
