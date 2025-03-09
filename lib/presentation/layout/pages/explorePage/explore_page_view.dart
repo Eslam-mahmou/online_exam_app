@@ -37,7 +37,7 @@ class ExplorePageView extends StatelessWidget {
                 borderRadius: BorderRadius.circular(25),
                 border: Border.all(color: ColorsManager.greyColor, width: 1),
               ),
-              child: TextField(
+              child: const TextField(
                 decoration: InputDecoration(
                     hintText: "search",
                     prefixIcon: Icon(Icons.search),

@@ -1,5 +1,6 @@
 
 import 'dart:developer';
+
 import 'package:bloc/bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
@@ -41,6 +42,7 @@ class ScoreScreenViewModel extends Cubit<ScoreState> {
        }
       case Error():
         log("result $result");
+        log("Error occurred: ${result.exception}");
         emit(ErrorScoreState(result.exception.toString()));
     }
   }

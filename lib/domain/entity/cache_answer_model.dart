@@ -1,4 +1,5 @@
 import 'package:hive/hive.dart';
+
 part 'cache_answer_model.g.dart';
 
 
@@ -26,7 +27,7 @@ class CachedAnswerData extends HiveObject {
   CachedAnswerData({ this.answers});
   Map<String, dynamic> toJson() {
     return {
-      "answers": answers?.map((answer) => answer.toJson()).toList(),
+      "answers": answers?.map((answer) => answer.toJson()).toList() ?? [],
     };
   }
 }

@@ -30,12 +30,33 @@ class QuestionViewModel extends Cubit<QuestionState> {
     }
   }
 
-  void _addQuestionAnswer(List<AnswerModel> answers) async {
+  // void _addQuestionAnswer(List<AnswerModel> answers) async {
+  //   final box = Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestion);
+  //   final answerData = CachedAnswerData(answers: answers);
+  //   await box.put(AppConstants.hiveBoxAnswerKey, answerData);
+  // }
+  void _addQuestionAnswer(AnswerModel newAnswer) async {
     final box = Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestion);
-    final answerData = CachedAnswerData(answers: answers);
-    await box.put(AppConstants.hiveBoxAnswerKey, answerData);
-  }
 
+    // Retrieve existing answers
+    CachedAnswerData? cachedData = box.get(AppConstants.hiveBoxAnswerKey);
+    List<AnswerModel> updatedAnswers = cachedData?.answers ?? [];
+
+    // Check if an answer for the same question already exists
+    int existingIndex =
+        updatedAnswers.indexWhere((a) => a.questionId == newAnswer.questionId);
+
+    if (existingIndex != -1) {
+      // Update the existing answer
+      updatedAnswers[existingIndex] = newAnswer;
+    } else {
+      updatedAnswers.add(newAnswer);
+    }
+    await box.put(AppConstants.hiveBoxAnswerKey,
+        CachedAnswerData(answers: updatedAnswers));
+    print(
+        '✅ Updated Answer List: ${updatedAnswers.map((e) => e.toJson()).toList()}');
+  }
 
   Future<void> _fetchQuestion(String examId) async {
     emit(LoadingQuestionState());
@@ -57,9 +78,16 @@ class QuestionViewModel extends Cubit<QuestionState> {
 
   void _nextQuestion(List<AnswerModel> answerModel) {
     if (currentQuestionIndex < question.length - 1) {
-      _addQuestionAnswer(
-        answerModel,
+      // Ensure the answer model is created properly
+      var newAnswer = AnswerModel(
+        questionId: question[currentQuestionIndex].id.toString(),
+        correct: question[currentQuestionIndex].selectedAnswer.toString(),
       );
+
+      // Use `_addQuestionAnswer()` to store the answer in Hive
+      _addQuestionAnswer(newAnswer);
+
+      // Move to the next question
       currentQuestionIndex++;
       emit(NextQuestionState(currentQuestionIndex));
     }
