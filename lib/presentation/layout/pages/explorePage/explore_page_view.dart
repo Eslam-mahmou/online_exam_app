@@ -126,6 +126,6 @@ class ExplorePageView extends StatelessWidget {
           ],
         ),
       ),
-    );
+    ));
   }
 }
