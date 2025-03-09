@@ -10,4 +10,5 @@ class EndPoints {
   static const String getAllSubject = "/api/v1/subjects";
   static const String getExam = "/api/v1/exams";
   static const String getQuestionOnExam = "/api/v1/questions";
+  static const String checkAnswer = "/api/v1/questions/check";
 }

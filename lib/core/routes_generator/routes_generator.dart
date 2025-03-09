@@ -8,6 +8,7 @@ import 'package:online_exam_app/presentation/auth/pages/forget_password/reset_pa
 import 'package:online_exam_app/presentation/auth/pages/login_screen.dart';
 import 'package:online_exam_app/presentation/auth/pages/sign_up_screen.dart';
 import 'package:online_exam_app/presentation/exam/exam_screen.dart';
+import 'package:online_exam_app/presentation/exam/score_screen.dart';
 import 'package:online_exam_app/presentation/layout/layout.dart';
 import 'package:online_exam_app/presentation/layout/manager/profile_tab_cubit/profile_tab_view_model.dart';
 import 'package:online_exam_app/presentation/splash/splash_screen.dart';
@@ -55,6 +56,8 @@ class RoutesGenerator {
       case PagesRoutes.questionScreen:
         return MaterialPageRoute(
             builder: (context) => const QuestionScreen(), settings: settings);
+      case PagesRoutes.scoreScreen :
+        return MaterialPageRoute(builder: (context) =>const ExamScoreScreen(),settings: settings);
       default:
         return unDefinedRoute();
     }

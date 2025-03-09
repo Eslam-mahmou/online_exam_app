@@ -1,5 +1,5 @@
 import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
-import 'package:online_exam_app/domain/entity/solve_questions_model.dart';
+import 'package:online_exam_app/domain/entity/cache_answer_model.dart';
 
 sealed class QuestionState {}
 
@@ -33,7 +33,7 @@ class QuestionTimerUpdated extends QuestionState {
 }
 
 class QuestionAnsweredState extends QuestionState {
-  SolveQuestionsModel answerModel;
+  AnswerModel answerModel;
   QuestionAnsweredState(this.answerModel);
 }
 class RemoveQuestionAnswered extends QuestionState {}

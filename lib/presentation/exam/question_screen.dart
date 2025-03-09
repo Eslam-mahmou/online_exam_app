@@ -1,5 +1,3 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -9,8 +7,8 @@ import 'package:online_exam_app/core/Utils/style_manager.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'package:online_exam_app/core/widget/custom_diaolg.dart';
 import 'package:online_exam_app/di/injectable_initializer.dart';
+import 'package:online_exam_app/domain/entity/cache_answer_model.dart';
 import 'package:online_exam_app/domain/entity/exam_response_entity.dart';
-import 'package:online_exam_app/domain/entity/solve_questions_model.dart';
 import 'package:online_exam_app/presentation/exam/widget/custom_question_view.dart';
 
 import 'manager/question_cubit/question_cubit.dart';
@@ -66,28 +64,92 @@ class QuestionScreen extends StatelessWidget {
                     CustomQuestionView(
                       question: currentQuestion,
                       numberOfQuestions: viewModel.currentQuestionIndex,
+                      questionsLength: viewModel.question.length,
                     ),
                     SizedBox(height: 20.h),
-                    Row(
-                      mainAxisAlignment: MainAxisAlignment.spaceBetween,
-                      children: [
-                        if (viewModel.currentQuestionIndex >
-                            0) // Only show if it's not the first question
-                          ElevatedButton(
-                            onPressed: () {
-                              viewModel.doIntent(PreviousQuestionIntent());
-                            },
-                            child: const Text('Previous'),
+                    Spacer(),
+                    Padding(
+                      padding: EdgeInsets.only(bottom: 24.h),
+                      child: Row(
+                        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                        children: [
+                          if (viewModel.currentQuestionIndex >
+                              0) // Only show if it's not the first question
+                            Expanded(
+                              child: ElevatedButton(
+                                style: ElevatedButton.styleFrom(
+                                    shape: RoundedRectangleBorder(
+                                      borderRadius: BorderRadius.circular(17.r),
+                                    ),
+                                    // backgroundColor: ColorsManager.primaryColor,
+                                    side: const BorderSide(
+                                        color: ColorsManager.primaryColor,
+                                        width: 1),
+                                    foregroundColor:
+                                        ColorsManager.primaryColor),
+                                onPressed: () {
+                                  viewModel.doIntent(PreviousQuestionIntent());
+                                },
+                                child: const Text('Back'),
+                              ),
+                            ),
+                          SizedBox(
+                            width: 16.w,
                           ),
-                        if (viewModel.currentQuestionIndex <
-                            viewModel.question.length - 1)
-                          ElevatedButton(
-                            onPressed: () {
-                              viewModel.doIntent(NextQuestionIntent());
-                            },
-                            child: const Text('Next'),
+                          Expanded(
+                            child: ElevatedButton(
+                              style: ElevatedButton.styleFrom(
+                                  shape: RoundedRectangleBorder(
+                                    borderRadius: BorderRadius.circular(17.r),
+                                  ),
+                                  backgroundColor: ColorsManager.primaryColor,
+                                  foregroundColor: ColorsManager.whiteColor),
+                              onPressed: () async {
+                                viewModel.currentQuestionIndex <
+                                        viewModel.question.length - 1
+                                    ? {
+                                        viewModel.doIntent(
+                                          NextQuestionIntent([
+                                            AnswerModel(
+                                              questionId: viewModel
+                                                  .question[viewModel
+                                                      .currentQuestionIndex]
+                                                  .id
+                                                  .toString(),
+                                              correct: viewModel
+                                                  .question[viewModel
+                                                      .currentQuestionIndex]
+                                                  .selectedAnswer
+                                                  .toString(),
+                                            ),
+                                          ]),
+                                        )
+                                      }
+                                    :
+                                    // viewModel.doIntent(
+                                    //    AddQuestionAnswerIntent(
+                                    //         SolveQuestionsModel(
+                                    //             viewModel
+                                    //                 .question[
+                                    //                     viewModel.currentQuestionIndex]
+                                    //                 .id
+                                    //                 .toString(),
+                                    //             viewModel
+                                    //                 .question[
+                                    //                     viewModel.currentQuestionIndex]
+                                    //                 .selectedAnswer)));
+                                    Navigator.pushNamed(
+                                        context, PagesRoutes.scoreScreen,
+                                        arguments: viewModel);
+                              },
+                              child: viewModel.currentQuestionIndex <
+                                      viewModel.question.length - 1
+                                  ? const Text('Next')
+                                  : const Text('Submit'),
+                            ),
                           ),
-                      ],
+                        ],
+                      ),
                     ),
                   ],
                 ),

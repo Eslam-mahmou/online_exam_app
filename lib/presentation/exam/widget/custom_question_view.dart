@@ -12,9 +12,10 @@ import 'package:online_exam_app/presentation/exam/manager/question_cubit/questio
 
 class CustomQuestionView extends StatefulWidget {
   CustomQuestionView(
-      {super.key, required this.question, required this.numberOfQuestions});
+      {super.key, required this.question, required this.numberOfQuestions,required this.questionsLength});
 
   Questions question;
+  int questionsLength;
   final num numberOfQuestions;
 
   // late int totalSeconds = question.exam!.duration!.toInt() * 60;//
@@ -149,7 +150,7 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
         ],
       ),
       Text(
-        "Question ${widget.numberOfQuestions + 1} of ${widget.question.exam!.numberOfQuestions}",
+        "Question ${widget.numberOfQuestions + 1} of ${widget.questionsLength}",
         textAlign: TextAlign.center,
         style: getTextStyle(
             FontSize.s14, FontWeightManager.medium, ColorsManager.blackColor),
@@ -166,7 +167,7 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
         child: Slider(
           autofocus: false,
           value: widget.numberOfQuestions.toDouble(),
-          max: widget.question.exam!.numberOfQuestions!.toDouble(),
+          max: widget.questionsLength.toDouble(),
           activeColor: ColorsManager.primaryColor,
           inactiveColor: Colors.grey[300],
           onChanged: (value) {},
@@ -199,11 +200,11 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
                 style: const TextStyle(color: Colors.black),
               ),
               value:answer.key ??"",
-              groupValue: QuestionViewModel.selectedAnswer ?? "",
+              groupValue:widget.question.selectedAnswer??"",
               activeColor: ColorsManager.primaryColor,
               controlAffinity: ListTileControlAffinity.leading,
               onChanged: (value) {
-                QuestionViewModel.selectedAnswer= value!;
+                widget.question.selectedAnswer= value;
                 log("gfghjkl$value");
               },
             ),
