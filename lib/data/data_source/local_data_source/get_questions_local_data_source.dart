@@ -12,12 +12,11 @@ abstract class GetQuestionsLocalDataSource {
 @Injectable(as: GetQuestionsLocalDataSource)
 class GetQuestionsLocalDataSourceImpl implements GetQuestionsLocalDataSource {
   @override
-  void setQuestions(List<Questions> questions) {
+  void setQuestions(List<Questions> questions) async{
     var box = Hive.box<Questions>(AppConstants.hiveBoxQuestion);
     box.clear();
     for (var i = 0; i < questions.length; i++) {
-      box.put(AppConstants.hiveBoxQuestionKey, questions[i]);
+     await box.put(questions[i].id, questions[i]);
     }
-    box.close();
   }
 }

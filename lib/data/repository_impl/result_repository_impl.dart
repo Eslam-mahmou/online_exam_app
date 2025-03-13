@@ -11,7 +11,6 @@ class ResultRepositoryImpl implements ResultRepository{
   Future<List<Questions>> getLocalQuestions() async{
     try {
       var box = Hive.box<List<Questions>>(AppConstants.hiveBoxQuestion);
-      log(box.get(AppConstants.hiveBoxQuestionKey).toString());
       return  box.get(AppConstants.hiveBoxQuestionKey)??[];
     } catch (e) {
       log(e.toString());

@@ -38,8 +38,11 @@ class ExamRepositoryImpl implements ExamRepository {
         var response = await _baseExamDataSource.getQuestionOnExam(examId);
         log(response.toString());
         var data = QuestionsOnExamDTO.fromJson(response.data);
+        if(data.questions!.isNotEmpty){
+          _getQuestionsLocalDataSource.setQuestions(data.questions!);
+        }
+
         log("data ${data.message}");
-        _getQuestionsLocalDataSource.setQuestions(data.questions!);
         return data;
       },
     );

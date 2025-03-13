@@ -19,6 +19,7 @@ class QuestionViewModel extends Cubit<QuestionState> {
   final ExamUseCase _examUseCase;
   List<Questions> question = [];
   int currentQuestionIndex = 0;
+
   void doIntent(QuestionIntent examIntent) {
     switch (examIntent) {
       case FetchQuestionIntent():
@@ -68,6 +69,7 @@ class QuestionViewModel extends Cubit<QuestionState> {
         question = data?.questions ?? [];
         log(question.toString());
         if (data!.message == "success") {
+
           emit(SuccessQuestionState(question));
         } else {
           emit(ErrorQuestionState(data.message));
@@ -118,4 +120,3 @@ class NextQuestionIntent extends QuestionIntent {
 }
 
 class PreviousQuestionIntent extends QuestionIntent {}
-

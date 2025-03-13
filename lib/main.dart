@@ -22,9 +22,13 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(AnswerModelAdapter());
   Hive.registerAdapter(CachedAnswerDataAdapter());
-  Hive.registerAdapter(AnswersAdapter());
   Hive.registerAdapter(QuestionsAdapter());
+  Hive.registerAdapter(AnswersAdapter());
+  if (Hive.isBoxOpen(AppConstants.hiveBoxQuestion)) {
+    await Hive.box<List<Questions>>(AppConstants.hiveBoxQuestion).close();
+  }
   await Hive.openBox<List<Questions>>(AppConstants.hiveBoxQuestion);
+
   await Hive.openBox<CachedAnswerData>(AppConstants.hiveBoxQuestionAnswer);
   await SharedPreferenceServices.init();
   runApp(const OnlineExamApp());

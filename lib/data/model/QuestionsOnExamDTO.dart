@@ -1,3 +1,4 @@
+import 'package:hive/hive.dart';
 import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
 
 class QuestionsOnExamDTO extends QuestionsOnExamEntity {
@@ -31,7 +32,7 @@ class QuestionsDTO extends Questions {
 
   QuestionsDTO.fromJson(dynamic json) {
     if (json['answers'] != null) {
-      answers = [];
+      answers = [] ;
       json['answers'].forEach((v) {
         answers?.add(Answers.fromJson(v));
       });
