@@ -5,18 +5,12 @@ import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
 import '../../../core/utils/constant_manager.dart';
 
 abstract class GetQuestionsLocalDataSource {
-  Future<List<Questions>> getQuestions();
+
 
   void setQuestions(List<Questions> questions);
 }
 @Injectable(as: GetQuestionsLocalDataSource)
 class GetQuestionsLocalDataSourceImpl implements GetQuestionsLocalDataSource {
-  @override
-  Future<List<Questions>> getQuestions() {
-    var box = Hive.box<Questions>(AppConstants.hiveBoxQuestion);
-    return Future.value(box.values.toList());
-  }
-
   @override
   void setQuestions(List<Questions> questions) {
     var box = Hive.box<Questions>(AppConstants.hiveBoxQuestion);

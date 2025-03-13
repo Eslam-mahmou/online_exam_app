@@ -28,19 +28,15 @@ class Questions extends HiveObject with EquatableMixin {
   });
 @HiveField(0)
   List<Answers>? answers;
-@HiveField(1)
   String? type;
-  @HiveField(2)
+  @HiveField(1)
   String? id;
-  @HiveField(3)
+  @HiveField(2)
   String? question;
-  @HiveField(4)
+  @HiveField(3)
   String? correct;
-  @HiveField(5)
   Subject? subject;
-  @HiveField(6)
   Exam? exam;
-  @HiveField(7)
   String? createdAt;
   String? selectedAnswer;
 
@@ -100,7 +96,7 @@ class Subject extends Equatable {
   // TODO: implement props
   List<Object?> get props => [id, name];
 }
-
+@HiveType(typeId: 3)
 class Answers extends Equatable {
   Answers({
     this.answer,
@@ -111,8 +107,9 @@ class Answers extends Equatable {
     answer = json['answer'];
     key = json['key'];
   }
-
+@HiveField(0)
   String? answer;
+  @HiveField(1)
   String? key;
 
   Map<String, dynamic> toJson() {

@@ -73,7 +73,7 @@ class QuestionViewModel extends Cubit<QuestionState> {
           emit(ErrorQuestionState(data.message));
         }
       case Error():
-        log("Error occurred: ${result.exception}");
+        log("Error occurred: ${result}");
         emit(ErrorQuestionState(result.exception));
     }
   }

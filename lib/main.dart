@@ -22,6 +22,7 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(AnswerModelAdapter());
   Hive.registerAdapter(CachedAnswerDataAdapter());
+  Hive.registerAdapter(AnswersAdapter());
   Hive.registerAdapter(QuestionsAdapter());
   await Hive.openBox<List<Questions>>(AppConstants.hiveBoxQuestion);
   await Hive.openBox<CachedAnswerData>(AppConstants.hiveBoxQuestionAnswer);
