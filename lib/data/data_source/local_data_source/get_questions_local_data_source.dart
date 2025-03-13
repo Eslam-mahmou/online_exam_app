@@ -35,9 +35,9 @@ class GetQuestionsLocalDataSourceImpl implements GetQuestionsLocalDataSource {
   @override
   void setQuestions(List<Questions> questions) async {
     var box = Hive.box<Questions>(AppConstants.hiveBoxQuestion);
-    await box.clear(); // ✅ Clear previous data
+    await box.clear();
     for (var question in questions) {
-      await box.put(question.id, question); // ✅ Store individually by ID
+      await box.put(question.id, question);
     }
   }
 }

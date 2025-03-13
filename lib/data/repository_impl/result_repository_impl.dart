@@ -33,7 +33,7 @@ class ResultRepositoryImpl implements ResultRepository {
   Future<List<Questions>> getLocalQuestions() async {
     try {
       var box = Hive.box<Questions>(AppConstants.hiveBoxQuestion);
-      return box.values.toList(); // ✅ Fetch all questions
+      return box.values.toList();
     } catch (e) {
       log(e.toString());
       throw Exception("Failed to fetch questions: $e");
