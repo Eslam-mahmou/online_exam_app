@@ -62,7 +62,7 @@ class RoutesGenerator {
             builder: (context) => const ExamScoreScreen(), settings: settings);
       case PagesRoutes.resultScreen:
         return MaterialPageRoute(
-            builder: (context) => const  ResultScreen(), settings: settings);
+            builder: (context) => const ResultScreen(), settings: settings);
       default:
         return unDefinedRoute();
     }

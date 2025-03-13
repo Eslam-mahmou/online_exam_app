@@ -203,7 +203,8 @@ class ExamScoreScreen extends StatelessWidget {
                             ElevatedButton(
                               onPressed: () {
                                 Navigator.pushNamed(
-                                    context, PagesRoutes.resultScreen);
+                                    context, PagesRoutes.resultScreen,
+                                    arguments: viewModel.answerEntity);
                               },
                               style: ElevatedButton.styleFrom(
                                 backgroundColor: ColorsManager.primaryColor,
