@@ -36,7 +36,7 @@ class QuestionViewModel extends Cubit<QuestionState> {
   //   await box.put(AppConstants.hiveBoxAnswerKey, answerData);
   // }
   void _addQuestionAnswer(AnswerModel newAnswer) async {
-    final box = Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestion);
+    final box = Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestionAnswer);
 
     // Retrieve existing answers
     CachedAnswerData? cachedData = box.get(AppConstants.hiveBoxAnswerKey);
@@ -61,6 +61,7 @@ class QuestionViewModel extends Cubit<QuestionState> {
   Future<void> _fetchQuestion(String examId) async {
     emit(LoadingQuestionState());
     var result = await _examUseCase.callQuestionOnExam(examId);
+
     switch (result) {
       case Success():
         var data = result.data;
@@ -72,6 +73,7 @@ class QuestionViewModel extends Cubit<QuestionState> {
           emit(ErrorQuestionState(data.message));
         }
       case Error():
+        log("Error occurred: ${result.exception}");
         emit(ErrorQuestionState(result.exception));
     }
   }

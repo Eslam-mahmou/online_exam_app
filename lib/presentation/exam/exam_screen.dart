@@ -81,6 +81,7 @@ class ExamScreen extends StatelessWidget {
                       ...List.generate(
                           viewModel.exams.length, (index) => CustomExamCard(
                         exam: viewModel.exams[index],
+
                       )),
                       SizedBox(height: 20.h),
                     ],

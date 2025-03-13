@@ -20,7 +20,7 @@ class QuestionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuestionViewModel viewModel = getIt.get<QuestionViewModel>();
-    var arg = ModalRoute.of(context)!.settings.arguments as ExamsEntity;
+    var arg = ModalRoute.of(context)?.settings.arguments as ExamsEntity;
 
     return BlocProvider(
       create: (context) => viewModel,
@@ -37,7 +37,7 @@ class QuestionScreen extends StatelessWidget {
                 postActionName: "Ok",
                 negativeActionName: "Cancel",
                 postAction: () {
-                  viewModel.doIntent(FetchQuestionIntent(arg.id.toString()));
+                  Navigator.pop(context);
                 },
               );
             }
@@ -67,7 +67,7 @@ class QuestionScreen extends StatelessWidget {
                       questionsLength: viewModel.question.length,
                     ),
                     SizedBox(height: 20.h),
-                    Spacer(),
+                   const Spacer(),
                     Padding(
                       padding: EdgeInsets.only(bottom: 24.h),
                       child: Row(
@@ -105,9 +105,6 @@ class QuestionScreen extends StatelessWidget {
                                   backgroundColor: ColorsManager.primaryColor,
                                   foregroundColor: ColorsManager.whiteColor),
                               onPressed: () async {
-                                viewModel.currentQuestionIndex <
-                                        viewModel.question.length - 1
-                                    ? {
                                         viewModel.doIntent(
                                           NextQuestionIntent([
                                             AnswerModel(
@@ -123,29 +120,19 @@ class QuestionScreen extends StatelessWidget {
                                                   .toString(),
                                             ),
                                           ]),
-                                        )
-                                      }
-                                    :
-                                    // viewModel.doIntent(
-                                    //    AddQuestionAnswerIntent(
-                                    //         SolveQuestionsModel(
-                                    //             viewModel
-                                    //                 .question[
-                                    //                     viewModel.currentQuestionIndex]
-                                    //                 .id
-                                    //                 .toString(),
-                                    //             viewModel
-                                    //                 .question[
-                                    //                     viewModel.currentQuestionIndex]
-                                    //                 .selectedAnswer)));
-                                    Navigator.pushNamed(
-                                        context, PagesRoutes.scoreScreen,
-                                        arguments: viewModel);
+                                        );
+
                               },
                               child: viewModel.currentQuestionIndex <
                                       viewModel.question.length - 1
                                   ? const Text('Next')
-                                  : const Text('Submit'),
+                                  : InkWell(
+                                  onTap: () {
+                                    Navigator.pushNamed(
+                                                context, PagesRoutes.scoreScreen,
+                                                arguments: viewModel);
+                                  },
+                                  child: const Text('Submit')),
                             ),
                           ),
                         ],

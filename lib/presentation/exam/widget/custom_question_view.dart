@@ -3,16 +3,20 @@ import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
-import 'package:online_exam_app/core/Utils/assets_manager.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
+import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
-import 'package:online_exam_app/presentation/exam/manager/question_cubit/question_cubit.dart';
+
+import '../../../core/Utils/assets_manager.dart';
 
 class CustomQuestionView extends StatefulWidget {
   CustomQuestionView(
-      {super.key, required this.question, required this.numberOfQuestions,required this.questionsLength});
+      {super.key,
+      required this.question,
+      required this.numberOfQuestions,
+      required this.questionsLength});
 
   Questions question;
   int questionsLength;
@@ -35,17 +39,6 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
     _startTimer();
   }
 
-  // void _startTimer() {
-  //   _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
-  //     if (remainingSeconds > 0) {
-  //       setState(() {
-  //         remainingSeconds--;
-  //       });
-  //     } else {
-  //       _timer?.cancel();
-  //     }
-  //   });
-  // }
   void _startTimer() {
     _timer = Timer.periodic(const Duration(seconds: 1), (timer) {
       if (remainingSeconds > 0) {
@@ -63,28 +56,53 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
   void _showTimeOutDialog() {
     showDialog(
       context: context,
-      barrierDismissible: false,
-      builder: (context) => AlertDialog(
-        // title: const Text("Time's Up!"),
-        content: Row(
-          children: [
-            Image.asset(ImageAssets.timeOutImage),
-            const Text("Time's Up!"),
-          ],
-        ),
-        actions: [
-          TextButton(
-            onPressed: () {
-              Navigator.pop(context);
-              setState(() {
-                remainingSeconds = widget.totalSeconds;
-              });
-              _startTimer(); // Restart countdown
-            },
-            child: const Text("Restart"),
-          ),
-        ],
-      ),
+      builder: (context) {
+        return Dialog(
+            shape: RoundedRectangleBorder(
+              borderRadius: BorderRadius.circular(16.0),
+            ),
+            child: Container(
+              width: 290.w,
+              height: 230.h,
+              padding: EdgeInsets.symmetric(vertical: 30.h),
+              decoration: BoxDecoration(
+                borderRadius: BorderRadius.circular(10),
+              ),
+              child: Column(
+                  mainAxisAlignment: MainAxisAlignment.spaceAround,
+                  children: [
+                    Row(mainAxisAlignment: MainAxisAlignment.center, children: [
+                      Image.asset(
+                        ImageAssets.timeOutImage,
+                        height: 80,
+                      ),
+                      SizedBox(width: 10.w),
+                      Text("Time out !!",
+                          style: getTextStyle(FontSize.s24,
+                              FontWeightManager.regular, ColorsManager.redColor,
+                              fontFamily: FontFamily.roboto)),
+                    ]),
+                    SizedBox(height: 20.h),
+                    ElevatedButton(
+                      onPressed: () {
+                        Navigator.pushNamed(context, PagesRoutes.scoreScreen);
+                      },
+                      style: ElevatedButton.styleFrom(
+                        backgroundColor: Colors.blue.shade800,
+                        shape: RoundedRectangleBorder(
+                          borderRadius: BorderRadius.circular(30),
+                        ),
+                      ),
+                      child: Text(
+                        "View score",
+                        style: getTextStyle(FontSize.s14,
+                            FontWeightManager.medium, ColorsManager.whiteColor,
+                            fontFamily: FontFamily.roboto),
+                      ),
+                    ),
+                  ]),
+            ));
+      },
     );
   }
 
@@ -140,7 +158,7 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
             style: getTextStyle(
                 FontSize.s20,
                 FontWeightManager.medium,
-                remainingSeconds <= remainingSeconds / 2
+                remainingSeconds <= (widget.totalSeconds ~/ 2)
                     ? ColorsManager.redColor
                     : ColorsManager.greenColor),
           ),
@@ -199,13 +217,12 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
                 answer.answer ?? 'No answer provided',
                 style: const TextStyle(color: Colors.black),
               ),
-              value:answer.key ??"",
-              groupValue:widget.question.selectedAnswer??"",
+              value: answer.key ?? "",
+              groupValue: widget.question.selectedAnswer ?? "",
               activeColor: ColorsManager.primaryColor,
               controlAffinity: ListTileControlAffinity.leading,
               onChanged: (value) {
-                widget.question.selectedAnswer= value;
-                log("gfghjkl$value");
+                widget.question.selectedAnswer = value;
               },
             ),
           );

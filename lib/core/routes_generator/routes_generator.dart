@@ -15,6 +15,7 @@ import 'package:online_exam_app/presentation/splash/splash_screen.dart';
 
 import '../../presentation/exam/question_screen.dart';
 import '../../presentation/layout/pages/profilePage/change_password.dart';
+import '../../presentation/result/result_screen.dart';
 
 class RoutesGenerator {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {
@@ -56,8 +57,12 @@ class RoutesGenerator {
       case PagesRoutes.questionScreen:
         return MaterialPageRoute(
             builder: (context) => const QuestionScreen(), settings: settings);
-      case PagesRoutes.scoreScreen :
-        return MaterialPageRoute(builder: (context) =>const ExamScoreScreen(),settings: settings);
+      case PagesRoutes.scoreScreen:
+        return MaterialPageRoute(
+            builder: (context) => const ExamScoreScreen(), settings: settings);
+      case PagesRoutes.resultScreen:
+        return MaterialPageRoute(
+            builder: (context) => const  ResultScreen(), settings: settings);
       default:
         return unDefinedRoute();
     }

@@ -28,7 +28,7 @@ class CheckAnswerRemoteDataSourceImpl implements CheckAnswerRemoteDataSource {
   //   });
   // }
   Future<Response> checkAnswer() async {
-    final box = Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestion);
+    final box = Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestionAnswer);
     CachedAnswerData? cachedData = box.get(AppConstants.hiveBoxAnswerKey);
 
     // Ensure data is retrieved properly

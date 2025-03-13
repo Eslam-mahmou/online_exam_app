@@ -7,6 +7,7 @@ import 'package:hive_flutter/adapters.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'package:online_exam_app/core/services/easy_loading_service.dart';
 import 'package:online_exam_app/core/utils/constant_manager.dart';
+import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
 import 'package:online_exam_app/domain/entity/cache_answer_model.dart';
 
 import 'core/routes_generator/routes_generator.dart';
@@ -21,7 +22,9 @@ void main() async {
   await Hive.initFlutter();
   Hive.registerAdapter(AnswerModelAdapter());
   Hive.registerAdapter(CachedAnswerDataAdapter());
-  await Hive.openBox<CachedAnswerData>(AppConstants.hiveBoxQuestion);
+  Hive.registerAdapter(QuestionsAdapter());
+  await Hive.openBox<List<Questions>>(AppConstants.hiveBoxQuestion);
+  await Hive.openBox<CachedAnswerData>(AppConstants.hiveBoxQuestionAnswer);
   await SharedPreferenceServices.init();
   runApp(const OnlineExamApp());
   ConfigLoading().showLoading();

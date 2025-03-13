@@ -1,5 +1,8 @@
-import 'package:equatable/equatable.dart';
+import 'dart:core';
 
+import 'package:equatable/equatable.dart';
+import 'package:hive/hive.dart';
+part 'QuestionsOnExamEntity.g.dart';
 class QuestionsOnExamEntity {
   QuestionsOnExamEntity({
     this.message,
@@ -10,8 +13,8 @@ class QuestionsOnExamEntity {
   List<Questions>? questions;
 
 }
-
-class Questions extends Equatable {
+@HiveType(typeId: 2)
+class Questions extends HiveObject with EquatableMixin {
   Questions({
     this.answers,
     this.type,
@@ -23,14 +26,21 @@ class Questions extends Equatable {
     this.createdAt,
     this.selectedAnswer
   });
-
+@HiveField(0)
   List<Answers>? answers;
+@HiveField(1)
   String? type;
+  @HiveField(2)
   String? id;
+  @HiveField(3)
   String? question;
+  @HiveField(4)
   String? correct;
+  @HiveField(5)
   Subject? subject;
+  @HiveField(6)
   Exam? exam;
+  @HiveField(7)
   String? createdAt;
   String? selectedAnswer;
 

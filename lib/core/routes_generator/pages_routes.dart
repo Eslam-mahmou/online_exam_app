@@ -10,4 +10,5 @@ abstract class PagesRoutes {
   static const String examScreen="/exam";
   static const String questionScreen = "questions";
   static const String scoreScreen = "score";
+  static const String  resultScreen = "result";
 }

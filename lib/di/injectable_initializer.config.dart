@@ -12,6 +12,8 @@ import 'package:get_it/get_it.dart' as _i174;
 import 'package:injectable/injectable.dart' as _i526;
 
 import '../core/api/api_manager.dart' as _i108;
+import '../data/data_source/local_data_source/get_questions_local_data_source.dart'
+    as _i755;
 import '../data/data_source/remote_data_source/auth_remote_data_source.dart'
     as _i261;
 import '../data/data_source/remote_data_source/check_answer_remote_data_source.dart'
@@ -25,16 +27,19 @@ import '../data/repository_impl/auth_repository_impl.dart' as _i970;
 import '../data/repository_impl/check_answer_repository_impl.dart' as _i36;
 import '../data/repository_impl/exam_repository_impl.dart' as _i321;
 import '../data/repository_impl/profile_repository_impl.dart' as _i771;
+import '../data/repository_impl/result_repository_impl.dart' as _i1012;
 import '../data/repository_impl/subject_repository_impl.dart' as _i587;
 import '../domain/repository/auth_repository.dart' as _i306;
 import '../domain/repository/check_answer_repository.dart' as _i863;
 import '../domain/repository/exam_repository.dart' as _i242;
 import '../domain/repository/profile_repository.dart' as _i899;
+import '../domain/repository/result_repository.dart' as _i471;
 import '../domain/repository/subject_repository.dart' as _i801;
 import '../domain/use_case/auth_use_case.dart' as _i358;
 import '../domain/use_case/check_answer_use_case.dart' as _i880;
 import '../domain/use_case/exam_use_case.dart' as _i334;
 import '../domain/use_case/profile_use_case.dart' as _i92;
+import '../domain/use_case/result_use_case.dart' as _i686;
 import '../domain/use_case/subject_use_case.dart' as _i946;
 import '../presentation/auth/manager/forget_password_cubit/forget_password_view_model.dart'
     as _i778;
@@ -57,6 +62,7 @@ import '../presentation/layout/manager/explore_cubit/explore_view_model.dart'
     as _i601;
 import '../presentation/layout/manager/profile_tab_cubit/profile_tab_view_model.dart'
     as _i409;
+import '../presentation/result/manager/result_cubit.dart' as _i405;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -70,6 +76,9 @@ extension GetItInjectableX on _i174.GetIt {
       environmentFilter,
     );
     gh.factory<_i108.ApiManager>(() => _i108.ApiManager());
+    gh.factory<_i471.ResultRepository>(() => _i1012.ResultRepositoryImpl());
+    gh.factory<_i755.GetQuestionsLocalDataSource>(
+        () => _i755.GetQuestionsLocalDataSourceImpl());
     gh.factory<_i897.BaseExamDataSource>(
         () => _i897.BaseExamDataSourceImpl(gh<_i108.ApiManager>()));
     gh.factory<_i261.AuthRemoteDataSource>(
@@ -81,10 +90,10 @@ extension GetItInjectableX on _i174.GetIt {
     gh.factory<_i863.CheckAnswerRepository>(() =>
         _i36.CheckAnswerRepositoryImpl(
             gh<_i340.CheckAnswerRemoteDataSource>()));
+    gh.factory<_i686.ResultUseCase>(
+        () => _i686.ResultUseCase(gh<_i471.ResultRepository>()));
     gh.factory<_i240.ProfileRemoteDataSource>(
         () => _i240.ProfileRemoteDataSourceImpl(gh<_i108.ApiManager>()));
-    gh.factory<_i242.ExamRepository>(
-        () => _i321.ExamRepositoryImpl(gh<_i897.BaseExamDataSource>()));
     gh.factory<_i899.ProfileRepository>(
         () => _i771.ProfileRepositoryImpl(gh<_i240.ProfileRemoteDataSource>()));
     gh.factory<_i801.SubjectRepository>(
@@ -95,8 +104,14 @@ extension GetItInjectableX on _i174.GetIt {
         () => _i970.AuthRepositoryImpl(gh<_i261.AuthRemoteDataSource>()));
     gh.factory<_i92.ProfileUseCase>(
         () => _i92.ProfileUseCase(gh<_i899.ProfileRepository>()));
+    gh.factory<_i242.ExamRepository>(() => _i321.ExamRepositoryImpl(
+          gh<_i897.BaseExamDataSource>(),
+          gh<_i755.GetQuestionsLocalDataSource>(),
+        ));
     gh.factory<_i601.ExploreViewModel>(
         () => _i601.ExploreViewModel(gh<_i946.SubjectUseCase>()));
+    gh.factory<_i405.ResultViewModel>(
+        () => _i405.ResultViewModel(gh<_i686.ResultUseCase>()));
     gh.factory<_i358.AuthUseCase>(
         () => _i358.AuthUseCase(gh<_i306.AuthRepository>()));
     gh.factory<_i880.CheckAnswerUseCase>(

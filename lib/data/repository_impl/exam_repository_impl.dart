@@ -9,13 +9,15 @@ import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
 import 'package:online_exam_app/domain/entity/exam_response_entity.dart';
 import 'package:online_exam_app/domain/repository/exam_repository.dart';
 
+import '../data_source/local_data_source/get_questions_local_data_source.dart';
 import '../model/QuestionsOnExamDTO.dart';
 
 @Injectable(as: ExamRepository)
 class ExamRepositoryImpl implements ExamRepository {
   final BaseExamDataSource _baseExamDataSource;
+  final GetQuestionsLocalDataSource _getQuestionsLocalDataSource ;
 
-  ExamRepositoryImpl(this._baseExamDataSource);
+  ExamRepositoryImpl(this._baseExamDataSource,this._getQuestionsLocalDataSource);
 
   @override
   Future<Result<ExamResponseEntity>> getExamsOnSubject(String subjectId) async {
@@ -36,6 +38,8 @@ class ExamRepositoryImpl implements ExamRepository {
         var response = await _baseExamDataSource.getQuestionOnExam(examId);
         log(response.toString());
         var data = QuestionsOnExamDTO.fromJson(response.data);
+        log("data ${data.message}");
+        _getQuestionsLocalDataSource.setQuestions(data.questions!);
         return data;
       },
     );
