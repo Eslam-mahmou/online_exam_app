@@ -97,43 +97,75 @@ class QuestionScreen extends StatelessWidget {
                             width: 16.w,
                           ),
                           Expanded(
-                            child: ElevatedButton(
-                              style: ElevatedButton.styleFrom(
-                                  shape: RoundedRectangleBorder(
-                                    borderRadius: BorderRadius.circular(17.r),
+                            child: viewModel.currentQuestionIndex <
+                                    viewModel.question.length - 1
+                                ? ElevatedButton(
+                                    onPressed: () {
+                                      // save answer
+                                      viewModel.doIntent(
+                                        NextQuestionIntent([
+                                          AnswerModel(
+                                            questionId: viewModel
+                                                .question[viewModel
+                                                    .currentQuestionIndex]
+                                                .id
+                                                .toString(),
+                                            correct: viewModel
+                                                .question[viewModel
+                                                    .currentQuestionIndex]
+                                                .selectedAnswer
+                                                .toString(),
+                                          ),
+                                        ]),
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(17.r),
+                                      ),
+                                      backgroundColor:
+                                          ColorsManager.primaryColor,
+                                      foregroundColor: ColorsManager.whiteColor,
+                                    ),
+                                    child: const Text("Next"),
+                                  )
+                                : ElevatedButton(
+                                    onPressed: () {
+                                      // save answer of last question
+                                      viewModel.doIntent(
+                                        NextQuestionIntent([
+                                          AnswerModel(
+                                            questionId: viewModel
+                                                .question[viewModel
+                                                    .currentQuestionIndex]
+                                                .id
+                                                .toString(),
+                                            correct: viewModel
+                                                .question[viewModel
+                                                    .currentQuestionIndex]
+                                                .selectedAnswer
+                                                .toString(),
+                                          ),
+                                        ]),
+                                      );
+                                      Navigator.pushNamed(
+                                        context,
+                                        PagesRoutes.scoreScreen,
+                                        arguments: viewModel,
+                                      );
+                                    },
+                                    style: ElevatedButton.styleFrom(
+                                      shape: RoundedRectangleBorder(
+                                        borderRadius:
+                                            BorderRadius.circular(17.r),
+                                      ),
+                                      backgroundColor:
+                                          ColorsManager.primaryColor,
+                                      foregroundColor: ColorsManager.whiteColor,
+                                    ),
+                                    child: const Text("Submit"),
                                   ),
-                                  backgroundColor: ColorsManager.primaryColor,
-                                  foregroundColor: ColorsManager.whiteColor),
-                              onPressed: () async {
-                                        viewModel.doIntent(
-                                          NextQuestionIntent([
-                                            AnswerModel(
-                                              questionId: viewModel
-                                                  .question[viewModel
-                                                      .currentQuestionIndex]
-                                                  .id
-                                                  .toString(),
-                                              correct: viewModel
-                                                  .question[viewModel
-                                                      .currentQuestionIndex]
-                                                  .selectedAnswer
-                                                  .toString(),
-                                            ),
-                                          ]),
-                                        );
-
-                              },
-                              child: viewModel.currentQuestionIndex <
-                                      viewModel.question.length - 1
-                                  ? const Text('Next')
-                                  : InkWell(
-                                  onTap: () {
-                                    Navigator.pushNamed(
-                                                context, PagesRoutes.scoreScreen,
-                                                arguments: viewModel);
-                                  },
-                                  child: const Text('Submit')),
-                            ),
                           ),
                         ],
                       ),

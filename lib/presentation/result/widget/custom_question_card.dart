@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
 
 class CustomQuestionCard extends StatelessWidget {
@@ -32,136 +33,76 @@ class CustomQuestionCard extends StatelessWidget {
               // Displaying all answers
               Column(
                 children: question.answers?.map((answer) {
-                      bool isSelected =
-                          question.selectedAnswer == answer.answer;
-                      bool isCorrectAnswer = question.correct == answer.answer;
+                      final answerKey = answer.key?.trim() ?? '';
+                      final answerText = answer.answer?.trim() ?? '';
+                      final selectedAnswer = question.selectedAnswer?.trim();
+                      final correctAnswer = question.correct?.trim() ?? '';
+
+                      final isSelected = selectedAnswer == answerKey;
+                      final isCorrectAnswer = correctAnswer == answerKey;
+                      final isWrongSelected = isSelected && !isCorrectAnswer;
+                      final isUnanswered = selectedAnswer == null ||
+                          selectedAnswer.isEmpty ||
+                          selectedAnswer.trim().isEmpty ||
+                          selectedAnswer == "null";
+
+                      print('== Debug ==');
+                      print('Question: ${question.question}');
+                      print('Key: $answerKey');
+                      print('Answer Text: $answerText');
+                      print('Selected Answer: $selectedAnswer');
+                      print(
+                          'Selected Answer (Raw): "${question.selectedAnswer}"');
+                      print('Correct Answer: $correctAnswer');
+                      print('isSelected: $isSelected');
+                      print('isCorrectAnswer: $isCorrectAnswer');
+                      print('isWrongSelected: $isWrongSelected');
+                      print('isUnanswered: $isUnanswered');
+                      print('===========');
 
                       return Container(
-                        width: double.infinity,
-                        margin: const EdgeInsets.symmetric(vertical: 5),
-                        padding: const EdgeInsets.symmetric(
-                            vertical: 12, horizontal: 16),
-                        decoration: BoxDecoration(
-                          color: isCorrectAnswer
-                              ? Colors.green.withOpacity(
-                                  0.3) // Correct answer background color
-                              : isSelected
-                                  ? Colors.red.withOpacity(
-                                      0.3) // Highlight wrong answer in red
-                                  : Colors.transparent,
-                          // Default color for unselected answers
-                          borderRadius: BorderRadius.circular(8),
-                          border: Border.all(
-                            color: isCorrectAnswer
-                                ? Colors
-                                    .green // Green border for correct answer
-                                : isSelected
-                                    ? Colors
-                                        .red // Red border for selected but incorrect answer
-                                    : Colors.grey, // Default grey border
-                            width: 2,
-                          ),
-                        ),
-                        child: Text(
-                          answer.answer ?? "No Answer",
-                          style: TextStyle(
-                            color: isCorrectAnswer
-                                ? Colors
-                                    .green[900] // Green text for correct answer
-                                : isSelected
-                                    ? Colors.red[
-                                        900] // Red text for incorrect answer
-                                    : Colors.black, // Default text color
-                            fontSize: 16,
-                            fontWeight: FontWeight.w500,
-                          ),
-                        ),
-                      );
-                    }).toList() ??
-                    [],
+                    width: double.infinity,
+                    margin: const EdgeInsets.symmetric(vertical: 5),
+                    padding: const EdgeInsets.symmetric(
+                        vertical: 12, horizontal: 16),
+                    decoration: BoxDecoration(
+                      color: (selectedAnswer == null ||
+                          selectedAnswer.isEmpty || selectedAnswer == "null")
+                          ? ColorsManager.greyColor.withOpacity(0.2)
+                          : (isCorrectAnswer
+                          ? ColorsManager.greenColor.withOpacity(0.3)
+                          : isWrongSelected
+                          ? ColorsManager.redColor.withOpacity(0.3)
+                          : Colors.transparent),
+                      borderRadius: BorderRadius.circular(8),
+                      border: Border.all(
+                        color: isCorrectAnswer
+                            ? Colors.green
+                            : isWrongSelected
+                            ? Colors.red
+                            : Colors.grey,
+                        width: 2,
+                      ),
+                    ),
+                    child: Text(
+                      answerText,
+                      style: TextStyle(
+                        color: isCorrectAnswer
+                            ? Colors.green[900]
+                            : isWrongSelected
+                            ? Colors.red[900]
+                            : isUnanswered
+                            ? Colors.grey[600]
+                            : Colors.black,
+                        fontSize: 16,
+                        fontWeight: FontWeight.w500,
+                      ),
+                    ),
+                  );
+                }).toList() ?? [],
               ),
             ],
           ),
         ));
   }
 }
-
-// class CustomQuestionCard extends StatelessWidget {
-//   final Questions question;
-//
-//   final String? selectedAnswer;
-//   final String? correctAnswer;
-//
-//   const CustomQuestionCard({
-//     super.key,
-//     required this.question,
-//     required this.selectedAnswer,
-//     required this.correctAnswer,
-//   });
-//
-//   @override
-//   @override
-//   Widget build(BuildContext context) {
-//     return Card(
-//       margin: const EdgeInsets.all(10),
-//       color: Colors.pink[50],
-//       child: Padding(
-//         padding: const EdgeInsets.all(10),
-//         child: Column(
-//           crossAxisAlignment: CrossAxisAlignment.start,
-//           children: [
-//             Text(
-//               question.question ?? "",
-//               style: TextStyle(
-//                 color: Colors.black,
-//                 fontSize: 16.sp,
-//                 fontWeight: FontWeight.bold,
-//               ),
-//             ),
-//             const SizedBox(height: 10),
-//             Column(
-//               children: question.answers!.map((answer) {
-//                 final isCorrect = answer.key == correctAnswer;
-//                 final isSelected = answer.key == selectedAnswer;
-//
-//                 Color tileColor;
-//                 Icon? leadingIcon;
-//
-//                 if (isCorrect && isSelected) {
-//                   // Correct answer selected
-//                   tileColor = Colors.green.shade100;
-//                   leadingIcon = const Icon(Icons.check_circle, color: Colors.green);
-//                 } else if (isSelected && !isCorrect) {
-//                   // Incorrect answer selected
-//                   tileColor = Colors.red.shade100;
-//                   leadingIcon = const Icon(Icons.cancel, color: Colors.red);
-//                 } else if (isCorrect) {
-//                   // Correct answer not selected
-//                   tileColor = Colors.green.shade100;
-//                   leadingIcon = const Icon(Icons.check_circle_outline, color: Colors.green);
-//                 } else {
-//                   // Not selected and not correct
-//                   tileColor = Colors.white;
-//                   leadingIcon = const Icon(Icons.circle_outlined, color: Colors.grey);
-//                 }
-//
-//                 return Container(
-//                   margin: const EdgeInsets.symmetric(vertical: 5),
-//                   decoration: BoxDecoration(
-//                     color: tileColor,
-//                     borderRadius: BorderRadius.circular(8),
-//                     border: Border.all(color: Colors.grey),
-//                   ),
-//                   child: ListTile(
-//                     leading: leadingIcon,
-//                     title: Text(answer.answer ?? ""),
-//                   ),
-//                 );
-//               }).toList(),
-//             ),
-//           ],
-//         ),
-//       ),
-//     );
-//   }
-// }

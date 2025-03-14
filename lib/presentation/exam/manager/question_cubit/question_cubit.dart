@@ -31,32 +31,28 @@ class QuestionViewModel extends Cubit<QuestionState> {
     }
   }
 
-  // void _addQuestionAnswer(List<AnswerModel> answers) async {
-  //   final box = Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestion);
-  //   final answerData = CachedAnswerData(answers: answers);
-  //   await box.put(AppConstants.hiveBoxAnswerKey, answerData);
-  // }
   void _addQuestionAnswer(AnswerModel newAnswer) async {
     final box = Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestionAnswer);
 
     // Retrieve existing answers
     CachedAnswerData? cachedData = box.get(AppConstants.hiveBoxAnswerKey);
-    List<AnswerModel> updatedAnswers = cachedData?.answers ?? [];
+    List<AnswerModel> updatedAnswers =
+        List.from(cachedData?.answers ?? []); // Ensure we have a list
 
-    // Check if an answer for the same question already exists
+    // Check if the answer for this question already exists
     int existingIndex =
         updatedAnswers.indexWhere((a) => a.questionId == newAnswer.questionId);
-
     if (existingIndex != -1) {
-      // Update the existing answer
-      updatedAnswers[existingIndex] = newAnswer;
+      updatedAnswers[existingIndex] = newAnswer; // Update existing answer
     } else {
       updatedAnswers.add(newAnswer);
     }
+
+    // Save the updated list back to Hive
     await box.put(AppConstants.hiveBoxAnswerKey,
         CachedAnswerData(answers: updatedAnswers));
     print(
-        '✅ Updated Answer List: ${updatedAnswers.map((e) => e.toJson()).toList()}');
+        "✅ Stored Answers: ${updatedAnswers.map((e) => e.toJson()).toList()}"); // Debugging output
   }
 
   Future<void> _fetchQuestion(String examId) async {
@@ -75,25 +71,39 @@ class QuestionViewModel extends Cubit<QuestionState> {
           emit(ErrorQuestionState(data.message));
         }
       case Error():
-        log("Error occurred: ${result}");
+        log("Error occurred: $result");
         emit(ErrorQuestionState(result.exception));
     }
   }
 
+  // void _nextQuestion(List<AnswerModel> answerModel) {
+  //   if (currentQuestionIndex < question.length - 1) {
+  //     // Ensure the answer model is created properly
+  //     var newAnswer = AnswerModel(
+  //       questionId: question[currentQuestionIndex].id.toString(),
+  //       correct: question[currentQuestionIndex].selectedAnswer.toString(),
+  //     );
+  //
+  //     // Use `_addQuestionAnswer()` to store the answer in Hive
+  //     _addQuestionAnswer(newAnswer);
+  //
+  //     // Move to the next question
+  //     currentQuestionIndex++;
+  //     emit(NextQuestionState(currentQuestionIndex));
+  //   }
+  // }
   void _nextQuestion(List<AnswerModel> answerModel) {
+    var newAnswer = AnswerModel(
+      questionId: question[currentQuestionIndex].id.toString(),
+      correct: question[currentQuestionIndex].selectedAnswer.toString(),
+    );
+    _addQuestionAnswer(newAnswer);
+
     if (currentQuestionIndex < question.length - 1) {
-      // Ensure the answer model is created properly
-      var newAnswer = AnswerModel(
-        questionId: question[currentQuestionIndex].id.toString(),
-        correct: question[currentQuestionIndex].selectedAnswer.toString(),
-      );
-
-      // Use `_addQuestionAnswer()` to store the answer in Hive
-      _addQuestionAnswer(newAnswer);
-
-      // Move to the next question
       currentQuestionIndex++;
       emit(NextQuestionState(currentQuestionIndex));
+    } else {
+      emit(LastQuestionState(currentQuestionIndex)); // Now it works!
     }
   }
 

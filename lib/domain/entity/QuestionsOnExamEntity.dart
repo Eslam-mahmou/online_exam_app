@@ -2,6 +2,7 @@ import 'dart:core';
 
 import 'package:equatable/equatable.dart';
 import 'package:hive/hive.dart';
+
 part 'QuestionsOnExamEntity.g.dart';
 class QuestionsOnExamEntity {
   QuestionsOnExamEntity({
@@ -39,6 +40,30 @@ class Questions extends HiveObject with EquatableMixin {
   Exam? exam;
   String? createdAt;
   String? selectedAnswer;
+
+  Questions copyWith({
+    List<Answers>? answers,
+    String? type,
+    String? id,
+    String? question,
+    String? correct,
+    Subject? subject,
+    Exam? exam,
+    String? createdAt,
+    String? selectedAnswer,
+  }) {
+    return Questions(
+      answers: answers ?? this.answers,
+      type: type ?? this.type,
+      id: id ?? this.id,
+      question: question ?? this.question,
+      correct: correct ?? this.correct,
+      subject: subject ?? this.subject,
+      exam: exam ?? this.exam,
+      createdAt: createdAt ?? this.createdAt,
+      selectedAnswer: selectedAnswer ?? this.selectedAnswer,
+    );
+  }
 
   @override
   // TODO: implement props

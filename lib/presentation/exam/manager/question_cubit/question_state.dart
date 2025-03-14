@@ -26,6 +26,12 @@ class PreviousQuestionState extends QuestionState {
   PreviousQuestionState(this.currentIndex);
 }
 
+class LastQuestionState extends QuestionState {
+  final int currentIndex;
+
+  LastQuestionState(this.currentIndex);
+}
+
 class QuestionTimerUpdated extends QuestionState {
   final int remainingSeconds;
   QuestionTimerUpdated(this.remainingSeconds);
