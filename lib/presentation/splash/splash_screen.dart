@@ -6,7 +6,6 @@ import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'package:online_exam_app/core/services/shared_preference_services.dart';
 import 'package:online_exam_app/core/utils/constant_manager.dart';
-import 'package:online_exam_app/presentation/auth/manager/login_cubit/login_view_model.dart';
 
 class SplashScreen extends StatefulWidget {
   const SplashScreen({super.key});

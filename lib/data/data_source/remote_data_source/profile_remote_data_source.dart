@@ -79,24 +79,4 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       },
     );
   }
-
-// Future<Response> changePassword(
-//     String oldPassword, String newPassword, String rePassword) async {
-//   String? token = SharedPreferenceServices.getToken(AppConstants.token.toString()).toString();
-//   if (token == null || token.isEmpty) {
-//     log("Token is missing or invalid");
-//   }
-//   return await _apiManager.patchData(
-//     EndPoints.changePasswordDomain,
-//     body: {
-//       "oldPassword": oldPassword,
-//       "password": newPassword,
-//       "rePassword": rePassword,
-//     },
-//     headers: {
-//       "token": token,
-//       "Content-Type": "application/json",
-//     },
-//   );
-// }
 }

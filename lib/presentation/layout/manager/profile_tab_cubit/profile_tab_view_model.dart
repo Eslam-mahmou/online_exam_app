@@ -50,8 +50,6 @@ class ProfileTabViewModel extends Cubit<ProfileTabState> {
         emit(ProfileTabError("User data is missing"));
         return;
       }
-
-      // Create updated entity
       final updatedProfile = await _profileUseCase.executeProfile(
         ProfileUserEntity(
           user: UserDataEntity(
@@ -64,8 +62,6 @@ class ProfileTabViewModel extends Cubit<ProfileTabState> {
           ),
         ),
       );
-
-      // Handle success case
       if (updatedProfile is Success<ProfileUserEntity>) {
         var updatedData = updatedProfile.data;
         if (updatedData != null) {

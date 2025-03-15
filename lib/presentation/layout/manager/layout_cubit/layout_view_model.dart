@@ -3,8 +3,8 @@ import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app/presentation/layout/manager/layout_cubit/layout_state.dart';
 import 'package:online_exam_app/presentation/layout/pages/explorePage/explore_page_view.dart';
 
-import '../../../result/result_screen.dart';
 import '../../pages/profilePage/profile_tab.dart';
+import '../../pages/result/result_screen.dart';
 
 class LayoutViewModel extends Cubit<LayoutState> {
   LayoutViewModel() : super(InitialLayoutState());

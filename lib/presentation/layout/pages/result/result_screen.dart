@@ -2,10 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/di/injectable_initializer.dart';
-import 'package:online_exam_app/presentation/result/manager/result_state.dart';
-import 'package:online_exam_app/presentation/result/widget/custom_question_card.dart';
+import 'package:online_exam_app/presentation/layout/widget/custom_question_card.dart';
 
-import 'manager/result_cubit.dart';
+import '../../manager/result_cubit/result_cubit.dart';
+import '../../manager/result_cubit/result_state.dart';
 
 class ResultScreen extends StatelessWidget {
   const ResultScreen({super.key});
@@ -17,6 +17,7 @@ class ResultScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Results"),
+          backgroundColor: ColorsManager.whiteColor,
           shadowColor: ColorsManager.whiteColor,
           leading: IconButton(
             icon: const Icon(Icons.arrow_back_ios),

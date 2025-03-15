@@ -38,7 +38,6 @@ class ProfileRepositoryImpl implements ProfileRepository{
 
       if (response.statusCode == 200 && response.data["message"] == "success") {
         final userResponse = ProfileUserModel.fromJson(response.data);
-        // return Success(userResponse as ProfileUserEntity?);
         return Success(userResponse);
       } else {
         return Error(response.data["message"]);

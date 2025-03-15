@@ -1,4 +1,3 @@
-
 class GetSubjectDetails {
   GetSubjectDetails({
     this.message,
@@ -21,14 +20,6 @@ class GetSubjectDetails {
   String? message;
   Metadata? metadata;
   List<Exams>? exams;
-
-// GetSubjectDetails copyWith({  String? message,
-//   Metadata? metadata,
-//   List<Exams>? exams,
-// }) => GetSubjectDetails(  message: message ?? this.message,
-//   metadata: metadata ?? this.metadata,
-//   exams: exams ?? this.exams,
-// );
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['message'] = message;
@@ -41,14 +32,6 @@ class GetSubjectDetails {
     return map;
   }
 }
-
-/// _id : "670070a830a3c3c1944a9c63"
-/// title : "HTML Quiz"
-/// duration : 25
-/// subject : "670037f6728c92b7fdf434fc"
-/// numberOfQuestions : 40
-/// active : true
-/// createdAt : "2024-10-04T22:48:08.842Z"
 
 class Exams {
   Exams({
@@ -79,22 +62,6 @@ class Exams {
   bool? active;
   String? createdAt;
 
-// Exams copyWith({  String? id,
-//   String? title,
-//   int? duration,
-//   String? subject,
-//   int? numberOfQuestions,
-//   bool? active,
-//   String? createdAt,
-// }) => Exams(  id: id ?? this.id,
-//   title: title ?? this.title,
-//   duration: duration ?? this.duration,
-//   subject: subject ?? this.subject,
-//   numberOfQuestions: numberOfQuestions ?? this.numberOfQuestions,
-//   active: active ?? this.active,
-//   createdAt: createdAt ?? this.createdAt,
-// );
-
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};
     map['_id'] = id;
@@ -107,10 +74,6 @@ class Exams {
     return map;
   }
 }
-
-/// currentPage : 1
-/// numberOfPages : 1
-/// limit : 40
 
 class Metadata {
   Metadata({
@@ -128,14 +91,6 @@ class Metadata {
   int? currentPage;
   int? numberOfPages;
   int? limit;
-
-// Metadata copyWith({  int? currentPage,
-//   int? numberOfPages,
-//   int? limit,
-// }) => Metadata(  currentPage: currentPage ?? this.currentPage,
-//   numberOfPages: numberOfPages ?? this.numberOfPages,
-//   limit: limit ?? this.limit,
-// );
 
   Map<String, dynamic> toJson() {
     final map = <String, dynamic>{};

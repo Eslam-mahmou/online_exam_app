@@ -62,7 +62,7 @@ import '../presentation/layout/manager/explore_cubit/explore_view_model.dart'
     as _i601;
 import '../presentation/layout/manager/profile_tab_cubit/profile_tab_view_model.dart'
     as _i409;
-import '../presentation/result/manager/result_cubit.dart' as _i405;
+import '../presentation/layout/manager/result_cubit/result_cubit.dart' as _i424;
 
 extension GetItInjectableX on _i174.GetIt {
 // initializes the registration of main-scope dependencies inside of GetIt
@@ -110,8 +110,8 @@ extension GetItInjectableX on _i174.GetIt {
         ));
     gh.factory<_i601.ExploreViewModel>(
         () => _i601.ExploreViewModel(gh<_i946.SubjectUseCase>()));
-    gh.factory<_i405.ResultViewModel>(
-        () => _i405.ResultViewModel(gh<_i686.ResultUseCase>()));
+    gh.factory<_i424.ResultViewModel>(
+        () => _i424.ResultViewModel(gh<_i686.ResultUseCase>()));
     gh.factory<_i358.AuthUseCase>(
         () => _i358.AuthUseCase(gh<_i306.AuthRepository>()));
     gh.factory<_i880.CheckAnswerUseCase>(

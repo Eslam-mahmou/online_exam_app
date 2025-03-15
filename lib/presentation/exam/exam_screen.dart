@@ -17,10 +17,9 @@ class ExamScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     ExamViewModel viewModel = getIt.get<ExamViewModel>();
-  var   arg =ModalRoute.of(context)!.settings.arguments as SubjectsEntity ;
+    var arg = ModalRoute.of(context)!.settings.arguments as SubjectsEntity;
     return BlocProvider(
-      create: (context) =>
-          viewModel,
+      create: (context) => viewModel,
       child: Scaffold(
         backgroundColor: ColorsManager.whiteColor,
         appBar: AppBar(
@@ -79,26 +78,24 @@ class ExamScreen extends StatelessWidget {
                       ),
                       SizedBox(height: 10.h),
                       ...List.generate(
-                          viewModel.exams.length, (index) => CustomExamCard(
-                        exam: viewModel.exams[index],
-
-                      )),
+                          viewModel.exams.length,
+                          (index) => CustomExamCard(
+                                exam: viewModel.exams[index],
+                              )),
                       SizedBox(height: 20.h),
                     ],
                   ],
                 ),
               );
-
-            }
-            else if (viewModel.exams.isEmpty){
-             return Center(
-               child: Text(
+            } else if (viewModel.exams.isEmpty) {
+              return Center(
+                child: Text(
                   "No exams found for this subject",
-                  style: getTextStyle(FontSize.s18, FontWeightManager.medium, ColorsManager.blackColor),
-               ),
-             );
-    }else
-    {
+                  style: getTextStyle(FontSize.s18, FontWeightManager.medium,
+                      ColorsManager.blackColor),
+                ),
+              );
+            } else {
               return const Text("Something went wrong");
             }
           },

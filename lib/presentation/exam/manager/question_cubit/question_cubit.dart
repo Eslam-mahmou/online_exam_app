@@ -75,22 +75,6 @@ class QuestionViewModel extends Cubit<QuestionState> {
     }
   }
 
-  // void _nextQuestion(List<AnswerModel> answerModel) {
-  //   if (currentQuestionIndex < question.length - 1) {
-  //     // Ensure the answer model is created properly
-  //     var newAnswer = AnswerModel(
-  //       questionId: question[currentQuestionIndex].id.toString(),
-  //       correct: question[currentQuestionIndex].selectedAnswer.toString(),
-  //     );
-  //
-  //     // Use `_addQuestionAnswer()` to store the answer in Hive
-  //     _addQuestionAnswer(newAnswer);
-  //
-  //     // Move to the next question
-  //     currentQuestionIndex++;
-  //     emit(NextQuestionState(currentQuestionIndex));
-  //   }
-  // }
   void _nextQuestion(List<AnswerModel> answerModel) {
     var newAnswer = AnswerModel(
       questionId: question[currentQuestionIndex].id.toString(),

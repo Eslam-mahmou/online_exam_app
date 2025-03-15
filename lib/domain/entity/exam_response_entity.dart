@@ -7,7 +7,6 @@ class ExamResponseEntity {
 
   String? message;
   List<ExamsEntity>? exams;
-
 }
 
 class ExamsEntity extends Equatable{
@@ -31,7 +30,4 @@ class ExamsEntity extends Equatable{
     id,
     title
   ];
-
-
-
 }

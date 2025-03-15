@@ -20,26 +20,6 @@ class ExploreViewModel extends Cubit<ExploreState> {
         _fetchSubject();
     }
   }
-
-  // Future<void> _fetchSubject() async {
-  //   emit(ExploreLoading());
-  //   var result = await _subjectUseCase.executeSubject();
-  //
-  //   switch (result) {
-  //     case Success():
-  //       var data = result.data;
-  //       if (data?.message == "success") {
-  //         log("Fetched subject: ${data?.subjects}");
-  //         subject = data;
-  //         emit(ExploreSuccess(subject));
-  //       } else {
-  //         emit(ExploreError(data?.message ?? "Unknown error"));
-  //       }
-  //     case Error():
-  //       emit(ExploreError(result.exception?.toString() ?? "API Error"));
-  //   }
-  // }
-
   Future<void> _fetchSubject() async {
     emit(ExploreLoading());
     var result = await _subjectUseCase.executeSubject();
@@ -50,7 +30,7 @@ class ExploreViewModel extends Cubit<ExploreState> {
         if (data != null && data.subjects!.isNotEmpty) {
           log("Fetched subjects: ${data.subjects}");
           subject = data;
-          emit(ExploreSuccess(subject!)); // Ensure it's not null
+          emit(ExploreSuccess(subject!));
         } else {
           emit(ExploreError("No subjects found."));
         }

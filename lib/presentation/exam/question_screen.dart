@@ -10,7 +10,6 @@ import 'package:online_exam_app/core/utils/constant_manager.dart';
 import 'package:online_exam_app/core/widget/custom_diaolg.dart';
 import 'package:online_exam_app/di/injectable_initializer.dart';
 import 'package:online_exam_app/domain/entity/cache_answer_model.dart';
-import 'package:online_exam_app/domain/entity/exam_response_entity.dart';
 import 'package:online_exam_app/presentation/exam/widget/custom_question_view.dart';
 
 import 'manager/question_cubit/question_cubit.dart';
@@ -84,7 +83,6 @@ class QuestionScreen extends StatelessWidget {
                                     shape: RoundedRectangleBorder(
                                       borderRadius: BorderRadius.circular(17.r),
                                     ),
-                                    // backgroundColor: ColorsManager.primaryColor,
                                     side: const BorderSide(
                                         color: ColorsManager.primaryColor,
                                         width: 1),

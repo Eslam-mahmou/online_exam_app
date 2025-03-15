@@ -21,20 +21,16 @@ void main() async {
   await Hive.initFlutter();
   configureDependencies();
 
-  // Register Hive adapters
   Hive.registerAdapter(AnswerModelAdapter());
   Hive.registerAdapter(CachedAnswerDataAdapter());
   Hive.registerAdapter(QuestionsAdapter());
   Hive.registerAdapter(AnswersAdapter());
 
-  // Close the box if it’s already open as the wrong type
   if (Hive.isBoxOpen(AppConstants.hiveBoxQuestion)) {
     await Hive.box(AppConstants.hiveBoxQuestion).close();
   }
 
-  // ✅ Open as Box<Questions> NOT Box<List<Questions>>
   await Hive.openBox<Questions>(AppConstants.hiveBoxQuestion);
-
   await Hive.openBox<CachedAnswerData>(AppConstants.hiveBoxQuestionAnswer);
   await SharedPreferenceServices.init();
 

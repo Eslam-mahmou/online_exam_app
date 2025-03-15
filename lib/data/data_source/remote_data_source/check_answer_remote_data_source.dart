@@ -20,13 +20,6 @@ class CheckAnswerRemoteDataSourceImpl implements CheckAnswerRemoteDataSource {
   final ApiManager _apiManager;
 
   @override
-  // Future<Response> checkAnswer() async {
-  //   return await _apiManager.postData(EndPoints.checkAnswer, headers: {
-  //     "token": SharedPreferenceServices.getToken(AppConstants.token).toString()
-  //   }, body: {
-  //     "answers": CachedAnswerData().toJson(),
-  //   });
-  // }
   Future<Response> checkAnswer() async {
     final box = Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestionAnswer);
     CachedAnswerData? cachedData = box.get(AppConstants.hiveBoxAnswerKey);

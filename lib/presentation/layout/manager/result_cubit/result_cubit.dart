@@ -1,33 +1,13 @@
-// import 'package:bloc/bloc.dart';
-// import 'package:injectable/injectable.dart';
-// import 'package:online_exam_app/domain/use_case/result_use_case.dart';
-// import 'package:online_exam_app/presentation/result/manager/result_state.dart';
-//
-// @injectable
-// class ResultViewModel extends Cubit<ResultState> {
-//   final ResultUseCase _resultUseCase;
-//
-//   ResultViewModel(this._resultUseCase) : super(LoadingResultState());
-//
-//   Future<void> fetchResult() async {
-//     emit(LoadingResultState());
-//     try {
-//       final result = await _resultUseCase.getResult();
-//       emit(SuccessResultState(result));
-//     } catch (e) {
-//       emit(ErrorResultState(e.toString()));
-//     }
-//   }
-// }
+import 'package:flutter/cupertino.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:hive/hive.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/domain/use_case/result_use_case.dart';
-import 'package:online_exam_app/presentation/result/manager/result_state.dart';
+import 'package:online_exam_app/presentation/layout/manager/result_cubit/result_state.dart';
 
-import '../../../core/utils/constant_manager.dart';
-import '../../../domain/entity/QuestionsOnExamEntity.dart';
-import '../../../domain/entity/cache_answer_model.dart';
+import '../../../../core/utils/constant_manager.dart';
+import '../../../../domain/entity/QuestionsOnExamEntity.dart';
+import '../../../../domain/entity/cache_answer_model.dart';
 
 @injectable
 class ResultViewModel extends Cubit<ResultState> {
@@ -37,13 +17,12 @@ class ResultViewModel extends Cubit<ResultState> {
   Future<void> fetchResult() async {
     emit(LoadingResultState());
     try {
-      // Fetch results from use case
       final List<Questions> result = await _resultUseCase.getResult();
 
-      // Retrieve stored answers from Hive
       final box =
           Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestionAnswer);
       CachedAnswerData? cachedData = box.get(AppConstants.hiveBoxAnswerKey);
+      debugPrint("cachedData");
       cachedData?.answers?.forEach((a) {
       });
       List<AnswerModel> updatedAnswers = cachedData?.answers ?? [];

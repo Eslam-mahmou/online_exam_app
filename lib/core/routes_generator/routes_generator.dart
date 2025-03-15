@@ -15,7 +15,7 @@ import 'package:online_exam_app/presentation/splash/splash_screen.dart';
 
 import '../../presentation/exam/question_screen.dart';
 import '../../presentation/layout/pages/profilePage/change_password.dart';
-import '../../presentation/result/result_screen.dart';
+import '../../presentation/layout/pages/result/result_screen.dart';
 
 class RoutesGenerator {
   static Route<dynamic> onGenerateRoute(RouteSettings settings) {

@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
-import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomQuestionCard extends StatelessWidget {
   final Questions question;
@@ -22,7 +22,6 @@ class CustomQuestionCard extends StatelessWidget {
           child: Column(
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
-              // Question Text
               Text(
                 question.question ?? "No question text",
                 style: const TextStyle(

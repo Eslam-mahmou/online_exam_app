@@ -1,5 +1,4 @@
-
-import '../../../domain/entity/QuestionsOnExamEntity.dart';
+import '../../../../domain/entity/QuestionsOnExamEntity.dart';
 
 sealed class ResultState {}
 

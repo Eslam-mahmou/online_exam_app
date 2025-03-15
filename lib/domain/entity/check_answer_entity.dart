@@ -12,7 +12,6 @@ class CheckAnswerEntity {
   String? total;
   List<WrongQuestionsEntity>? wrongQuestions;
   List<CorrectQuestionsEntity>? correctQuestions;
-
 }
 
 class CorrectQuestionsEntity {
@@ -25,8 +24,6 @@ class CorrectQuestionsEntity {
   String? question;
   String? correctAnswer;
   dynamic answers;
-
-
 }
 
 class WrongQuestionsEntity {
@@ -41,6 +38,4 @@ class WrongQuestionsEntity {
   String? inCorrectAnswer;
   String? correctAnswer;
   dynamic answers;
-
-
 }

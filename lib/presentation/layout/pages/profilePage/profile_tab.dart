@@ -86,7 +86,9 @@ class ProfileTab extends StatelessWidget {
                             Navigator.pushNamed(
                                 context, PagesRoutes.loginScreen);
                           },
-                          icon: const Icon(Icons.logout))
+                        icon: const Icon(Icons.logout),
+                        color: ColorsManager.redColor,
+                      )
                     ],
                   ),
                 ),

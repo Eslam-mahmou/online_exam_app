@@ -30,7 +30,7 @@ class LoginViewModel extends Cubit<LoginState> {
       case Success():
         var data = result.data;
         if (data != null && data.token != null) {
-          emit(SuccessLoginState(data)); // Login successful
+          emit(SuccessLoginState(data));
           log("Login Success: ${data.token}");
         } else {
           emit(ErrorLoginState(data?.message ?? "Login failed"));

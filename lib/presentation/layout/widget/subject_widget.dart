@@ -39,7 +39,7 @@ class SubjectWidget extends StatelessWidget {
                         height: 50,
                       )),
                   SizedBox(width: 8.w),
-                  Text(subject.name.toString(), // Use subject.name directly
+                  Text(subject.name.toString(),
                       style: getTextStyle(FontSize.s16,
                           FontWeightManager.regular, ColorsManager.blackColor)),
                 ],

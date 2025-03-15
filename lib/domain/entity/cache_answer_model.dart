@@ -3,7 +3,7 @@ import 'package:hive/hive.dart';
 part 'cache_answer_model.g.dart';
 
 
-@HiveType(typeId: 0) // Ensure each model has a unique typeId
+@HiveType(typeId: 0)
 class AnswerModel extends HiveObject {
   @HiveField(0)
   String? questionId;
