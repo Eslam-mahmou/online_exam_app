@@ -51,30 +51,3 @@ class SubjectWidget extends StatelessWidget {
     );
   }
 }
-
-// class SubjectWidget extends StatelessWidget {
-//    SubjectWidget({super.key,required this.subjectEntity});
-//   AllSubjectEntity subjectEntity;
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return  SizedBox(
-//       height: 90.h,
-//       child: GestureDetector(
-//         onTap: (){},
-//         child: Card(
-//           shadowColor: ColorsManager.blackColor,
-//           elevation: 3,
-//           child: Row(
-//             children: [
-//               SizedBox(width: 14.w,),
-//               Image.asset(IconAssets.homeIcon,scale: 1,),
-//               SizedBox(width: 8.w,),
-//                Text(subjectEntity.subjects.name.toString(),style: getTextStyle(FontSize.s16, FontWeightManager.regular, ColorsManager.blackColor),),
-//             ],
-//           ),
-//         ),
-//       ),
-//     );
-//   }
-// }

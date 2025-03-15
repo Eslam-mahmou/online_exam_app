@@ -6,6 +6,8 @@ import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
+import 'package:online_exam_app/core/services/shared_preference_services.dart';
+import 'package:online_exam_app/core/utils/constant_manager.dart';
 import 'package:online_exam_app/core/widget/custom_diaolg.dart';
 import 'package:online_exam_app/core/widget/custom_elevated_button.dart';
 import 'package:online_exam_app/core/widget/custom_text_from_field.dart';
@@ -67,10 +69,25 @@ class ProfileTab extends StatelessWidget {
                 SizedBox(height: 45.h),
                 Padding(
                   padding: EdgeInsets.symmetric(horizontal: 16.w),
-                  child: Text(
-                    "Profile",
-                    style: getTextStyle(FontSize.s20, FontWeightManager.medium,
-                        ColorsManager.blackColor),
+                  child: Row(
+                    mainAxisAlignment: MainAxisAlignment.spaceBetween,
+                    children: [
+                      Text(
+                        "Profile",
+                        style: getTextStyle(FontSize.s20,
+                            FontWeightManager.medium, ColorsManager.blackColor),
+                      ),
+                      IconButton(
+                          onPressed: () {
+                            SharedPreferenceServices.deleteData(
+                                AppConstants.token);
+                            SharedPreferenceServices.deleteData(
+                                AppConstants.isRemember);
+                            Navigator.pushNamed(
+                                context, PagesRoutes.loginScreen);
+                          },
+                          icon: const Icon(Icons.logout))
+                    ],
                   ),
                 ),
                 SizedBox(height: 16.h),
@@ -157,140 +174,3 @@ class ProfileTab extends StatelessWidget {
     );
   }
 }
-
-/// Work one with stateful widget
-// class ProfileTab extends StatefulWidget {
-//   const ProfileTab({super.key});
-//
-//   @override
-//   State<ProfileTab> createState() => _ProfileTabState();
-// }
-// class _ProfileTabState extends State<ProfileTab> {
-//   final TextEditingController usernameController = TextEditingController();
-//   final TextEditingController firstNameController = TextEditingController();
-//   final TextEditingController lastNameController = TextEditingController();
-//   final TextEditingController emailController = TextEditingController();
-//   final TextEditingController phoneController = TextEditingController();
-//
-//   late ProfileTabViewModel viewModel;
-//
-//   @override
-//   void initState() {
-//     super.initState();
-//     viewModel = getIt.get<ProfileTabViewModel>();
-//     viewModel.doIntent(GetUserInfoIntent());
-//   }
-//
-//   @override
-//   void dispose() {
-//     usernameController.dispose();
-//     firstNameController.dispose();
-//     lastNameController.dispose();
-//     emailController.dispose();
-//     phoneController.dispose();
-//     super.dispose();
-//   }
-//
-//   @override
-//   Widget build(BuildContext context) {
-//     return BlocConsumer<ProfileTabViewModel, ProfileTabState>(
-//       bloc: viewModel,
-//       listener: (context, state) {
-//         if (state is ProfileTabLoading) {
-//           EasyLoading.show();
-//         } else if (state is ProfileTabSuccess) {
-//           final user = state.user?.user;
-//           if (user != null) {
-//             usernameController.text = user.username ?? "";
-//             firstNameController.text = user.firstName ?? "";
-//             lastNameController.text = user.lastName ?? "";
-//             emailController.text = user.email ?? "";
-//             phoneController.text = user.phone ?? "";
-//           }
-//           EasyLoading.dismiss();
-//         } else if (state is ProfileTabError) {
-//           EasyLoading.dismiss();
-//           DialogUtils.showMessage(
-//             context: context,
-//             message: state.errMessage,
-//             title: "Error",
-//             postActionName: "Ok",
-//             postAction: () {
-//               viewModel.doIntent(GetUserInfoIntent());
-//             },
-//           );
-//         }
-//       },
-//       builder: (context, state) {
-//         if (state is ProfileTabLoading) {
-//           return const Center(child: CircularProgressIndicator());
-//         } else if (state is ProfileTabSuccess) {
-//           return SingleChildScrollView(
-//             padding: const EdgeInsets.all(16.0),
-//             child: Column(
-//               crossAxisAlignment: CrossAxisAlignment.stretch,
-//               children: [
-//                 const Text("Profile", style: TextStyle(fontSize: 20, fontWeight: FontWeight.bold)),
-//                 const SizedBox(height: 16),
-//                 CustomTextFromField(
-//                   controller: usernameController,
-//                   validator: AppValidate.validateUserName,
-//                   labelText: "Username",
-//                 ),
-//                 const SizedBox(height: 16),
-//                 Row(
-//                   children: [
-//                     Expanded(
-//                       child: CustomTextFromField(
-//                         controller: firstNameController,
-//                         validator: AppValidate.validateFullName,
-//                         labelText: "First Name",
-//                       ),
-//                     ),
-//                     const SizedBox(width: 8),
-//                     Expanded(
-//                       child: CustomTextFromField(
-//                         controller: lastNameController,
-//                         validator: AppValidate.validateFullName,
-//                         labelText: "Last Name",
-//                       ),
-//                     ),
-//                   ],
-//                 ),
-//                 const SizedBox(height: 16),
-//                 CustomTextFromField(
-//                   controller: emailController,
-//                   validator: AppValidate.validateEmail,
-//                   labelText: "Email",
-//                 ),
-//                 const SizedBox(height: 16),
-//                 CustomTextFromField(
-//                   controller: phoneController,
-//                   validator: AppValidate.validateMobile,
-//                   labelText: "Phone Number",
-//                 ),
-//                 const SizedBox(height: 16),
-//                 CustomElevatedButton(
-//                   label: "Update",
-//                   onTap: () {
-//                     final updatedUser = UserDataEntity(
-//                       username: usernameController.text.trim(),
-//                       firstName: firstNameController.text.trim(),
-//                       lastName: lastNameController.text.trim(),
-//                       email: emailController.text.trim(),
-//                       phone: phoneController.text.trim(),
-//                     );
-//                     viewModel.doIntent(EditProfileClickedIntent(updatedUser));
-//                   },
-//                 ),
-//               ],
-//             ),
-//           );
-//         } else if (state is ProfileTabError) {
-//           return Center(child: Text("Error: ${state.errMessage}"));
-//         }
-//         return const SizedBox.shrink();
-//       },
-//     );
-//   }
-// }

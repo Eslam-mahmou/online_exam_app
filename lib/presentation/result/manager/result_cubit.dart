@@ -44,10 +44,7 @@ class ResultViewModel extends Cubit<ResultState> {
       final box =
           Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestionAnswer);
       CachedAnswerData? cachedData = box.get(AppConstants.hiveBoxAnswerKey);
-      print("== Cached Data ==");
       cachedData?.answers?.forEach((a) {
-        print(
-            "Questionnnnnnnnnnnnnnnnnnnnnnnnnn ID: ${a.questionId}, Selected: ${a.correct}");
       });
       List<AnswerModel> updatedAnswers = cachedData?.answers ?? [];
 

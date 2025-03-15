@@ -1,7 +1,7 @@
 
 import 'dart:developer';
 
-import 'package:bloc/bloc.dart';
+import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:injectable/injectable.dart';
 import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
 import 'package:online_exam_app/domain/entity/check_answer_entity.dart';
@@ -22,10 +22,7 @@ class ScoreScreenViewModel extends Cubit<ScoreState> {
         _checkAnswer();
     }
   }
-  // Future<CachedAnswerData?> _getCachedAnswers() async {
-  //   final box = Hive.box<CachedAnswerData>(AppConstants.hiveBoxQuestion);
-  //   return box.get(AppConstants.hiveBoxAnswerKey);
-  // }
+
 
   void _checkAnswer() async {
     emit(LoadingScoreState());

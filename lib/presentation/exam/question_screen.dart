@@ -5,6 +5,8 @@ import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
+import 'package:online_exam_app/core/services/shared_preference_services.dart';
+import 'package:online_exam_app/core/utils/constant_manager.dart';
 import 'package:online_exam_app/core/widget/custom_diaolg.dart';
 import 'package:online_exam_app/di/injectable_initializer.dart';
 import 'package:online_exam_app/domain/entity/cache_answer_model.dart';
@@ -20,14 +22,15 @@ class QuestionScreen extends StatelessWidget {
   @override
   Widget build(BuildContext context) {
     QuestionViewModel viewModel = getIt.get<QuestionViewModel>();
-    var arg = ModalRoute.of(context)?.settings.arguments as ExamsEntity;
-
     return BlocProvider(
       create: (context) => viewModel,
       child: Scaffold(
         backgroundColor: ColorsManager.whiteColor,
         body: BlocConsumer<QuestionViewModel, QuestionState>(
-          bloc: viewModel..doIntent(FetchQuestionIntent(arg.id.toString())),
+          bloc: viewModel
+            ..doIntent(FetchQuestionIntent(
+                SharedPreferenceServices.getData(AppConstants.examId)
+                    .toString())),
           listener: (context, state) {
             if (state is ErrorQuestionState) {
               DialogUtils.showMessage(
@@ -67,7 +70,7 @@ class QuestionScreen extends StatelessWidget {
                       questionsLength: viewModel.question.length,
                     ),
                     SizedBox(height: 20.h),
-                   const Spacer(),
+                    const Spacer(),
                     Padding(
                       padding: EdgeInsets.only(bottom: 24.h),
                       child: Row(

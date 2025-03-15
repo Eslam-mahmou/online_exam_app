@@ -26,7 +26,7 @@ class ExplorePageView extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.start,
             children: [
               Text(
-                "Survery",
+                "Survey",
                 style: getTextStyle(FontSize.s20, FontWeightManager.medium,
                     ColorsManager.primaryColor),
               ),
@@ -81,51 +81,24 @@ class ExplorePageView extends StatelessWidget {
                   if (state is ExploreLoading) {
                     return const Center(child: CircularProgressIndicator());
                   } else if (state is ExploreSuccess) {
-                    return SubjectWidget(
-                        subjects: state.subject?.subjects ?? []);
+                    return Column(
+                      children: [
+                        SubjectWidget(
+                            subjects: state.subject?.subjects ?? []),
+                        SizedBox(
+                          height: 50.h,
+                        )
+                      ],
+                    );
                   } else if (state is ExploreError) {
                     return Center(child: Text("Error: ${state.errMessage}"));
                   }
                   return const SizedBox.shrink();
                 },
-              )
-
-            // BlocConsumer<ExploreViewModel,ExploreState>(
-            //     bloc: viewModel..doIntent(GetAllSubjectIntent()),
-            //     listener: (context, state) {
-            //       if (state is ExploreLoading) {
-            //         EasyLoading.show();
-            //       } else if (state is ExploreSuccess) {
-            //
-            //         EasyLoading.dismiss();
-            //       } else if (state is ExploreError) {
-            //         EasyLoading.dismiss();
-            //         DialogUtils.showMessage(
-            //           context: context,
-            //           message: state.errMessage,
-            //           title: "Error",
-            //           postActionName: "Ok",
-            //           negativeActionName: "Cancel",
-            //           postAction: () {
-            //             viewModel.doIntent(GetAllSubjectIntent());
-            //           },
-            //         );
-            //       }
-            //     },
-            //     builder: (context,state) {
-            //       if (state is ExploreLoading){
-            //         return const Center(child: CircularProgressIndicator());
-            //       }else if (state is ExploreSuccess) {
-            //         return SubjectWidget(subjectEntity: viewModel.subject.subjects,);
-            //       } else if (state is ExploreError) {
-            //         return Center(child: Text("Error: ${state.errMessage}"));
-            //       }
-            //       return const SizedBox.shrink();
-            //   }
-            // ),
+              ),
           ],
+                  ),
         ),
-      ),
     ));
   }
 }

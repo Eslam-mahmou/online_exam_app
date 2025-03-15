@@ -1,8 +1,8 @@
 import 'package:injectable/injectable.dart';
-import 'package:online_exam_app/core/api/ApiExcuter.dart';
 import 'package:online_exam_app/data/model/all_subject_dto.dart';
 import 'package:online_exam_app/domain/common/result.dart';
 
+import '../../core/api/api_execute.dart';
 import '../../domain/entity/all_subject.dart';
 import '../../domain/repository/subject_repository.dart';
 import '../data_source/remote_data_source/subject_remote_data_source.dart';

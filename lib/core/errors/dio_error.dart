@@ -18,7 +18,7 @@ class ServerFailure extends DioFailure {
         return ServerFailure('receive timeout with apiServer');
       case DioExceptionType.badCertificate:
       case DioExceptionType.badResponse:
-        return ServerFailure.BadfromResponse(
+        return ServerFailure.badFromResponse(
             dioError.response!.statusCode!, dioError.response!.data);
       case DioExceptionType.cancel:
         return ServerFailure('Requst to ApiServer was canceld');
@@ -31,7 +31,7 @@ class ServerFailure extends DioFailure {
     }
   }
 
-  factory ServerFailure.BadfromResponse(int statusCode, dynamic response) {
+  factory ServerFailure.badFromResponse(int statusCode, dynamic response) {
     if ((statusCode == 400 || statusCode == 401 || statusCode == 403)) {
       return ServerFailure(response["message"]);
     }else if (statusCode ==409){

@@ -21,7 +21,7 @@ class BaseExamDataSourceImpl implements BaseExamDataSource {
       "subject":subjectId
     },
     headers: {
-      "token":SharedPreferenceServices.getToken(AppConstants.token).toString()
+      "token":SharedPreferenceServices.getData(AppConstants.token).toString()
     });
   }
 
@@ -31,7 +31,7 @@ class BaseExamDataSourceImpl implements BaseExamDataSource {
         .getData(EndPoints.getQuestionOnExam, queryParameters: {
       "exam": examId
     }, headers: {
-      "token": SharedPreferenceServices.getToken(AppConstants.token).toString()
+      "token": SharedPreferenceServices.getData(AppConstants.token).toString()
     });
   }
 }

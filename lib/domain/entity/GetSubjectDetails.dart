@@ -1,6 +1,3 @@
-/// message : "success"
-/// metadata : {"currentPage":1,"numberOfPages":1,"limit":40}
-/// exams : [{"_id":"670070a830a3c3c1944a9c63","title":"HTML Quiz","duration":25,"subject":"670037f6728c92b7fdf434fc","numberOfQuestions":40,"active":true,"createdAt":"2024-10-04T22:48:08.842Z"}]
 
 class GetSubjectDetails {
   GetSubjectDetails({

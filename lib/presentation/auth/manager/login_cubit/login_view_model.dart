@@ -14,6 +14,7 @@ class LoginViewModel extends Cubit<LoginState> {
   final emailController = TextEditingController();
   final passwordController = TextEditingController();
   final GlobalKey<FormState> formLoginKey = GlobalKey<FormState>();
+   bool isRememberMe = false;
 
   void doIntent(LoginIntent loginIntent) {
     switch (loginIntent) {

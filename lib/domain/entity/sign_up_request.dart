@@ -9,7 +9,7 @@ class SignUpRequest extends Equatable {
   final String rePassword;
   final String phone;
 
-  SignUpRequest({
+ const SignUpRequest({
     required this.username,
     required this.firstName,
     required this.lastName,

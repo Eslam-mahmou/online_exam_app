@@ -26,13 +26,13 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   @override
   Future<Response> getUserInfo() async {
     return await _apiManager.getData(EndPoints.getUser, headers: {
-      "token": SharedPreferenceServices.getToken(AppConstants.token).toString()
+      "token": SharedPreferenceServices.getData(AppConstants.token).toString()
     });
   }
 
   @override
   Future<Response> updateProfile(ProfileUserEntity user) async {
-    log("Headers: {'Content-Type': 'application/json', 'Token': '${SharedPreferenceServices.getToken(AppConstants.token.toString())}'}");
+    log("Headers: {'Content-Type': 'application/json', 'Token': '${SharedPreferenceServices.getData(AppConstants.token.toString())}'}");
     return await _apiManager.putData(
       EndPoints.editProfile,
       {
@@ -44,7 +44,7 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
       },
       {
         "token":
-            SharedPreferenceServices.getToken(AppConstants.token.toString())
+            SharedPreferenceServices.getData(AppConstants.token.toString())
       },
     );
   }
@@ -53,10 +53,10 @@ class ProfileRemoteDataSourceImpl implements ProfileRemoteDataSource {
   Future<Response> changePassword(
       String oldPassword, String newPassword, String rePassword) async {
     String? token =
-        await SharedPreferenceServices.getToken(AppConstants.token.toString())
+        SharedPreferenceServices.getData(AppConstants.token.toString())
             .toString();
 
-    if (token == null || token.isEmpty) {
+    if ( token.isEmpty) {
       log("Token is missing or invalid!");
 
       return Response(

@@ -36,7 +36,7 @@ class ForgetPasswordViewModel extends Cubit<ForgetPasswordState> {
         log(data!.message.toString());
         if (data.message == "success") {
           log(data.toString());
-          SharedPreferenceServices.saveToken(AppConstants.email, email);
+          SharedPreferenceServices.saveData(AppConstants.email, email);
           emit(SuccessForgetPasswordState(data));
         } else {
           emit(ErrorForgetPasswordState(data.message));

@@ -19,7 +19,7 @@ class SubjectRemoteDataSourceImpl implements SubjectRemoteDataSource {
   @override
   Future<Response> getAllSubject() async {
     return await _apiManager.getData(EndPoints.getAllSubject, headers: {
-      "token": SharedPreferenceServices.getToken(AppConstants.token).toString()
+      "token": SharedPreferenceServices.getData(AppConstants.token).toString()
     });
   }
 }

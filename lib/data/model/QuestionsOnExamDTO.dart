@@ -1,4 +1,3 @@
-import 'package:hive/hive.dart';
 import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
 
 class QuestionsOnExamDTO extends QuestionsOnExamEntity {
@@ -6,7 +5,6 @@ class QuestionsOnExamDTO extends QuestionsOnExamEntity {
     super.message,
     super.questions,
   });
-
   QuestionsOnExamDTO.fromJson(dynamic json) {
     message = json['message'];
     if (json['questions'] != null) {

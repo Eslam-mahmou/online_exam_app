@@ -1,24 +1,29 @@
-import 'dart:developer';
-
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
 import 'package:flutter_easyloading/flutter_easyloading.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
-import 'package:online_exam_app/core/Utils/style_manager.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
+import 'package:online_exam_app/core/services/shared_preference_services.dart';
+import 'package:online_exam_app/core/utils/constant_manager.dart';
 import 'package:online_exam_app/core/widget/custom_diaolg.dart';
 import 'package:online_exam_app/core/widget/custom_text_from_field.dart';
 import 'package:online_exam_app/core/widget/custom_validate.dart';
 import 'package:online_exam_app/di/injectable_initializer.dart';
 import 'package:online_exam_app/presentation/auth/manager/login_cubit/login_state.dart';
 import 'package:online_exam_app/presentation/auth/manager/login_cubit/login_view_model.dart';
+import '../../../core/Utils/style_manager.dart';
 import '../../../core/widget/custom_elevated_button.dart';
 
-class LoginScreen extends StatelessWidget {
+class LoginScreen extends StatefulWidget {
   const LoginScreen({super.key});
 
+  @override
+  State<LoginScreen> createState() => _LoginScreenState();
+}
+
+class _LoginScreenState extends State<LoginScreen> {
   @override
   Widget build(BuildContext context) {
     LoginViewModel viewModel = getIt.get<LoginViewModel>();
@@ -52,7 +57,8 @@ class LoginScreen extends StatelessWidget {
                 }
                 if (state is SuccessLoginState) {
                   EasyLoading.dismiss();
-                  Navigator.pushNamed(context, PagesRoutes.layoutScreen);
+                  SharedPreferenceServices.saveData(AppConstants.isRemember, viewModel.isRememberMe);
+                  Navigator.pushReplacementNamed(context, PagesRoutes.layoutScreen);
                 }
               },
               child: Form(
@@ -73,58 +79,6 @@ class LoginScreen extends StatelessWidget {
                       SizedBox(
                         height: 24.h,
                       ),
-                      // Padding(
-                      //   padding:
-                      //       EdgeInsets.symmetric(horizontal: 16.w, vertical: 8.h),
-                      //   child: TextFormField(
-                      //     controller: viewModel.passwordController,
-                      //     validator: AppValidate.validatePassword,
-                      //     keyboardType: TextInputType.visiblePassword,
-                      //     cursorColor: ColorsManager.blackColor,
-                      //     obscuringCharacter: "*",
-                      //     obscureText: obscureText,
-                      //     style: getTextStyle(FontSize.s18,
-                      //         FontWeightManager.regular, ColorsManager.blackColor,
-                      //         fontFamily: FontFamily.roboto),
-                      //     decoration: InputDecoration(
-                      //       labelText: "Password",
-                      //       labelStyle: getTextStyle(
-                      //           FontSize.s12,
-                      //           FontWeightManager.regular,
-                      //           ColorsManager.greyColor,
-                      //           fontFamily: FontFamily.roboto),
-                      //       suffixIcon: IconButton(
-                      //           onPressed: () {
-                      //             changePassword();
-                      //           },
-                      //           icon: obscureText
-                      //               ? const Icon(
-                      //                   Icons.visibility,
-                      //                   color: ColorsManager.blackColor,
-                      //                 )
-                      //               : const Icon(
-                      //                   Icons.visibility_off,
-                      //                   color: ColorsManager.blackColor,
-                      //                 )),
-                      //       border: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(4),
-                      //           borderSide: const BorderSide(
-                      //               color: ColorsManager.greyColor, width: 1)),
-                      //       enabledBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(4),
-                      //           borderSide: const BorderSide(
-                      //               color: ColorsManager.greyColor, width: 1)),
-                      //       focusedBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(4),
-                      //           borderSide: const BorderSide(
-                      //               color: ColorsManager.greyColor, width: 2)),
-                      //       errorBorder: OutlineInputBorder(
-                      //           borderRadius: BorderRadius.circular(4),
-                      //           borderSide: const BorderSide(
-                      //               color: ColorsManager.redColor, width: 1)),
-                      //     ),
-                      //   ),
-                      // ),
                       CustomTextFromField(
                           keyboardType: TextInputType.visiblePassword,
                           controller: viewModel.passwordController,
@@ -136,10 +90,20 @@ class LoginScreen extends StatelessWidget {
                       ),
                       Row(
                         children: [
-                          Checkbox(
-                            value: false,
-                            onChanged: (value) {},
-                          ),
+                          StatefulBuilder(builder: (BuildContext context,
+                              void Function(void Function()) setState) {
+                            return Checkbox(
+                              value: viewModel.isRememberMe,
+                              onChanged: (value) {
+                                setState(() {
+                                  viewModel.isRememberMe =
+                                      !viewModel.isRememberMe;
+                                });
+                                debugPrint(viewModel.isRememberMe.toString());
+                              },
+                              activeColor: ColorsManager.primaryColor,
+                            );
+                          }),
                           Text(
                             "Remember me",
                             style: getTextStyle(
@@ -207,7 +171,8 @@ class LoginScreen extends StatelessWidget {
                                     FontWeightManager.regular,
                                     ColorsManager.primaryColor,
                                     decoration: TextDecoration.underline,
-                                    decorationColor: ColorsManager.primaryColor)),
+                                    decorationColor:
+                                        ColorsManager.primaryColor)),
                           ),
                         ],
                       )

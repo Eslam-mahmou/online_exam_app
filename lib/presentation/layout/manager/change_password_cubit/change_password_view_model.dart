@@ -38,12 +38,7 @@ class ChangePasswordViewModel extends Cubit<ChangePasswordState> {
     String newPass = newPassword.text.trim();
     String rePass = rePassword.text.trim();
 
-    print("oldPassword: $oldPass");
-    print("newPassword: $newPass");
-    print("rePassword: $rePass");
-
     if (rePass != newPass) {
-      print("rePassword does not match newPassword");
       rePass = newPass;
     }
 

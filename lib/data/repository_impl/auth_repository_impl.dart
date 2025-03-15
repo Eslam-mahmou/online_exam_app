@@ -2,7 +2,6 @@ import 'dart:developer';
 
 import 'package:dio/dio.dart';
 import 'package:injectable/injectable.dart';
-import 'package:online_exam_app/core/api/ApiExcuter.dart';
 import 'package:online_exam_app/data/data_source/remote_data_source/auth_remote_data_source.dart';
 import 'package:online_exam_app/data/model/forget_response_password_dto.dart';
 import 'package:online_exam_app/data/model/login_response_dto.dart';
@@ -15,6 +14,7 @@ import 'package:online_exam_app/domain/entity/reset_password_response_entity.dar
 import 'package:online_exam_app/domain/entity/verify_email_response_entity.dart';
 import 'package:online_exam_app/domain/repository/auth_repository.dart';
 
+import '../../core/api/Api_execute.dart';
 import '../../core/services/shared_preference_services.dart';
 import '../../core/utils/constant_manager.dart';
 import '../../domain/entity/sign_up_request.dart';
@@ -34,7 +34,7 @@ class AuthRepositoryImpl implements AuthRepository {
         log(response.toString());
         var data = LoginResponseDto.fromJson(response.data);
         log(data.token.toString());
-        SharedPreferenceServices.saveToken(
+        SharedPreferenceServices.saveData(
            AppConstants.token, data.token.toString());
 
         return data;
@@ -73,7 +73,7 @@ class AuthRepositoryImpl implements AuthRepository {
         var response =
             await _authRemoteDataSource.resetPassword(email, newPassword);
         var data = ResetPasswordResponseDto.formJson(response.data);
-        SharedPreferenceServices.saveToken(AppConstants.token, data.token.toString());
+        SharedPreferenceServices.saveData(AppConstants.token, data.token.toString());
         return data;
       },
     );
@@ -88,7 +88,7 @@ class AuthRepositoryImpl implements AuthRepository {
         // SharedPreferenceServices.getToken(response.data['token']);
         final userResponse = UserResponse.fromJson(response.data);
         log(userResponse.token);
-        SharedPreferenceServices.saveToken(
+        SharedPreferenceServices.saveData(
             AppConstants.token, userResponse.token);
         log(userResponse.token);
         final userModel = userResponse.user;

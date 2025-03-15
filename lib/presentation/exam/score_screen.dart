@@ -220,7 +220,7 @@ class ExamScoreScreen extends StatelessWidget {
                             OutlinedButton(
                               onPressed: () {
                                 Navigator.pushNamed(
-                                    context, PagesRoutes.examScreen);
+                                    context, PagesRoutes.questionScreen);
                               },
                               style: OutlinedButton.styleFrom(
                                 minimumSize: const Size(double.infinity, 50),

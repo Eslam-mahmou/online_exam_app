@@ -6,6 +6,8 @@ import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
+import 'package:online_exam_app/core/services/shared_preference_services.dart';
+import 'package:online_exam_app/core/utils/constant_manager.dart';
 import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
 import 'package:online_exam_app/presentation/exam/manager/question_cubit/question_cubit.dart';
 
@@ -130,6 +132,7 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
               color: ColorsManager.blackColor,
             ),
             onTap: () {
+              SharedPreferenceServices.deleteData(AppConstants.examId);
               Navigator.pop(context);
             },
           ),
@@ -234,8 +237,7 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
 
 String formatMinutesToTime(int minutes) {
   int hours = minutes ~/ 60;
-  int mins = minutes % 60;
-  int seconds = (minutes * 60) % 60;
+  int mains = minutes % 60;
 
-  return '${hours.toString().padLeft(2, '0')}:${mins.toString().padLeft(2, '0')}';
+  return '${hours.toString().padLeft(2, '0')}:${mains.toString().padLeft(2, '0')}';
 }

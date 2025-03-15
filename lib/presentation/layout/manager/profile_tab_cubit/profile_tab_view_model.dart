@@ -19,12 +19,8 @@ class ProfileTabViewModel extends Cubit<ProfileTabState> {
       case GetUserInfoIntent():
         _fetchUser();
       case EditProfileClickedIntent():
-        if (profileTabIntent.user != null) {
-          _handleEditProfile(profileTabIntent.user);
-        } else {
-          emit(ProfileTabError("User data is missing"));
-        }
-    }
+        _handleEditProfile(profileTabIntent.user);
+          }
   }
 
   Future<void> _fetchUser() async {

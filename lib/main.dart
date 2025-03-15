@@ -41,27 +41,6 @@ void main() async {
   runApp(const OnlineExamApp());
   ConfigLoading().showLoading();
 }
-
-// void main() async {
-//   WidgetsFlutterBinding.ensureInitialized();
-//   Bloc.observer = MyBlocObserver();
-//   configureDependencies();
-//   await Hive.initFlutter();
-//   Hive.registerAdapter(AnswerModelAdapter());
-//   Hive.registerAdapter(CachedAnswerDataAdapter());
-//   Hive.registerAdapter(QuestionsAdapter());
-//   Hive.registerAdapter(AnswersAdapter());
-//   if (Hive.isBoxOpen(AppConstants.hiveBoxQuestion)) {
-//     await Hive.box<List<Questions>>(AppConstants.hiveBoxQuestion).close();
-//   }
-//   await Hive.openBox<List<Questions>>(AppConstants.hiveBoxQuestion);
-//
-//   await Hive.openBox<CachedAnswerData>(AppConstants.hiveBoxQuestionAnswer);
-//   await SharedPreferenceServices.init();
-//   runApp(const OnlineExamApp());
-//   ConfigLoading().showLoading();
-// }
-
 class OnlineExamApp extends StatelessWidget {
   const OnlineExamApp({super.key});
 

@@ -51,8 +51,7 @@ class QuestionViewModel extends Cubit<QuestionState> {
     // Save the updated list back to Hive
     await box.put(AppConstants.hiveBoxAnswerKey,
         CachedAnswerData(answers: updatedAnswers));
-    print(
-        "✅ Stored Answers: ${updatedAnswers.map((e) => e.toJson()).toList()}"); // Debugging output
+    // Debugging output
   }
 
   Future<void> _fetchQuestion(String examId) async {

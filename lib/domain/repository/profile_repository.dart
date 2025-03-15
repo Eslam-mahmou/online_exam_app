@@ -11,4 +11,5 @@ abstract class ProfileRepository {
 
   Future<Result<ChangePasswordResponseEntity>> changePassword(
       String oldPassword, String newPassword, String rePassword);
+
 }

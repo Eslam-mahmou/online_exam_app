@@ -1,4 +1,3 @@
-import 'package:online_exam_app/domain/entity/cache_answer_model.dart';
 import 'package:online_exam_app/domain/entity/check_answer_entity.dart';
 
 import '../common/result.dart';

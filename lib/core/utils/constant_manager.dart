@@ -6,4 +6,6 @@ static const String hiveBoxQuestionAnswer="hiveBoxQuestionAnswer";
 static const String hiveBoxAnswerKey="HiveBoxAnswerKey";
 static const String hiveBoxQuestion="hiveBoxQuestion";
 static const String hiveBoxQuestionKey="HiveBoxQuestionKey";
+static const String examId="examId";
+static const String isRemember="isRemember";
 }

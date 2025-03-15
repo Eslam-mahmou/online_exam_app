@@ -30,7 +30,7 @@ class VerifyEmailVewModel extends Cubit<VerifyEmailState> {
           _verifyEmail(_collectVerifyCode());
         }
       case ResendClickedIntent():
-        _resendCode(SharedPreferenceServices.getToken(AppConstants.email.toString()).toString());
+        _resendCode(SharedPreferenceServices.getData(AppConstants.email.toString()).toString());
       case DisposeEmailIntent():
         _disposeTextField();
     }

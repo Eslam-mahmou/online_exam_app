@@ -20,7 +20,7 @@ class ResetPasswordViewModel extends Cubit<ResetPasswordState> {
       case ResetPasswordIntent():
         if (formResetPasswordKey.currentState!.validate()) {
           _resetPassword(
-              SharedPreferenceServices.getToken(AppConstants.email.toString())
+              SharedPreferenceServices.getData(AppConstants.email.toString())
                   .toString(), newPassword.text);
         }
     }

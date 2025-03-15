@@ -3,6 +3,8 @@ import 'package:flutter_screenutil/flutter_screenutil.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
+import 'package:online_exam_app/core/services/shared_preference_services.dart';
+import 'package:online_exam_app/core/utils/constant_manager.dart';
 import 'package:online_exam_app/domain/entity/exam_response_entity.dart';
 
 import '../../../core/Utils/assets_manager.dart';
@@ -17,6 +19,7 @@ class CustomExamCard extends StatelessWidget {
   Widget build(BuildContext context) {
     return GestureDetector(
       onTap: () {
+        SharedPreferenceServices.saveData(AppConstants.examId, exam.id);
         Navigator.pushNamed(context, PagesRoutes.questionScreen,
             arguments: exam);
       },
