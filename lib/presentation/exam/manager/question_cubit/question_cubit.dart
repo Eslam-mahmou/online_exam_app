@@ -19,7 +19,7 @@ class QuestionViewModel extends Cubit<QuestionState> {
   final ExamUseCase _examUseCase;
   List<Questions> question = [];
   int currentQuestionIndex = 0;
-
+ static Timer ? timer;
   void doIntent(QuestionIntent examIntent) {
     switch (examIntent) {
       case FetchQuestionIntent():

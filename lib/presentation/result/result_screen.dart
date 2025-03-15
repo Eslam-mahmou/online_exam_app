@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_bloc/flutter_bloc.dart';
+import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/di/injectable_initializer.dart';
 import 'package:online_exam_app/presentation/result/manager/result_state.dart';
 import 'package:online_exam_app/presentation/result/widget/custom_question_card.dart';
@@ -16,8 +17,9 @@ class ResultScreen extends StatelessWidget {
       child: Scaffold(
         appBar: AppBar(
           title: const Text("Results"),
+          shadowColor: ColorsManager.whiteColor,
           leading: IconButton(
-            icon: const Icon(Icons.arrow_back),
+            icon: const Icon(Icons.arrow_back_ios),
             onPressed: () => Navigator.pop(context),
           ),
         ),

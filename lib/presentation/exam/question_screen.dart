@@ -133,6 +133,7 @@ class QuestionScreen extends StatelessWidget {
                                 : ElevatedButton(
                                     onPressed: () {
                                       // save answer of last question
+                                      QuestionViewModel.timer?.cancel();
                                       viewModel.doIntent(
                                         NextQuestionIntent([
                                           AnswerModel(

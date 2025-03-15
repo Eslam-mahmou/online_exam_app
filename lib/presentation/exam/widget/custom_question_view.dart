@@ -1,5 +1,4 @@
 import 'dart:async';
-import 'dart:developer';
 
 import 'package:flutter/material.dart';
 import 'package:flutter_screenutil/flutter_screenutil.dart';
@@ -8,6 +7,7 @@ import 'package:online_exam_app/core/Utils/font_manager.dart';
 import 'package:online_exam_app/core/Utils/style_manager.dart';
 import 'package:online_exam_app/core/routes_generator/pages_routes.dart';
 import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
+import 'package:online_exam_app/presentation/exam/manager/question_cubit/question_cubit.dart';
 
 import '../../../core/Utils/assets_manager.dart';
 
@@ -22,8 +22,8 @@ class CustomQuestionView extends StatefulWidget {
   int questionsLength;
   final num numberOfQuestions;
 
-  // late int totalSeconds = question.exam!.duration!.toInt() * 60;//
-  late int totalSeconds = 1 * 60; //
+  late int totalSeconds = question.exam!.duration!.toInt() * 60;//
+
 
   @override
   State<CustomQuestionView> createState() => _CustomQuestionViewState();
@@ -32,7 +32,6 @@ class CustomQuestionView extends StatefulWidget {
 class _CustomQuestionViewState extends State<CustomQuestionView> {
   Timer? _timer;
   late int remainingSeconds;
-
   @override
   void initState() {
     remainingSeconds = widget.totalSeconds;
@@ -51,7 +50,11 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
       }
     });
   }
-
+  @override
+  void dispose() {
+    _timer?.cancel(); // Cancel the timer when the widget is disposed
+    super.dispose();
+  }
 // to show that TIME out.
   void _showTimeOutDialog() {
     showDialog(
@@ -85,6 +88,7 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
                     SizedBox(height: 20.h),
                     ElevatedButton(
                       onPressed: () {
+                        _timer?.cancel();
                         Navigator.pushNamed(context, PagesRoutes.scoreScreen);
                       },
                       style: ElevatedButton.styleFrom(
@@ -106,16 +110,12 @@ class _CustomQuestionViewState extends State<CustomQuestionView> {
     );
   }
 
-  @override
-  void dispose() {
-    _timer?.cancel();
-    super.dispose();
-  }
 
   String? selectedAnswer;
 
   @override
   Widget build(BuildContext context) {
+    QuestionViewModel.timer=_timer;
     return SafeArea(
         child:
             Column(crossAxisAlignment: CrossAxisAlignment.stretch, children: [

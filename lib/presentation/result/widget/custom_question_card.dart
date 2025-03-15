@@ -1,20 +1,22 @@
 import 'package:flutter/material.dart';
 import 'package:online_exam_app/core/Utils/colors_manager.dart';
 import 'package:online_exam_app/domain/entity/QuestionsOnExamEntity.dart';
+import 'package:flutter_screenutil/flutter_screenutil.dart';
 
 class CustomQuestionCard extends StatelessWidget {
   final Questions question;
 
-  const CustomQuestionCard({Key? key, required this.question})
-      : super(key: key);
+  const CustomQuestionCard({super.key, required this.question});
 
   @override
   Widget build(BuildContext context) {
     return Card(
         elevation: 3,
+        margin: EdgeInsets.symmetric(vertical: 12.h),
         shape: RoundedRectangleBorder(
           borderRadius: BorderRadius.circular(12),
         ),
+        color: ColorsManager.whiteColor,
         child: Padding(
           padding: const EdgeInsets.all(16.0),
           child: Column(
@@ -46,25 +48,11 @@ class CustomQuestionCard extends StatelessWidget {
                           selectedAnswer.trim().isEmpty ||
                           selectedAnswer == "null";
 
-                      print('== Debug ==');
-                      print('Question: ${question.question}');
-                      print('Key: $answerKey');
-                      print('Answer Text: $answerText');
-                      print('Selected Answer: $selectedAnswer');
-                      print(
-                          'Selected Answer (Raw): "${question.selectedAnswer}"');
-                      print('Correct Answer: $correctAnswer');
-                      print('isSelected: $isSelected');
-                      print('isCorrectAnswer: $isCorrectAnswer');
-                      print('isWrongSelected: $isWrongSelected');
-                      print('isUnanswered: $isUnanswered');
-                      print('===========');
-
                       return Container(
                     width: double.infinity,
-                    margin: const EdgeInsets.symmetric(vertical: 5),
-                    padding: const EdgeInsets.symmetric(
-                        vertical: 12, horizontal: 16),
+                    margin:  EdgeInsets.symmetric(vertical:6.h),
+                    padding:  EdgeInsets.symmetric(
+                        vertical: 12.h, horizontal: 16.w),
                     decoration: BoxDecoration(
                       color: (selectedAnswer == null ||
                           selectedAnswer.isEmpty || selectedAnswer == "null")
